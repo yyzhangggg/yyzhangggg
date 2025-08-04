@@ -1,0 +1,84 @@
+#Mixed Execution
+exec prog1 prog3 RR prog2
+
+#Maximum Memory Usage
+exec prog3 prog4 prog5
+
+#Single Program Execution withough input RR should expected to default RR
+exec prog2
+
+#Round-Robin with All Programs
+exec prog1 prog2 prog3 prog4 prog5 RR
+
+# no input, error handle
+exec
+
+#invalid test name(?)
+exec prog1 prog6 RR
+
+prog12
+# Simple output with sequential prints and variable manipulation
+echo START-PROG10
+set x 10
+print x
+set x 20
+print x
+echo END-PROG10
+
+prog13
+# Mixed functionality with echo and variables
+echo PROG13:START
+set name John
+print name
+echo GREETING FROM $name
+set age 25
+echo $name is $age years old.
+set name Jane
+print name
+echo NOW $name is $age years old.
+echo PROG12:END
+
+# test for shared mem
+exec prog8 prog8 RR
+
+#test for add to shared mem seperately
+exec prog8
+exec prog8
+
+prog 14
+#test case for 3
+echo P7L1
+set x 42; print x
+echo P7L2
+echo P7L3
+echo P7L4
+set y "Hello"; print y
+echo P7L5
+
+prog15
+#mix operation and echo
+echo P9-BEGIN
+set a b; print a
+echo P9L1
+set a c; print a
+echo P9L2
+echo P9-END
+
+
+#test for exec
+# test for mem overflowed, should use LRU
+exec prog6 prog7 prog8 prog10 prog6 prog7 prog10 prog8 RR
+# test for shared prog10
+exec prog6 prog10 prog7 prog8 prog10 RR
+
+
+#test for run
+#test var persistence
+run prog10
+
+#test for more mem occupence(could we have one liner?)
+run prog6; run prog7; run prog8
+
+
+
+
