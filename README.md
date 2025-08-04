@@ -3,6 +3,7 @@ hey there, welcome to my worksites >-&lt;
 here's a list of content i created: 
 1. AI Projects
 2. Data sceicne competition Projects
-3. My web for my creative works including but not limited as Photograhy, Paintings & Writtings.
+3. OS shell project and memory management, etc.
+4. My web for my creative works including but not limited as Photograhy, Paintings & Writtings.
 
 feel free to explore around  /:D /
