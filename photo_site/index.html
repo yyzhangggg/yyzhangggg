@@ -6,7 +6,7 @@
 			.hidden {display: none;}
 			</style>
 
-		<!--  grating words ~ OVO ~ -->	
+		<!--  style settings overall -->	
 		<title>Yanying Zhang</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -34,7 +34,7 @@
 					</section>
 
 				<!-- LA： sea, railway flowers -->
-					<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="first">
+					<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="first" data-folder="backlight">
 						<div class="content">
 							<h2>Back Light</h2>
 							<p>Everything reflects some special colour when the sunlight on it's back. I love how the creator of the universe designed humaned eyes that is much more advanced in seeing vivid colours even there's strong light on the back. The best digital camera won't capture the same amount of colour resolution than our bare eyes.</p>
@@ -2874,19 +2874,51 @@ print 'It took ' + i + ' iterations to sort the deck.';
 
 		<!-- script for load more -->
 		<script>
-		function loadFolder(folderName) {
-			fetch(`load_images.php?folder=${folderName}`)
-				.then(res => res.json())
-				.then(images => {
-					let newWindow = window.open('', '_blank');
-					newWindow.document.write(`<html><head><title>${folderName} image</title></head><body style="text-align:center; background:#f9f9f9;">`);
-					images.forEach(src => {
-						newWindow.document.write(`<img src="${src}" style="width:200px; margin:10px; border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,0.1);">`);
-					});
-					newWindow.document.write('</body></html>');
-					newWindow.document.close();
+			//for every spotlight elements
+		document.querySelectorAll('section.spotlight').forEach(section => {
+		const button = section.querySelector('.load-more');
+		if (!button) return;
+
+		button.addEventListener('click', () => {
+			const folderName = section.getAttribute('data-folder');
+			if (!folderName) {
+			alert('no assigned series');
+			return;
+			}
+
+			fetch(`load_images.php?folder=${encodeURIComponent(folderName)}`)
+			.then(res => res.json())
+			.then(images => {
+				//debugging： img error
+				if (!images || images.error) {
+				alert('load fail');
+				return;
+				}
+				const imageContainer = section.querySelector('.image');
+				//debugging： folder exmpty or folder error
+				if (!imageContainer) {
+				alert('cannot find series');
+				return;
+				}
+
+				imageContainer.innerHTML = '';
+
+				images.forEach(src => {
+				const img = document.createElement('img');
+				img.src = src;
+				img.style.width = '200px';
+				img.style.margin = '10px';
+				img.style.borderRadius = '8px';
+				img.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+				imageContainer.appendChild(img);
 				});
-		}
+
+				button.style.display = 'none';
+			})
+			//catch error
+			.catch(() => alert('wrong request'));
+		});
+		});
 		</script>
 	</body>
 </html>
