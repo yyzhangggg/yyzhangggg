@@ -2873,20 +2873,20 @@ print 'It took ' + i + ' iterations to sort the deck.';
 			<script src="assets/js/main.js"></script>
 
 		<!-- script for load more -->
-			<script>
-			document.querySelectorAll('.load-more').forEach(button => {
-			button.addEventListener('click', function (event) {
-			event.preventDefault(); // stop redirecting
-				// find the current section
-				const section = this.closest('section');	
-				// find all the hidden pictues in the current section 
-				const hiddenImages = section.querySelectorAll('.image .hidden');	
-				// show image
-				hiddenImages.forEach(img => {
-					img.classList.remove('hidden');
+		<script>
+		function loadFolder(folderName) {
+			fetch(`load_images.php?folder=${folderName}`)
+				.then(res => res.json())
+				.then(images => {
+					let newWindow = window.open('', '_blank');
+					newWindow.document.write(`<html><head><title>${folderName} image</title></head><body style="text-align:center; background:#f9f9f9;">`);
+					images.forEach(src => {
+						newWindow.document.write(`<img src="${src}" style="width:200px; margin:10px; border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,0.1);">`);
 					});
-			});
-		});
+					newWindow.document.write('</body></html>');
+					newWindow.document.close();
+				});
+		}
 		</script>
 	</body>
 </html>
