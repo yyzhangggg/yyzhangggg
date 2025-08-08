@@ -1,9 +1,11 @@
 <?php
-// get diff series of folder name
+
+//read folder name
 $folderName = isset($_GET['folder']) ? $_GET['folder'] : '';
 $baseDir = 'images/';
 
-// safe check
+
+//get path
 $folderPath = realpath($baseDir . $folderName);
 if (!$folderName || strpos($folderPath, realpath($baseDir)) !== 0) {
     http_response_code(400);
@@ -11,10 +13,11 @@ if (!$folderName || strpos($folderPath, realpath($baseDir)) !== 0) {
     exit;
 }
 
-//load 
+//read all left image
 $files = scandir($folderPath);
 $images = [];
 
+//case
 foreach ($files as $file) {
     if ($file !== '.' && $file !== '..') {
         $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
