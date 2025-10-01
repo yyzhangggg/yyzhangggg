@@ -1,3 +1,6 @@
+Authors: Melisa Civelekoglu (261110846) and Yanying Zhang (260958711)
+Used code from Mcgill University offered class COMP310 assigments.
+
 Main functions of MT:
 1. Implement the scheduling infrastructure: - modify the run command to use the scheduler and run SCRIPT as a process
                                             - add a PCB to keep track of:  
