@@ -3,7 +3,7 @@ hey there, welcome to my worksites >-&lt;
 here's a list of content i created: 
 1. AI Projects
 2. Data sceicne competition Projects
-3. OS shell project and memory management, etc.
+3. OS shell project by c, run in linux system
 4. My web for my creative works including but not limited as Photograhy, Paintings & Writtings.
 5. Fun games explore
 
