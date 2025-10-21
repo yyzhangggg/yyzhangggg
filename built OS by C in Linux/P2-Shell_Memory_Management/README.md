@@ -11,8 +11,10 @@ mkdir name            | make dictionary
 touch my_file         | creates a new empty file  inside the current directory
 cd                    | changes  current directory to directory  dirname
 exec                  | forks the shell and calls one of the flavors of exec to execute the given command
- 
-More details on what i do and improve:
+
+mainly it's about to do file management and built fault tolerance methods in file systems like Demand Paging, Shadow Paging, Journaling and Fault tolerant data storage like RAID.
+
+More details in what i do and improve:
 1. Enhanced set command:
 Usually set can only take 2 tokens and set the token1 to be token2.
 Extend the set command so it could be able to support values of at most 5 alphanumeric tokens. If the command has more 
