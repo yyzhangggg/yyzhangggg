@@ -35,7 +35,7 @@
 					beauty and imagination through my lens. I also enjoy shooting/painting about landscapes and
 					architecture — I find inspiration in both people and the world around them.</p>
 				<ul class="actions stacked">
-					<li><button class="button load-more">Load More</button></li>
+					<li><button class="button load-more">Load No More XD</button></li>
 				</ul>
 			</div>
 			<div class="image">
@@ -54,7 +54,10 @@
 					than our bare eyes.</p>
 				<!-- load more botton -->
 				<ul class="actions stacked">
+					<!-- php -->
 					<a href="gallery.php?folder=backlight" target="_blank" class button ="button load-more">Load More</> </a>
+					<!-- html -->
+					<button onclick="openGallery('backlight')">Load More</button>
 				</ul>
 			</div>
 			<!-- example image -->
@@ -70,7 +73,10 @@
 				<h2>Architecture</h2>
 				<p></p>
 				<ul class="actions stacked">
+					<!-- php -->
 					<a href="gallery.php?folder=arch" target="_blank" class button ="button load-more">Load More</> </a>
+					<!-- html -->
+					<button onclick="openGallery('arch')">Load More</button>
 				</ul>
 			</div>
 			<!-- example image -->
@@ -90,7 +96,10 @@
 					that the luxury brand of fashion can never mimic and produce the same of how they grown to be. The
 					flowers are pretty, but the leaves are prettier!</p>
 				<ul class="actions stacked">
+					<!-- php -->
 						<a href="gallery.php?folder=flowers" target="_blank" class button ="button load-more">Load More</> </a>
+						<!-- html -->
+						<button onclick="openGallery('flowers')">Load More</button>
 				</ul>
 			</div>
 			<!-- example image -->
@@ -109,7 +118,10 @@
 					living and dead trees, shrubs, and creeks. The entire sky seems to proclaim the glory and design of
 					the Creator.</p>
 				<ul class="actions stacked">
+					<!-- php -->
 					<a href="gallery.php?folder=nature" target="_blank" class button ="button load-more">Load More</> </a>
+					<!-- html -->
+					<button onclick="openGallery('nature')">Load More</button>
 				</ul>
 			</div>
 			<!-- example image -->
@@ -125,7 +137,10 @@
 				<h2>City Walk</h2>
 				<p></p>
 				<ul class="actions stacked">
+					<!-- php approach-->
 					<a href="gallery.php?folder=city" target="_blank" class button ="button load-more">Load More</> </a>
+					<!-- html approach-->
+					<button onclick="openGallery('city')">Load More</button>
 				</ul>
 			</div>
 			<!-- example image -->
@@ -142,7 +157,10 @@
 					art movements I admire most, and I enjoy adding my own unique artistic touches to this style. Rather
 					than replicating real-life scenes, I prefer creating dreamlike landscapes.</p>
 				<ul class="actions stacked">
-					<a href="gallery.php?folder=painting" target="_blank" class button ="button load-more">Load More</> </a>
+					<!-- php -->
+					<a href="gallery.php?folder=painting" target="_blank" class button = "button load-more" > Load More </a>
+					<!-- html -->
+					<button onclick="openGallery('painting')">Load More</button>
 				</ul>
 			</div>
 			<!-- example image -->
@@ -2884,53 +2902,12 @@
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
 
-	<!-- script for load more -->
+	<!-- script for HTML method of Load More Button-->
 	<script>
-		//for every spotlight elements
-		document.querySelectorAll('section.spotlight').forEach(section => {
-			const button = section.querySelector('.load-more');
-			if (!button) return;
-
-			button.addEventListener('click', () => {
-				const folderName = section.getAttribute('data-folder');
-				if (!folderName) {
-					alert('no assigned series');
-					return;
-				}
-
-				fetch(`load_images.php?folder=${encodeURIComponent(folderName)}`)
-					.then(res => res.json())
-					.then(images => {
-						//debugging： img error
-						if (!images || images.error) {
-							alert('load fail');
-							return;
-						}
-						const imageContainer = section.querySelector('.image');
-						//debugging： folder exmpty or folder error
-						if (!imageContainer) {
-							alert('cannot find series');
-							return;
-						}
-
-						imageContainer.innerHTML = '';
-
-						images.forEach(src => {
-							const img = document.createElement('img');
-							img.src = src;
-							img.style.width = '200px';
-							img.style.margin = '10px';
-							img.style.borderRadius = '8px';
-							img.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-							imageContainer.appendChild(img);
-						});
-
-						button.style.display = 'none';
-					})
-					//catch error
-					.catch(() => alert('wrong request'));
-			});
-		});
+		function openGallery(category) {
+      // Open load_more.html in new tab and pass folder name
+    	window.open("load_more.html?folder=" + category, "_blank");
+    }
 	</script>
 
 
