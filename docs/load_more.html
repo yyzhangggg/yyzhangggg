@@ -87,7 +87,8 @@
         }
 
         @keyframes spin {
-        to { transform: rotate(360deg); }
+        0% { transform: rotate(0deg);}
+        100% { transform: rotate(360deg);}
         }
         </style>
     </head>
@@ -96,9 +97,7 @@
         <!--毛玻璃导航栏 -->
         <div class="navbar">Gallery</div>
         <!--载入特效-->
-        <div class="loader">
-            <div class="spinner"></div>
-        </div>
+        <div class="loader"></div>
 
         <h2 id="title">Gallery</h2>
         <div id="gallery" class="masonry"> </div>
