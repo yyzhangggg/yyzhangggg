@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <head>
+    <>
         <title>Gallery</title>
         <style>
         body {
@@ -34,7 +34,33 @@
             .masonry { column-count: 1; }
         }
 
-        /* Image container */
+        /* Loading Spinner 加载特效，use before the first image is loaded */
+        .loader {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        }
+
+        .spinner {
+        width: 50px;
+        height: 50px;
+        border: 6px solid #ddd;
+        border-top-color: #555;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+        to { transform: rotate(360deg); }
+        }
+
+         /* Image container */
         .masonry img {
         width: 100%;
         margin-bottom: 15px;
@@ -45,7 +71,7 @@
         transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        /*瀑布流特效+淡入*/
+        /*淡入特效，每个图片加载进去的时候使用*/
         /* Fade-in effect when loaded */
         .loaded {
             opacity: 1;
@@ -55,6 +81,12 @@
     </head>
 
     <body>
+
+        <!--载入特效-->
+        <div class="loader">
+            <div class="spinner"></div>
+        </div>
+
         <h2 id="title">Gallery</h2>
         <div id="gallery" class="masonry"> </div>
         <script>
@@ -66,33 +98,56 @@
             const gallery = document.getElementById("gallery");
 
             title.innerText = " Gallery for " + folder ;
-
+            
+            const extensions = ["jpg", "jpeg", "png", "webp"]; //拓展文件名，兼容更多种类图片
             let maxTry = 200;          // 最多尝试多少（安全区）
             let failLimit = 5;         // 连续失败次数后停止
             let failCounter = 0;       // 当前连续失败次数
 
-            for (let i = 1; i <= maxTry; i++) {
-                if (failCounter >= failLimit) {
-                console.log("No more images in folder:", folder);
-                break;
+            //历遍单个图片不同extension名字
+            function loadImage(index) {
+                let attempt = 0;
+
+                function tryNextExtension() {
+                if (attempt >= extensions.length) {
+                    failCounter++;
+                    return;
                 }
 
-                const index = String(i).padStart(2, "0");
-                const imgUrl = `images/${folder}/${index}.jpg`;
-
+                const ext = extensions[attempt];
+                const imgUrl = `images/${folder}/${index}.${ext}`;
                 const img = new Image();
                 img.src = imgUrl;
 
                 img.onload = function () {
-                failCounter = 0;       // reset because this one exists
-                img.classList.add("loaded");
-                gallery.appendChild(img);
+                    failCounter = 0;
+                    img.classList.add("loaded");
+                    gallery.appendChild(img);
                 };
 
                 img.onerror = function () {
-                failCounter++;
+                    attempt++;
+                    tryNextExtension();
                 };
+                }
+
+                tryNextExtension();
             }
+            //加载全部
+            async function loadAllImages() {
+                for (let i = 1; i <= maxTry; i++) {
+                if (failCounter >= failLimit) break;
+
+                const num = String(i).padStart(2, "0"); // 01 → 99
+                loadImage(num);
+                }
+
+                setTimeout(() => {
+                loader.style.display = "none";
+                }, 1200);
+            }
+            //调用loadALL
+            loadAllImages();
         </script>
     </body>
 </html>
