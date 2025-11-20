@@ -135,53 +135,60 @@
             let failCounter = 0;       // 当前连续失败次数
             let currentIndex = 1;      //当前index
 
+            let loaderHidden = false; // 标志 loader 是否已经隐藏,第一个图加载出来就隐藏loader
 
             function tryLoadImage(index){
-                return new Promise((resolve, reject) => {
-            let extIdx = 0;
+                return new Promise((resolve,reject)=>{
+                    let extIdx = 0;
 
-        function tryNextExt(){
-            if(extIdx >= extensions.length){
-                reject(false);
-                return;
-            }
+                    function tryNextExt(){
+                        if(extIdx >= extensions.length){
+                            reject(false);
+                            return;
+                        }
 
-             //固定的路径（根据我的layer）
-            const baseURL = "https://github.com/yyzhangggg/my_website/docs/images";
-            const imgPath =  `${baseURL}/${folder}/${names[nameIdx]}.${extensions[extIdx]}`;
-            const img = new Image();
-            img.src = imgPath;
+                        const baseURL = "https://github.com/yyzhangggg/my_website/docs/images";
+                        const path =  `${baseURL}/${folder}/${names[nameIdx]}.${extensions[extIdx]}`;
+                        const img = new Image();
+                        img.src = path;
 
-            img.onload = () => resolve(img);
-            img.onerror = () => {
-                extIdx++;
-                tryNextExt();
-            };
-        }
-
-        tryNextExt();
-    });
-}
-
-        async function loadAllImages(){
-            while(currentIndex <= maxImages){
-                try{
-                    const img = await tryLoadImage(currentIndex);
-                    img.classList.add("fade-in");    // 可配合 CSS 渐入动画
-                    gallery.appendChild(img);
-                    failCounter = 0;                 // 成功 → 重置连续失败计数
-                }catch(e){
-                    failCounter++;
-                    if(failCounter >= failLimit){
-                        alert("Error: loading fail or folder finished");
-                        break;
+                        img.onload = ()=>resolve(img);
+                        img.onerror = ()=>{
+                            extIdx++;
+                            tryNextExt();
+                        };
                     }
-                }
-                currentIndex++;
+
+                    tryNextExt();
+                });
             }
-            loader.style.display = "none";           // 加载完成 → 隐藏 loader
-        }
-        loadAllImages();
+
+            async function loadAllImages(){
+                while(currentIndex <= maxImages){
+                    try{
+                        const img = await tryLoadImage(currentIndex);
+                        img.classList.add("fade-in");
+                        gallery.appendChild(img);
+
+                        // ✅ 第一张成功加载就隐藏 loader
+                        if(!loaderHidden){
+                            loader.style.display = "none";
+                            loaderHidden = true;
+                        }
+                    }catch(e){
+                        // 如果一开始第一张图片就失败，不隐藏 loader
+                        console.log(`Image ${currentIndex} not found`);
+                    }
+                    currentIndex++;
+                }
+
+                // 可选：最后检查，如果 loader 还没隐藏，说明没有图片成功加载
+                if(!loaderHidden){
+                    loader.style.display = "none";
+                    alert("Error: no images loaded");
+                }
+            }
+            loadAllImages();
         </script>
     </body>
 </html>
