@@ -151,7 +151,8 @@
                             reject(false);
                             return;
                         }
-                        const path = `images/${folder}/${names[nameIndex]}.${extensions[extIndex]}`;
+                        //固定的路径（根据我的layer）
+                        const path = `images/${folder}/${names[nameIdx]}.${extensions[extIdx]}`;
                         const img = new Image();
                         img.src = path;
                         img.onload = ()=>resolve(img);
