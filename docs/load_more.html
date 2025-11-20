@@ -152,7 +152,8 @@
                             return;
                         }
                         //固定的路径（根据我的layer）
-                        const path = `images/${folder}/${names[nameIdx]}.${extensions[extIdx]}`;
+                        const baseURL = "https://yyzhangggg.github.io/my_website/docs/images";
+                        const path = `${baseURL}/${folder}/${names[nameIdx]}.${extensions[extIdx]}`;
                         const img = new Image();
                         img.src = path;
                         img.onload = ()=>resolve(img);
@@ -188,7 +189,6 @@
                 }
                 loader.style.display = "none";
             }
-
             loadAllImages();
         </script>
     </body>
