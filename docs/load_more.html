@@ -1,8 +1,24 @@
 <!DOCTYPE html>
-<html>
-    <>
-        <title>Gallery</title>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <title>Gallery</title>
         <style>
+        /* 毛玻璃导航栏 */
+        .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        backdrop-filter: blur(12px);
+        background: rgba(255,255,255,0.5);
+        padding: 18px 22px;
+        font-size: 20px;
+        font-weight: 600;
+        z-index: 999;
+        border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+
         body {
             font-family: sans-serif;
             margin: 0;
@@ -15,11 +31,34 @@
             font-weight: 300;
             margin-bottom: 25px;
         }
-
-        /* Masonry layout */
+        
+        /* 瀑布流布局 */
         .masonry {
-        column-count: 4;      /* Number of columns */
-        column-gap: 15px;     /* Space between columns */
+            column-count: 4;                   /* Number of columns */
+            column-gap: 15px;               /* Space between columns */
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+
+        /* Image container */
+        .masonry img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            opacity: 0;                      /* Start invisible */
+            transform: translateY(20px);        /* Start shifted down */
+            animation: fadeIn 0.8s ease forwards;
+            break-inside: avoid;
+        }
+
+        /*渐变effect*/
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
 
@@ -47,6 +86,14 @@
         z-index: 9999;
         }
 
+        /*淡入特效，每个图片加载进去的时候使用*/
+        /* Fade-in effect when loaded */
+        .loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /*加载到最后一张后自动停止 spinner*/
         .spinner {
         width: 50px;
         height: 50px;
@@ -59,29 +106,12 @@
         @keyframes spin {
         to { transform: rotate(360deg); }
         }
-
-         /* Image container */
-        .masonry img {
-        width: 100%;
-        margin-bottom: 15px;
-        border-radius: 6px;
-        break-inside: avoid;        /* Prevent breaking images */
-        opacity: 0;                 /* Start invisible */
-        transform: translateY(20px); /* Start shifted down */
-        transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        /*淡入特效，每个图片加载进去的时候使用*/
-        /* Fade-in effect when loaded */
-        .loaded {
-            opacity: 1;
-            transform: translateY(0);
-        }
         </style>
     </head>
 
     <body>
-
+        <!--毛玻璃导航栏 -->
+        <div class="navbar">Gallery</div>
         <!--载入特效-->
         <div class="loader">
             <div class="spinner"></div>
