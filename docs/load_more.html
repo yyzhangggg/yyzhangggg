@@ -6,7 +6,7 @@
         body {
             font-family: sans-serif;
             margin: 0;
-            background: #bdf8f1;
+            background: #ede7ea;
             padding: 20px;
         }
 
@@ -22,6 +22,8 @@
         column-gap: 15px;     /* Space between columns */
         }
 
+
+        /*调整尺寸： 适应both手机和电脑 */
         @media (max-width: 1200px) {
             .masonry { column-count: 3; }
         }
@@ -43,6 +45,7 @@
         transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
+        /*瀑布流特效+淡入*/
         /* Fade-in effect when loaded */
         .loaded {
             opacity: 1;
@@ -55,7 +58,7 @@
         <h2 id="title">Gallery</h2>
         <div id="gallery" class="masonry"> </div>
         <script>
-        // Get folder name from URL
+        // Get folder name from URL生成一个specify的title
             const params = new URLSearchParams(window.location.search);
             const folder = params.get("folder");
 
@@ -64,20 +67,32 @@
 
             title.innerText = " Gallery for " + folder ;
 
-        // Try load 01 → 100
-        for (let i = 1; i <= 100; i++) {
-            const index = String(i).padStart(2, "0");
-            const imgUrl = `images/${folder}/${index}.jpg`;
+            let maxTry = 200;          // 最多尝试多少（安全区）
+            let failLimit = 5;         // 连续失败次数后停止
+            let failCounter = 0;       // 当前连续失败次数
 
-            const img = new Image();
-            img.src = imgUrl;
+            for (let i = 1; i <= maxTry; i++) {
+                if (failCounter >= failLimit) {
+                console.log("No more images in folder:", folder);
+                break;
+                }
 
-            // Only append valid images
-            img.onload = function () {
-            img.classList.add("loaded");   // Apply fade-in effect
+                const index = String(i).padStart(2, "0");
+                const imgUrl = `images/${folder}/${index}.jpg`;
+
+                const img = new Image();
+                img.src = imgUrl;
+
+                img.onload = function () {
+                failCounter = 0;       // reset because this one exists
+                img.classList.add("loaded");
                 gallery.appendChild(img);
-            };
-        }
+                };
+
+                img.onerror = function () {
+                failCounter++;
+                };
+            }
         </script>
     </body>
 </html>
