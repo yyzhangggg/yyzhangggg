@@ -1,88 +1,83 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Gallery</title>
+    <head>
+        <title>Gallery</title>
+        <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background: #bdf8f1;
+            padding: 20px;
+        }
 
-    <style>
-    body {
-        font-family: sans-serif;
-        margin: 0;
-        background: #f8f8f8;
-        padding: 20px;
-    }
+        h2 {
+            text-align: center;
+            font-weight: 300;
+            margin-bottom: 25px;
+        }
 
-    h2 {
-        text-align: center;
-        font-weight: 300;
-        margin-bottom: 25px;
-    }
+        /* Masonry layout */
+        .masonry {
+        column-count: 4;      /* Number of columns */
+        column-gap: 15px;     /* Space between columns */
+        }
 
-    /* Masonry layout */
-    .masonry {
-      column-count: 4;      /* Number of columns */
-      column-gap: 15px;     /* Space between columns */
-    }
+        @media (max-width: 1200px) {
+            .masonry { column-count: 3; }
+        }
+        @media (max-width: 800px) {
+            .masonry { column-count: 2; }
+        }
+        @media (max-width: 500px) {
+            .masonry { column-count: 1; }
+        }
 
-    @media (max-width: 1200px) {
-        .masonry { column-count: 3; }
-    }
-    @media (max-width: 800px) {
-        .masonry { column-count: 2; }
-    }
-    @media (max-width: 500px) {
-        .masonry { column-count: 1; }
-    }
+        /* Image container */
+        .masonry img {
+        width: 100%;
+        margin-bottom: 15px;
+        border-radius: 6px;
+        break-inside: avoid;        /* Prevent breaking images */
+        opacity: 0;                 /* Start invisible */
+        transform: translateY(20px); /* Start shifted down */
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        }
 
-    /* Image container */
-    .masonry img {
-    width: 100%;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    break-inside: avoid;        /* Prevent breaking images */
-    opacity: 0;                 /* Start invisible */
-    transform: translateY(20px); /* Start shifted down */
-    transition: opacity 0.8s ease, transform 0.8s ease;
-    }
+        /* Fade-in effect when loaded */
+        .loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        </style>
+    </head>
 
-    /* Fade-in effect when loaded */
-    .loaded {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    </style>
-</head>
+    <body>
+        <h2 id="title">Gallery</h2>
+        <div id="gallery" class="masonry"> </div>
+        <script>
+        // Get folder name from URL
+            const params = new URLSearchParams(window.location.search);
+            const folder = params.get("folder");
 
-<body>
+            const title = document.getElementById("title");
+            const gallery = document.getElementById("gallery");
 
-<h2 id="title">Gallery</h2>
+            title.innerText = " Gallery for " + folder ;
 
-<div id="gallery" class="masonry"></div>
+        // Try load 01 → 100
+        for (let i = 1; i <= 100; i++) {
+            const index = String(i).padStart(2, "0");
+            const imgUrl = `images/${folder}/${index}.jpg`;
 
-<script>
-  // Get folder name from URL
-    const params = new URLSearchParams(window.location.search);
-    const folder = params.get("folder");
+            const img = new Image();
+            img.src = imgUrl;
 
-    const title = document.getElementById("title");
-    const gallery = document.getElementById("gallery");
-
-    title.innerText = folder + " Gallery";
-
-  // Try load 01 → 100
-for (let i = 1; i <= 100; i++) {
-    const index = String(i).padStart(2, "0");
-    const imgUrl = `images/${folder}/${index}.jpg`;
-
-    const img = new Image();
-    img.src = imgUrl;
-
-    // Only append valid images
-    img.onload = function () {
-      img.classList.add("loaded");   // Apply fade-in effect
-        gallery.appendChild(img);
-    };
-}
-</script>
-
-</body>
+            // Only append valid images
+            img.onload = function () {
+            img.classList.add("loaded");   // Apply fade-in effect
+                gallery.appendChild(img);
+            };
+        }
+        </script>
+    </body>
 </html>
