@@ -30,48 +30,7 @@
             margin-bottom: 25px;
         }
         
-        /*定义item */
-         /* 图片容器 */
-        .image-item {
-            position: relative;
-            margin-bottom: 15px;
-            break-inside: avoid;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.8s ease forwards;
-        }
-        
-        .image-item img {
-            width: 100%;
-            border-radius: 12px;
-            display: block;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        
-        .image-item:hover img {
-            transform: scale(1.02);
-        }
-        
-        /* 图片信息覆盖层 */
-        .image-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            color: white;
-            padding: 15px;
-            border-radius: 0 0 12px 12px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .image-item:hover .image-overlay {
-            opacity: 1;
-        }
-
-        /* 瀑布流布局style */
+        /* 瀑布流布局style : define objects like in java */
         .masonry {
             column-count: 4;                   /* Number of columns */
             column-gap: 15px;               /* Space between columns */
@@ -82,11 +41,18 @@
         .masonry img {
             width: 100%;
             border-radius: 12px;
-            margin-bottom: 12px;
-            opacity: 0;                      /* Start invisible */
-            transform: translateY(20px);        /* Start shifted down */
+            margin-bottom: 15px;
+            opacity: 0;
+            transform: translateY(20px);
             animation: fadeIn 0.8s ease forwards;
             break-inside: avoid;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .masonry img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
         }
 
         /* fading effect */
