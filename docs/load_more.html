@@ -10,11 +10,131 @@
             background: #fdf5f9;
             padding: 20px;
         }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #333;
+            text-transform: capitalize;
+        }
 
-        h2 {
+        .header h2 {
             text-align: center;
             font-weight: 300;
             margin-bottom: 25px;
+        }
+
+        /*object definer */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            background-color: white;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-caption {
+            padding: 10px;
+            background-color: white;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+        /* Lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .lightbox-prev,
+        .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            padding: 20px;
+            user-select: none;
+        }
+        
+        .lightbox-prev {
+            left: 20px;
+        }
+        
+        .lightbox-next {
+            right: 20px;
+        }
+        
+        .no-images {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+            
+            .gallery-item img {
+                height: 200px;
+            }
         }
         
         /* 瀑布流布局 */
@@ -25,9 +145,6 @@
             max-width: 1200px;
             margin: auto;
         }
-
-
-        /* Image container */
         .masonry img {
             width: 100%;
             border-radius: 12px;
@@ -38,7 +155,7 @@
             break-inside: avoid;
         }
 
-        /*渐变effect*/
+        /* fading effect*/
         @keyframes fadeIn {
             to {
                 opacity: 1;
@@ -58,7 +175,7 @@
             .masonry { column-count: 1; }
         }
 
-        /* Loading Spinner 加载特效，use before the first image is loaded */
+        /* Loading Spinner / use before the first image is loaded */
         .loader {
         position: fixed;
         top: 0; left: 0;
@@ -110,7 +227,7 @@
                         }
 
                         const baseURL = "https://github.io/yyzhangggg/my_website/docs/images";
-                        const path =  `${baseURL}/${folder}/${names[nameIdx]}.${extensions[extIdx]}`;
+                        const path =  `${baseURL}/${folder}/${index}.${extensions[extIdx]}`;
                         const img = new Image();
                         img.src = path;
 
@@ -126,30 +243,42 @@
             }
 
             async function loadAllImages(){
-                while(currentIndex <= maxImages){
+                while(currentIndex <= maxTry){
                     try{
                         const img = await tryLoadImage(currentIndex);
                         img.classList.add("fade-in");
                         gallery.appendChild(img);
 
-                        // ✅ 第一张成功加载就隐藏 loader
+                        // 成功加载，重置失败计数器
+                        failCounter = 0;
+                        // 第一张成功加载就隐藏 loader
                         if(!loaderHidden){
                             loader.style.display = "none";
                             loaderHidden = true;
                         }
                     }catch(e){
-                        // 如果一开始第一张图片就失败，不隐藏 loader
-                        console.log(`Image ${currentIndex} not found`);
+                        // 失败计数器递增
+                        failCounter++;
+                        console.log(`Image ${currentIndex} not found (fail ${failCounter}/${failLimit})`);
+                        
+                        // 如果连续失败达到限制，停止加载
+                        if(failCounter >= failLimit){
+                            console.log("Reached fail limit, stopping...");
+                            break;
+                        }
                     }
                     currentIndex++;
                 }
 
-                // 可选：最后检查，如果 loader 还没隐藏，说明没有图片成功加载
+                // 最后如果 loader 还没隐藏，说明没有图片成功加载
                 if(!loaderHidden){
                     loader.style.display = "none";
-                    alert("Error: no images loaded");
+                    gallery.innerHTML = '<p style="text-align:center; padding:40px; color:#666;">No images found in this category.</p>';
                 }
+                
+                console.log(`Loading complete. Loaded ${currentIndex - failCounter - 1} images.`);
             }
+            
             loadAllImages();
 
             //simple chart
@@ -163,6 +292,7 @@
             function updateCartUI() {
                 // 更新购物车图标数量、总价等
             }
+
         </script>
     </body>
 </html>
