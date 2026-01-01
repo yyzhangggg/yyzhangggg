@@ -243,13 +243,13 @@
             }
 
             async function loadAllImages(){
-                while(currentIndex <= maxTry){
+                while(currentIndex <= maxTry && failCounter < failLimit){
                     try{
                         const img = await tryLoadImage(currentIndex);
                         img.classList.add("fade-in");
                         gallery.appendChild(img);
 
-                        // 成功加载，重置失败计数器
+                        // success, reset counter
                         failCounter = 0;
                         // 第一张成功加载就隐藏 loader
                         if(!loaderHidden){
