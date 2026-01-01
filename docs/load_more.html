@@ -4,25 +4,10 @@
 <meta charset="UTF-8">
     <title>Gallery</title>
         <style>
-        /* 毛玻璃导航栏 */
-        .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        backdrop-filter: blur(12px);
-        background: rgba(255,255,255,0.5);
-        padding: 18px 22px;
-        font-size: 20px;
-        font-weight: 600;
-        z-index: 999;
-        border-bottom: 1px solid rgba(255,255,255,0.3);
-        }
-
         body {
             font-family: sans-serif;
             margin: 0;
-            background: #ede7ea;
+            background: #fdf5f9;
             padding: 20px;
         }
 
@@ -94,22 +79,17 @@
     </head>
 
     <body>
-        <!--毛玻璃导航栏 -->
-        <div class="navbar">Gallery</div>
-        <!--载入特效-->
+        <!--载入特效 启动^^ -->
         <div class="loader"></div>
-
-        <h2 id="title">Gallery</h2>
         <div id="gallery" class="masonry"> </div>
         <script>
         // Get folder name from URL生成一个specify的title
             const folder = new URLSearchParams(window.location.search).get("folder") || "default";
-
             const title = document.getElementById("title");
             const gallery = document.getElementById("gallery");
             const loader = document.getElementById("loader");
-
-            title.innerText = " Gallery for " + folder ;
+            //生成每个folder的特别名字
+            title.innerText = `Gallery of ${folder}`;
             
             const extensions = ["jpg", "jpeg", "png", "webp","JPG", "JPEG", "PNG", "WEBP"]; //拓展文件名，兼容更多种类图片
             let maxTry = 200;          // 最多尝试多少（安全区）
@@ -171,6 +151,18 @@
                 }
             }
             loadAllImages();
+
+            //simple chart
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            function addToCart(paintingId, title, price, imageUrl) {
+                cart.push({id: paintingId, title, price, imageUrl, quantity: 1});
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartUI();
+            }
+
+            function updateCartUI() {
+                // 更新购物车图标数量、总价等
+            }
         </script>
     </body>
 </html>
