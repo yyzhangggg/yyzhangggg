@@ -29,115 +29,49 @@
             font-weight: 300;
             margin-bottom: 25px;
         }
-
-        /*object definer */
-        .gallery-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px 0;
-        }
         
-        .gallery-item {
+        /*定义item */
+         /* 图片容器 */
+        .image-item {
             position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            background-color: white;
+            margin-bottom: 15px;
+            break-inside: avoid;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease forwards;
         }
         
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-        
-        .gallery-item img {
+        .image-item img {
             width: 100%;
-            height: 300px;
-            object-fit: cover;
+            border-radius: 12px;
             display: block;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
         
-        .image-caption {
-            padding: 10px;
-            background-color: white;
-            text-align: center;
-            font-size: 14px;
-            color: #666;
+        .image-item:hover img {
+            transform: scale(1.02);
         }
-        /* Lightbox styles */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
+        
+        /* 图片信息覆盖层 */
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .lightbox.active {
-            display: flex;
-        }
-        
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-        }
-        
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 40px;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
             color: white;
-            font-size: 40px;
-            cursor: pointer;
-            z-index: 1001;
+            padding: 15px;
+            border-radius: 0 0 12px 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
-        .lightbox-prev,
-        .lightbox-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            font-size: 40px;
-            cursor: pointer;
-            padding: 20px;
-            user-select: none;
+        .image-item:hover .image-overlay {
+            opacity: 1;
         }
-        
-        .lightbox-prev {
-            left: 20px;
-        }
-        
-        .lightbox-next {
-            right: 20px;
-        }
-        
-        .no-images {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-        }
-        
-        @media (max-width: 768px) {
-            .gallery-container {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 15px;
-            }
-            
-            .gallery-item img {
-                height: 200px;
-            }
-        }
-        
-        /* 瀑布流布局 */
+
+        /* 瀑布流布局style */
         .masonry {
             column-count: 4;                   /* Number of columns */
             column-gap: 15px;               /* Space between columns */
@@ -155,14 +89,13 @@
             break-inside: avoid;
         }
 
-        /* fading effect*/
+        /* fading effect */
         @keyframes fadeIn {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
 
         /*调整尺寸： 适应both手机和电脑 */
         @media (max-width: 1200px) {
@@ -177,20 +110,31 @@
 
         /* Loading Spinner / use before the first image is loaded */
         .loader {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.9);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        
+        .loader::after {
+            content: "";
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #ff6b9d;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
         @keyframes spin {
-        0% { transform: rotate(0deg);}
-        100% { transform: rotate(360deg);}
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         </style>
     </head>
