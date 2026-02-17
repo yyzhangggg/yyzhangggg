@@ -7,6 +7,27 @@
 		.hidden {
 			display: none;
 		}
+		/* product background preview & hover enlarge */
+		.product-preview {
+			background-size: cover;
+			background-position: center;
+			position: relative;
+		}
+		.product-preview .hover-view {
+			display: none;
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 9999;
+			max-width: 80vw;
+			max-height: 80vh;
+			box-shadow: 0 0 20px rgba(0,0,0,0.5);
+			pointer-events: none;
+		}
+		.product-preview:hover .hover-view {
+			display: block;
+		}
 	</style>
 
 	<!--  style settings overall -->
@@ -379,53 +400,59 @@
 						<p>Handmade Italian lace scrunchies in a girlish style, featuring a square design that adds a touch of youthful rebellion to sweetness.</p>
 					</section>
 					<!-- Items 03-->
-					<section>
+					<section class="product-preview" style="background-image: url('https://raw.githubusercontent.com/yyzhangggg/my_website/main/docs/images/product/1.png');">
 						<span class="icon solid style2 major fa-leaf"></span>
 						<!-- name of the product-->
 						<h3>Decorative painting</h3>
 						<!-- discription -->
 						<p>Light purple and sandy texture w/ decorative butterfly.</p>
+						<img class="hover-view" src="https://raw.githubusercontent.com/yyzhangggg/my_website/main/docs/images/product/1.png" alt="Decorative painting preview" />
 					</section>
 
 					<!-- Items 04-->
-					<section>
+					<section class="product-preview" style="background-image: url('https://raw.githubusercontent.com/yyzhangggg/my_website/main/docs/images/product/2.png');">
 						<span class="icon solid style2 major fa-leaf"></span>
 						<!-- name of the product-->
 						<h3>Decorative painting</h3>
 						<!-- discription -->
 						<p>Cute Strawberry w/ needles and threads, could pair with its' younger sister piese.</p>
+						<img class="hover-view" src="https://raw.githubusercontent.com/yyzhangggg/my_website/main/docs/images/product/2.png" alt="Decorative painting preview" />
 					</section>
 					<!-- Items 05-->
-					<section>
+					<section class="product-preview" style="background-image: url('https://raw.githubusercontent.com/yyzhangggg/my_website/main/docs/images/product/3.png');">
 						<span class="icon solid style2 major fa-leaf"></span>
 						<!-- name of the product-->
 						<h3>Decorative painting</h3>
 						<!-- discription -->
 						<p>Cute Strawberry w/ needles and threads, could pair with its' elder sister piese</p>
+						<img class="hover-view" src="https://raw.githubusercontent.com/yyzhangggg/my_website/main/docs/images/product/3.png" alt="Decorative painting preview" />
 					</section>
 					<!-- Items 06-->
-					<section>
+					<section class="product-preview" style="background-image: url('https://raw.githubusercontent.com/yyzhangggg/my_website/main/docs/images/product/4.png');">
 						<span class="icon solid style2 major fa-leaf"></span>
 						<!-- name of the product-->
 						<h3>Decorative painting</h3>
 						<!-- discription -->
 						<p>Mountain rich in colours.</p>
+						<img class="hover-view" src="https://raw.githubusercontent.com/yyzhangggg/my_website/main/docs/images/product/4.png" alt="Decorative painting preview" />
 					</section>
 					<!-- Items 07-->
-					<section>
+					<section class="product-preview" style="background-image: url('https://raw.githubusercontent.com/yyzhangggg/my_website/main/docs/images/product/5.png');">
 						<span class="icon solid style2 major fa-leaf"></span>
 						<!-- name of the product-->
 						<h3>Decorative painting</h3>
 						<!-- discription -->
 						<p>A relief of worries and anxiety.</p>
+						<img class="hover-view" src="https://raw.githubusercontent.com/yyzhangggg/my_website/main/docs/images/product/5.png" alt="Decorative painting preview" />
 					</section>
 					<!-- Items 08-->
-					<section>
+					<section class="product-preview" style="background-image: url('https://raw.githubusercontent.com/yyzhangggg/my_website/main/docs/images/product/IMG_1280.JPG');">
 						<span class="icon solid style2 major fa-leaf"></span>
 						<!-- name of the product-->
 						<h3>Decorative painting</h3>
 						<!-- discription -->
 						<p>Glimpse of Bio science in aristics view, bridge the gap of science and art.</p>
+						<img class="hover-view" src="https://raw.githubusercontent.com/yyzhangggg/my_website/main/docs/images/product/IMG_1280.JPG" alt="Decorative painting preview" />
 					</section>
 					<!-- Items 09-->
 					<section>
