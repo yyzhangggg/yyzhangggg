@@ -168,14 +168,16 @@
                 while(currentIndex <= maxTry && failCounter < failLimit){
                     try{
                         const img = await tryLoadImage(currentIndex);
-                        img.classList.add("fade-in");
                         gallery.appendChild(img);
+                        // stagger fade-in per image
+                        setTimeout(() => { img.classList.add("fade-in"); }, 50);
 
                         // success, reset counter
                         failCounter = 0;
                         // 第一张成功加载就隐藏 loader
                         if(!loaderHidden){
-                            loader.style.display = "none";
+                            loader.classList.add("fade-out");
+                            setTimeout(() => { loader.style.display = "none"; }, 600);
                             loaderHidden = true;
                         }
                     }catch(e){
