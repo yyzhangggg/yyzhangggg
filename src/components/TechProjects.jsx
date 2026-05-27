@@ -39,7 +39,7 @@ const projects = [
     name: 'Chess Sudoku Solver',
     tech: 'Java',
     desc: 'Multi-constraint puzzle solver integrating chess piece rules (Knight, Queen, King) across 3×3 to 5×5 grids, with a GUI visualizer.',
-    href: 'https://github.com/yyzhangggg/my_website/tree/main/games%20coded%20by%20Java/Final_Project',
+    href: 'https://github.com/yyzhangggg/my_website/tree/main/java-projects/chess-sudoku-solver',
   },
 ]
 
