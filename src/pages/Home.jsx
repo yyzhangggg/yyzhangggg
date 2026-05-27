@@ -5,6 +5,7 @@ import Products        from '../components/Products'
 import AboutMe         from '../components/AboutMe'
 import TechProjects    from '../components/TechProjects'
 import Friends         from '../components/Friends'
+import CreativeWriting from '../components/CreativeWriting'
 
 // All six spotlight rows defined as data to keep JSX clean
 const spotlights = [
@@ -83,6 +84,7 @@ export default function Home() {
       <Products />
       <AboutMe />
       <TechProjects />
+      <CreativeWriting />
       <Friends />
     </div>
   )
