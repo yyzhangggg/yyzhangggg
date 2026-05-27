@@ -6,8 +6,7 @@
 
 🔭 &nbsp;Currently working on: CNN image classifiers, regression models, NLP pipelines  
 🌱 &nbsp;Learning: BERT fine-tuning, MLOps, advanced SQL  
-💼 &nbsp;Open to: ML Engineer / Data Scientist internships and entry-level roles  
-📫 &nbsp;Reach me at: zyy010810@gmail.com
+💼 &nbsp;Open to: ML Engineer / Data Scientist internships and entry-level roles
 
 ---
 

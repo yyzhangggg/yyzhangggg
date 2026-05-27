@@ -38,6 +38,5 @@ Creative portfolio featuring photography, paintings, and writings — built with
 
 ## 📫 Contact
 
-- **Email:** zyy010810@gmail.com
 - **LinkedIn:** [linkedin.com/in/yanying-zhang-a61943232](https://www.linkedin.com/in/yanying-zhang-a61943232)
 - **GitHub:** [github.com/yyzhangggg](https://github.com/yyzhangggg)
