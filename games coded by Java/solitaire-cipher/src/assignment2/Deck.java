@@ -57,17 +57,14 @@ public class Deck {
      */
     public Deck(Deck d) {
         /**** ADD CODE HERE ****/
-        int counter = 0;
+        // Walk the source deck and add a deep copy of each card in order.
+        // addCard handles the head == null case, so no pre-initialisation needed.
         Card temp = d.head;
-        this.head = temp.getCopy();
-        while (counter < d.numOfCards){
-            Card x = temp.getCopy();
-            this.addCard(x);
+        for (int counter = 0; counter < d.numOfCards; counter++) {
+            this.addCard(temp.getCopy());
             temp = temp.next;
-            counter++;
         }
-        //renew the size of the deck
-        this.numOfCards = d.numOfCards;
+        // numOfCards is already correct (incremented by each addCard call).
     }
 
     /*
@@ -122,14 +119,12 @@ public class Deck {
             array[j]=array[gen.nextInt(j+1)];
             array[gen.nextInt(j+1)]=tempcard;
         }
-        this.head=array[0];
-
-        //renew the deck, put all card back to the deck
-        for (int k=1; k< this.numOfCards;k++){
-            temp.next= array[k];
-            temp=temp.next;
+        // Rebuild the circular doubly-linked list from the shuffled array.
+        for (int k = 0; k < this.numOfCards; k++) {
+            array[k].next = array[(k + 1) % this.numOfCards];
+            array[k].prev = array[(k - 1 + this.numOfCards) % this.numOfCards];
         }
-        this.head=array[0];
+        this.head = array[0];
     }
 
     /*
@@ -140,17 +135,14 @@ public class Deck {
     public Joker locateJoker(String color) {
         /**** ADD CODE HERE ****/
         if (this.head != null){
-            Card temp= this.head;
-            int counter=0;
-            while (counter < this.numOfCards){
-                //the value of jocker if numofcard-1,use this value to determin joker then check color
-                if (temp.getValue()==numOfCards-1){
-                    if (((Joker) temp).getColor()==color){
-                        return (Joker)temp;
-                    }
+            Card temp = this.head;
+            for (int counter = 0; counter < this.numOfCards; counter++){
+                // Use instanceof so we never mis-identify a PlayingCard as a Joker.
+                // Use .equals() for string comparison (== compares references, not content).
+                if (temp instanceof Joker && ((Joker) temp).getColor().equals(color)){
+                    return (Joker) temp;
                 }
-                temp=temp.next;
-                counter++;
+                temp = temp.next;
             }
         }
         return null;
@@ -163,16 +155,20 @@ public class Deck {
      */
     public void moveCard(Card c, int p) {
         /**** ADD CODE HERE ****/
-        int counter=0;
-        Card temp = c;
-        while (counter < p){
-            Card first = temp.prev;
-            Card third = temp.next;
-            first.next=third;
-            temp.next=third.next;
-            third.next=temp;
-            counter++;
-            temp=temp.next;
+        // Move card c one position at a time, updating all four pointers each step.
+        for (int counter = 0; counter < p; counter++){
+            Card before = c.prev;   // node immediately before c
+            Card after  = c.next;   // node immediately after  c
+
+            // Splice c out of its current position
+            before.next = after;
+            after.prev  = before;
+
+            // Insert c right after 'after'
+            c.prev          = after;
+            c.next          = after.next;
+            after.next.prev = c;
+            after.next      = c;
         }
     }
 
@@ -242,7 +238,8 @@ public class Deck {
             temp=temp.next;
             i++;
         }
-        if (temp.getValue()!= this.numOfCards-1){
+        // Return null if the found card is a Joker; use instanceof, not value comparison.
+        if (!(temp instanceof Joker)){
             return temp;
         }
         return null;
@@ -277,8 +274,8 @@ public class Deck {
         Card x =this.head;
         int count=0;
         while (count< this.numOfCards){
-            if (x.getValue() == this.numOfCards -1){
-                if (x.toString() == "BJ"){
+            if (x instanceof Joker){
+                if (x.toString().equals("BJ")){
                     b++;
                     break;
                 }else{
@@ -300,8 +297,6 @@ public class Deck {
 
         //look up the keystream
         if(this.numOfCards !=0){
-            Card temp = this.head;
-            int value = temp.getValue();
             Card keyholder = this.lookUpCard();
             if (keyholder != null){
                 return keyholder.getValue();
