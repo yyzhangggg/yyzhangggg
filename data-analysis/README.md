@@ -1,6 +1,6 @@
 # Data Analysis Projects
 
-A collection of data science projects using Python, R, and SQL.
+A collection of data science and numerical computing projects using Python, R, and SQL.
 
 ---
 
@@ -29,15 +29,17 @@ A collection of data science projects using Python, R, and SQL.
 
 ---
 
-### Lab Notebooks
+### [Numerical Methods](numerical-method/)
+**Stack:** Python (`math`, `numpy`, `matplotlib`)  
+**Scope:** Three labs implementing and analysing core numerical computing algorithms from scratch.
 
-Short exploratory data analysis exercises:
+| Lab | Topic |
+|-----|-------|
+| [`lab1.ipynb`](numerical-method/lab1.ipynb) | Floating-point function approximation — `log`, `exp`, `sin`, `cos`, `arctan` via argument halving & CORDIC |
+| [`lab2.ipynb`](numerical-method/lab2.ipynb) | Power series convergence & root finding — Taylor series, Newton's method, Heron vs Goldschmidt |
+| [`lab3.ipynb`](numerical-method/lab3.ipynb) | Polynomial interpolation — Lagrange, Runge phenomenon, Chebyshev nodes, piecewise methods |
 
-| File | Description |
-|---|---|
-| [`lab1.ipynb`](lab1.ipynb) | Data exploration and visualization |
-| [`lab2.ipynb`](lab2.ipynb) | Statistical analysis and feature engineering |
-| [`lab3.ipynb`](lab3.ipynb) | Predictive modeling |
+See [`numerical-method/README.md`](numerical-method/README.md) for detailed summaries of each lab.
 
 ---
 
@@ -52,5 +54,5 @@ Rscript data_squad.R
 
 **Jupyter notebooks:**
 ```bash
-jupyter notebook lab1.ipynb
+jupyter notebook numerical-method/lab1.ipynb
 ```
