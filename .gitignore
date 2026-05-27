@@ -1,8 +1,27 @@
+# Editor / IDE
 .vscode
 .claude
+.idea
+*.iml
 
 # Node / Vite
 node_modules/
 dist/
 .env
 .env.local
+
+# Java compiled output — never commit bytecode
+*.class
+**/out/
+**/*.class
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Misc
+*.docx
+virtual-wardrobe.html
