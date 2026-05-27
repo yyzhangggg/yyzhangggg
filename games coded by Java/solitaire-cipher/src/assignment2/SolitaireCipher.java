@@ -1,3 +1,5 @@
+package assignment2;
+
 import java.util.Locale;
 
 public class SolitaireCipher {

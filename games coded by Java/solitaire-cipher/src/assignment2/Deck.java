@@ -1,3 +1,4 @@
+package assignment2;
 
 import java.util.Random;
 
@@ -81,12 +82,19 @@ public class Deck {
     public void addCard(Card c) {
         /**** ADD CODE HERE ****/
         if(c!=null){
-        c.prev = this.head.prev;
-        this.head.prev.next = c;
-        c.next = this.head;
-        this.head.prev = c;
-        this.numOfCards=this.numOfCards+1;}
-        else{
+            if(this.head == null){
+                // First card: make it self-circular
+                this.head = c;
+                c.next = c;
+                c.prev = c;
+            } else {
+                c.prev = this.head.prev;
+                this.head.prev.next = c;
+                c.next = this.head;
+                this.head.prev = c;
+            }
+            this.numOfCards=this.numOfCards+1;
+        } else{
             throw new NullPointerException();
         }
     }
@@ -98,6 +106,7 @@ public class Deck {
      */
     public void shuffle() {
         /**** ADD CODE HERE ****/
+        if(this.numOfCards == 0) return;
         Card [] array = new Card[this.numOfCards];
         int i =0;
         Card temp = this.head;
