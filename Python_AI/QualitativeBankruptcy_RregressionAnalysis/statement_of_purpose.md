@@ -7,7 +7,7 @@ The purpose of this project meant to showes basic ability of data analytics skil
         Dataset 2: Qualitative Bankruptcy (250 instances).rar (Qualitative Bankruptcy dataset):
            https://archive.ics.uci.edu/ml/datasets/Qualitative_Bankruptcy
 
-2. Load the datasets into NumPy and Pandas objects in Python and clean the data, and analysis teh data using the following AI model:
+2. Load the datasets into NumPy and Pandas objects in Python and clean the data, and analysis the data using the following AI model:
    (1)Implement analytical linear regression solution for Dataset 
    (2)Implement logistic regression with gradient descent for Dataset
    (3)Implement mini-batch stochastic gradient descent for both linear and logistic regression.

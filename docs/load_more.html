@@ -196,7 +196,8 @@
 
                 // 最后如果 loader 还没隐藏，说明没有图片成功加载
                 if(!loaderHidden){
-                    loader.style.display = "none";
+                    loader.classList.add("fade-out");
+                    setTimeout(() => { loader.style.display = "none"; }, 600);
                     gallery.innerHTML = '<p style="text-align:center; padding:40px; color:#666;">No images found in this category.</p>';
                 }
                 
