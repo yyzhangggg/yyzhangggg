@@ -57,10 +57,8 @@ public class DecisionTree implements Serializable {
                     double best_ave_entropy = 1.0 / 0;
                     int best_attr = -1;
                     double best_threshold = -1;
-                    int[] x = new int[2];
-                    x[0] = 0;
-                    x[1] = 1;
-                    for (int index : x) {//split by x1 then by x2,note that index 0=x1, index 1=x2
+                    int numAttributes = datalist.get(0).x.length; // support any number of attributes
+                    for (int index = 0; index < numAttributes; index++) {//split by each attribute
                         for (Datum data : datalist) {
                             //split data point
                             ArrayList<Datum> small = new ArrayList<Datum>();
@@ -151,30 +149,30 @@ public class DecisionTree implements Serializable {
 
             //given another DTNode object, this method checks if the tree rooted at the calling DTNode is equal to the tree rooted
             //at DTNode object passed as the parameter
-            public boolean equals (Object dt2) {
-            	boolean b=true;
-                if (dt2 instanceof DTNode) {
-                    DTNode newnode = (DTNode) dt2;
-                    ArrayList <Boolean> bl=new ArrayList<Boolean>();
-                    if (this.leaf) {
-                        b = (this.label == newnode.label) ;
-                    } 
-                    if(!this.leaf){
-                    	b=(this.attribute == newnode.attribute && this.threshold == newnode.threshold);
-                    }
-                    bl.add(b);
-                    if (this.left != null && newnode.left != null) {
-                    		this.left.equals(newnode.left);
-                    }
-                    if (this.right != null && newnode.right != null) {
-                    		this.right.equals(newnode.right);
-                    }
-                    return b;
+            public boolean equals(Object dt2) {
+                if (!(dt2 instanceof DTNode)) {
+                    return false;
                 }
-                
-                
-                //ADD CODE HERE
-                return false;
+                DTNode other = (DTNode) dt2;
+
+                // Leaf status must match.
+                if (this.leaf != other.leaf) return false;
+
+                if (this.leaf) {
+                    // Both leaves: labels must match.
+                    return this.label == other.label;
+                } else {
+                    // Both internal nodes: attribute and threshold must match,
+                    // then recurse into both children (results must NOT be discarded).
+                    if (this.attribute != other.attribute || this.threshold != other.threshold) {
+                        return false;
+                    }
+                    boolean leftEq  = (this.left  == null && other.left  == null)
+                                   || (this.left  != null && other.left  != null && this.left.equals(other.left));
+                    boolean rightEq = (this.right == null && other.right == null)
+                                   || (this.right != null && other.right != null && this.right.equals(other.right));
+                    return leftEq && rightEq;
+                }
             }
     }
 
