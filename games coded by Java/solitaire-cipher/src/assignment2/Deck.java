@@ -113,11 +113,13 @@ public class Deck {
             temp=temp.next;
             i++;
         }
-        for (int j =this.numOfCards-1;j >1 ; j--){
-            Card tempcard= array[j];
-            //swap A[gen] and A[j]
-            array[j]=array[gen.nextInt(j+1)];
-            array[gen.nextInt(j+1)]=tempcard;
+        // Standard Fisher-Yates shuffle: j must go down to 1 (not 2),
+        // and we need a single swap per step (not two separate nextInt calls).
+        for (int j = this.numOfCards-1; j > 0; j--){
+            int idx = gen.nextInt(j+1);
+            Card tempcard = array[j];
+            array[j]   = array[idx];
+            array[idx] = tempcard;
         }
         // Rebuild the circular doubly-linked list from the shuffled array.
         for (int k = 0; k < this.numOfCards; k++) {
