@@ -4,7 +4,7 @@ here's a list of content i created:
 1. AI Projects
 2. Data analytic competition Projects for real insurance company by java , excel & sql
 3. OS shell project by c, run in linux system
-4. /docs is the folder for My web for my creative works including but not limited as Photograhy, Paintings & Writtings.
-5. Fun games explore byb java 
+4. /docs is the folder for My web for my creative works including but not limited as Photograph, Paintings & Writtings.
+5. Fun games explore by java 
 
 feel free to play around  /:D /
