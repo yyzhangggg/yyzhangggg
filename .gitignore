@@ -10,13 +10,10 @@ dist/
 .env
 .env.local
 
-# Java compiled output — never commit bytecode
+# Java compiled output
 *.class
 **/out/
 **/*.class
-
-# macOS
-.DS_Store
 
 # Windows
 Thumbs.db
