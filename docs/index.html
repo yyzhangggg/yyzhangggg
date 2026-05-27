@@ -37,6 +37,94 @@
 	</style>
 
 	<!--  style settings overall -->
+	<!-- Friends section styles -->
+	<style>
+		/* ── Friends & Relationships ── */
+		#friends .inner { margin-bottom: 1em; }
+		.friends-row {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			overflow-x: auto;
+			gap: 1.8em;
+			padding: 1em 3em 2.5em;
+			justify-content: flex-start;
+			scrollbar-width: thin;
+			scrollbar-color: rgba(255,255,255,0.2) transparent;
+		}
+		.friends-row::-webkit-scrollbar { height: 6px; }
+		.friends-row::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+		.friend-card {
+			flex: 0 0 180px;
+			text-align: center;
+			background: rgba(255,255,255,0.04);
+			border: 1px solid rgba(255,255,255,0.1);
+			border-radius: 1.2em;
+			padding: 1.8em 1.2em 1.5em;
+			transition: transform 0.25s ease, box-shadow 0.25s ease;
+		}
+		.friend-card:hover {
+			transform: translateY(-6px);
+			box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+		}
+		.friend-photo {
+			width: 110px;
+			height: 110px;
+			border-radius: 50%;
+			margin: 0 auto 1.1em;
+			overflow: hidden;
+			border: 3px solid rgba(255,255,255,0.18);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: linear-gradient(135deg, #e8e8e8, #d0d0d0);
+		}
+		.friend-photo img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+		.friend-photo-placeholder {
+			font-size: 2.4em;
+			color: #aaa;
+			line-height: 1;
+			user-select: none;
+		}
+		.friend-card h3 {
+			margin: 0 0 0.35em;
+			font-size: 1em;
+			font-weight: 600;
+		}
+		.friend-tag {
+			display: inline-block;
+			font-size: 0.68em;
+			padding: 0.22em 0.75em;
+			border-radius: 2em;
+			background: rgba(255,255,255,0.14);
+			margin-bottom: 0.75em;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+		}
+		.friend-card p.friend-note {
+			font-size: 0.82em;
+			opacity: 0.7;
+			margin: 0;
+			line-height: 1.55;
+		}
+		/* add-friend slot */
+		.friend-card.add-slot {
+			border-style: dashed;
+			opacity: 0.45;
+			cursor: default;
+		}
+		.friend-card.add-slot .friend-photo {
+			background: transparent;
+			border-style: dashed;
+		}
+		.friend-card.add-slot .friend-photo-placeholder { font-size: 2em; }
+	</style>
+
 	<title>Yanying Zhang</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -796,6 +884,110 @@
 			</div>
 		</section>
 		<!-- ===================== END TECHNICAL PROJECTS SECTION ===================== -->
+
+	<!-- ===================== FRIENDS & RELATIONSHIPS SECTION ===================== -->
+	<section class="wrapper style1 align-center" id="friends">
+		<div class="inner">
+			<h2>My People 💛</h2>
+			<p>The beautiful souls who colour my world — friends who've walked alongside me through every season of life.<br />
+			<em style="font-size:0.85em; opacity:0.65;">Replace each placeholder photo with your own — drop images into <code>images/friends/</code> and update the <code>src</code>.</em></p>
+		</div>
+
+		<!-- Horizontal scrolling friend cards -->
+		<div class="friends-row">
+
+			<!-- ── Friend 01 ── -->
+			<div class="friend-card">
+				<div class="friend-photo">
+					<!-- Replace src with your photo path, e.g. images/friends/01.jpg -->
+					<img src="images/friends/01.jpg"
+						 alt="Friend"
+						 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+					<div class="friend-photo-placeholder" style="display:none;">📷</div>
+				</div>
+				<h3>Name</h3>
+				<span class="friend-tag">Best Friend</span>
+				<p class="friend-note">A little note about this wonderful person and what makes your friendship special.</p>
+			</div>
+
+			<!-- ── Friend 02 ── -->
+			<div class="friend-card">
+				<div class="friend-photo">
+					<img src="images/friends/02.jpg"
+						 alt="Friend"
+						 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+					<div class="friend-photo-placeholder" style="display:none;">📷</div>
+				</div>
+				<h3>Name</h3>
+				<span class="friend-tag">College Friend</span>
+				<p class="friend-note">A little note about this wonderful person and what makes your friendship special.</p>
+			</div>
+
+			<!-- ── Friend 03 ── -->
+			<div class="friend-card">
+				<div class="friend-photo">
+					<img src="images/friends/03.jpg"
+						 alt="Friend"
+						 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+					<div class="friend-photo-placeholder" style="display:none;">📷</div>
+				</div>
+				<h3>Name</h3>
+				<span class="friend-tag">Childhood Friend</span>
+				<p class="friend-note">A little note about this wonderful person and what makes your friendship special.</p>
+			</div>
+
+			<!-- ── Friend 04 ── -->
+			<div class="friend-card">
+				<div class="friend-photo">
+					<img src="images/friends/04.jpg"
+						 alt="Friend"
+						 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+					<div class="friend-photo-placeholder" style="display:none;">📷</div>
+				</div>
+				<h3>Name</h3>
+				<span class="friend-tag">Art Buddy</span>
+				<p class="friend-note">A little note about this wonderful person and what makes your friendship special.</p>
+			</div>
+
+			<!-- ── Friend 05 ── -->
+			<div class="friend-card">
+				<div class="friend-photo">
+					<img src="images/friends/05.jpg"
+						 alt="Friend"
+						 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+					<div class="friend-photo-placeholder" style="display:none;">📷</div>
+				</div>
+				<h3>Name</h3>
+				<span class="friend-tag">Close Friend</span>
+				<p class="friend-note">A little note about this wonderful person and what makes your friendship special.</p>
+			</div>
+
+			<!-- ── Friend 06 ── -->
+			<div class="friend-card">
+				<div class="friend-photo">
+					<img src="images/friends/06.jpg"
+						 alt="Friend"
+						 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+					<div class="friend-photo-placeholder" style="display:none;">📷</div>
+				</div>
+				<h3>Name</h3>
+				<span class="friend-tag">Friend</span>
+				<p class="friend-note">A little note about this wonderful person and what makes your friendship special.</p>
+			</div>
+
+			<!-- ── Add more friends slot ── -->
+			<div class="friend-card add-slot">
+				<div class="friend-photo">
+					<div class="friend-photo-placeholder">＋</div>
+				</div>
+				<h3>Add Friend</h3>
+				<span class="friend-tag">Your pick</span>
+				<p class="friend-note">Duplicate a card block above to add more people to your wall.</p>
+			</div>
+
+		</div>
+	</section>
+	<!-- ===================== END FRIENDS & RELATIONSHIPS SECTION ===================== -->
 
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
