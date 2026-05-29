@@ -1,3 +1,5 @@
+import { useState, useRef, useCallback, useEffect } from 'react'
+
 const RAW = 'https://raw.githubusercontent.com/yyzhangggg/my_website/main/docs/images/product'
 
 const paintings = [
@@ -8,6 +10,13 @@ const paintings = [
   { file: '5.png',        title: 'Relief',               desc: 'A visual expression of releasing worries and anxiety.' },
   { file: 'IMG_1280.JPG', title: 'BioArt',               desc: 'A glimpse of biological science through an artistic lens — bridging science and art.' },
 ]
+
+const N = paintings.length          // 6
+const VISIBLE = 3
+// Triple the list: copy A (0–5), copy B (6–11), copy C (12–17)
+// Start at copy B so we can scroll backward or forward seamlessly
+const extended = [...paintings, ...paintings, ...paintings]
+const START = N
 
 function PaintingCard({ file, title, desc }) {
   const src = `${RAW}/${file}`
@@ -25,17 +34,74 @@ function PaintingCard({ file, title, desc }) {
 }
 
 export default function Products() {
+  const [idx, setIdx]           = useState(START)
+  const [animated, setAnimated] = useState(true)
+  const intervalRef = useRef(null)
+  const snapRef     = useRef(null)
+
+  const advance = useCallback(() => {
+    setIdx(prev => prev + 1)
+  }, [])
+
+  // When we slide into copy C, snap back to the same position in copy B (no visible jump)
+  useEffect(() => {
+    if (idx >= N * 2) {
+      snapRef.current = setTimeout(() => {
+        setAnimated(false)
+        setIdx(N)
+      }, 520) // wait for the 0.5 s CSS transition to finish
+    }
+    return () => clearTimeout(snapRef.current)
+  }, [idx])
+
+  // Re-enable the CSS transition after the silent snap
+  useEffect(() => {
+    if (!animated) {
+      let r1, r2
+      r1 = requestAnimationFrame(() => {
+        r2 = requestAnimationFrame(() => setAnimated(true))
+      })
+      return () => { cancelAnimationFrame(r1); cancelAnimationFrame(r2) }
+    }
+  }, [animated])
+
+  const startScroll = useCallback(() => {
+    if (intervalRef.current) return
+    intervalRef.current = setInterval(advance, 1800)
+  }, [advance])
+
+  const stopScroll = useCallback(() => {
+    clearInterval(intervalRef.current)
+    intervalRef.current = null
+  }, [])
+
+  // Cleanup on unmount
+  useEffect(() => () => {
+    clearInterval(intervalRef.current)
+    clearTimeout(snapRef.current)
+  }, [])
+
+  // translateX is % of the track's own width; each card = 100/extended.length % of track
+  const translatePct = -(idx - START) * (100 / extended.length)
+
   return (
     <section className="wrapper style1" id="paintings">
       <style>{`
-        .paint-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.1rem;
+        .carousel-outer {
+          overflow: hidden;
+          border-radius: 0.9em;
+          cursor: default;
         }
-        @media (max-width: 1280px) { .paint-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 736px)  { .paint-grid { grid-template-columns: 1fr; } }
-
+        .carousel-track {
+          display: flex;
+          width: ${(extended.length / VISIBLE) * 100}%;
+        }
+        .carousel-slide {
+          width: ${100 / extended.length}%;
+          flex-shrink: 0;
+          padding: 0 0.55rem;
+          box-sizing: border-box;
+        }
         .paint-card {
           border-radius: 0.9em;
           overflow: hidden;
@@ -56,8 +122,8 @@ export default function Products() {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform .4s ease;
           display: block;
+          transition: transform .4s ease;
         }
         .paint-card:hover .paint-img img {
           transform: scale(1.06);
@@ -88,10 +154,24 @@ export default function Products() {
           </p>
         </div>
         <div className="z-body">
-          <div className="paint-grid">
-            {paintings.map((p, i) => (
-              <PaintingCard key={i} {...p} />
-            ))}
+          <div
+            className="carousel-outer"
+            onMouseEnter={startScroll}
+            onMouseLeave={stopScroll}
+          >
+            <div
+              className="carousel-track"
+              style={{
+                transform: `translateX(${translatePct}%)`,
+                transition: animated ? 'transform 0.5s ease' : 'none',
+              }}
+            >
+              {extended.map((p, i) => (
+                <div key={i} className="carousel-slide">
+                  <PaintingCard {...p} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
