@@ -56,26 +56,21 @@ export default function CreativeWriting() {
   const [active, setActive] = useState(null)
 
   return (
-    <section className="wrapper style1 align-center" id="creative-writing">
+    <section className="wrapper style1" id="creative-writing">
       <style>{`
-        /* ── Section layout ── */
-        #creative-writing .inner { margin-bottom: 2em; }
+        /* ── Preview card ── */
         .cw-grid {
           display: flex;
           flex-wrap: wrap;
-          gap: 2em;
-          justify-content: center;
-          padding: 0 2em 3em;
+          gap: 1.5em;
         }
-
-        /* ── Preview card ── */
         .cw-card {
-          width: 340px;
+          width: 300px;
           text-align: left;
           background: rgba(255,255,255,0.04);
           border: 1px solid rgba(255,255,255,0.12);
           border-radius: 1.2em;
-          padding: 2em 1.8em 1.6em;
+          padding: 1.8em 1.6em 1.4em;
           display: flex;
           flex-direction: column;
           gap: 0.6em;
@@ -214,18 +209,21 @@ export default function CreativeWriting() {
         }
       `}</style>
 
-      <div className="inner">
-        <h2>Creative Writing ✍️</h2>
-        <p>
-          Stories I write for fun — character studies, slice-of-life fiction,
-          and scenes that live in my head until I put them down.
-        </p>
-      </div>
-
-      <div className="cw-grid">
-        {writings.map((piece, i) => (
-          <WritingCard key={i} piece={piece} onRead={setActive} />
-        ))}
+      <div className="z-row z-flip">
+        <div className="z-label">
+          <h2>Creative Writing ✍️</h2>
+          <p>
+            Stories I write for fun — character studies, slice-of-life fiction,
+            and scenes that live in my head until I put them down.
+          </p>
+        </div>
+        <div className="z-body">
+          <div className="cw-grid">
+            {writings.map((piece, i) => (
+              <WritingCard key={i} piece={piece} onRead={setActive} />
+            ))}
+          </div>
+        </div>
       </div>
 
       {active && <Modal piece={active} onClose={() => setActive(null)} />}

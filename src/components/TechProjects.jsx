@@ -45,33 +45,37 @@ const projects = [
 
 export default function TechProjects() {
   return (
-    <section className="wrapper style1 align-center" id="tech-projects">
-      <div className="inner">
-        <h2>Technical Projects</h2>
-        <p>
-          ML / AI &nbsp;·&nbsp; Data Science &nbsp;·&nbsp; Systems Programming
-          &nbsp;·&nbsp; Java
-        </p>
-        <div className="items style1 medium onscroll-fade-in">
-          {projects.map((p) => (
-            <section key={p.name}>
-              <span className={`icon solid style2 major ${p.icon}`} />
-              <h3>{p.name}</h3>
-              <p>
-                <strong>{p.tech}</strong>
-                <br />
-                {p.desc}
-              </p>
-              <a
-                href={p.href}
-                className="button small"
-                target="_blank"
-                rel="noreferrer"
-              >
-                View on GitHub
-              </a>
-            </section>
-          ))}
+    <section className="wrapper style1" id="tech-projects">
+      <div className="z-row">
+        <div className="z-label">
+          <h2>Technical Projects</h2>
+          <p>
+            ML / AI &nbsp;·&nbsp; Data Science &nbsp;·&nbsp; Systems Programming
+            &nbsp;·&nbsp; Java
+          </p>
+        </div>
+        <div className="z-body">
+          <div className="items style1 medium onscroll-fade-in">
+            {projects.map((p) => (
+              <section key={p.name}>
+                <span className={`icon solid style2 major ${p.icon}`} />
+                <h3>{p.name}</h3>
+                <p>
+                  <strong>{p.tech}</strong>
+                  <br />
+                  {p.desc}
+                </p>
+                <a
+                  href={p.href}
+                  className="button small"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View on GitHub
+                </a>
+              </section>
+            ))}
+          </div>
         </div>
       </div>
     </section>
