@@ -18,7 +18,7 @@ function FriendCard({ imgPath, name, tag, note, placeholder = false }) {
           className="friend-photo-placeholder"
           style={{ display: imgPath ? 'none' : 'flex' }}
         >
-          {placeholder ? '＋' : '📷'}
+          {placeholder ? '＋' : null}
         </div>
       </div>
       <h3>{name}</h3>
@@ -131,7 +131,7 @@ export default function Friends() {
 
       <div className="z-row">
         <div className="z-label">
-          <h2>My People 💛</h2>
+          <h2>My People</h2>
           <p>
             The beautiful souls who colour my world — friends who&apos;ve walked
             alongside me through every season of life.

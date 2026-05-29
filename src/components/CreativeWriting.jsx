@@ -42,7 +42,7 @@ function WritingCard({ piece, onRead }) {
     <div className="cw-card">
       <span className="cw-genre-badge">{piece.genre}</span>
       <h3 className="cw-card-title">{piece.title}</h3>
-      <p className="cw-card-setting">📍 {piece.setting}</p>
+      <p className="cw-card-setting">{piece.setting}</p>
       <p className="cw-card-excerpt">&ldquo;{piece.excerpt}&rdquo;</p>
       <button className="button small cw-read-btn" onClick={() => onRead(piece)}>
         Read More →
@@ -211,7 +211,7 @@ export default function CreativeWriting() {
 
       <div className="z-row z-flip">
         <div className="z-label">
-          <h2>Creative Writing ✍️</h2>
+          <h2>Creative Writing</h2>
           <p>
             Stories I write for fun — character studies, slice-of-life fiction,
             and scenes that live in my head until I put them down.
