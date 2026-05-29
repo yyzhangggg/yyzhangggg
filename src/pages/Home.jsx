@@ -58,8 +58,19 @@ const spotlights = [
     body: '',
   },
   {
-    id: '7th',
+    id: '6th',
     orient: 'left',
+    folder: 'forest',
+    previewImg: 'images/forest/4.jpg',
+    title: 'Forest',
+    body: `Forests hold a mysterious quiet that no city can replicate. Walking through
+           a forest feels like entering a cathedral built by the Creator himself —
+           where light filters through canopies, every shadow tells a story of growth,
+           and the silence is alive with the sound of leaves and distant water.`,
+  },
+  {
+    id: '7th',
+    orient: 'right',
     folder: 'painting',
     previewImg: 'images/painting/0.jpg',
     title: 'Painting w/ mixed multi-media',
