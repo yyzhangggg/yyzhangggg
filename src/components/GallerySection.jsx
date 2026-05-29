@@ -1,12 +1,13 @@
 import { asset } from '../utils/assetPath'
 
-const items = Array.from({ length: 12 }, (_, i) => {
-  const num = String(i + 1).padStart(2, '0')
-  return {
-    full: asset(`images/gallery/fulls/${num}.jpg`),
-    thumb: asset(`images/gallery/thumbs/${num}.jpg`),
-  }
-})
+const items = [
+  { file: '1.png' },
+  { file: '2.png' },
+  { file: '3.png' },
+  { file: '4.png' },
+  { file: '5.png' },
+  { file: '6.JPG' },
+]
 
 export default function GallerySection() {
   return (
@@ -21,20 +22,21 @@ export default function GallerySection() {
         </div>
         <div className="z-body">
           <div className="gallery style2 medium lightbox onscroll-fade-in">
-            {items.map((item, idx) => (
-              <article key={idx}>
-                <a href={item.full} className="image">
-                  <img src={item.thumb} alt={`Gallery ${idx + 1}`} />
-                </a>
-                <div className="caption">
-                  <h3>Title</h3>
-                  <p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
-                  <ul className="actions fixed">
-                    <li><span className="button small">Details</span></li>
-                  </ul>
-                </div>
-              </article>
-            ))}
+            {items.map((item, idx) => {
+              const src = asset(`images/gallery/${item.file}`)
+              return (
+                <article key={idx}>
+                  <a href={src} className="image">
+                    <img src={src} alt={`Gallery ${idx + 1}`} />
+                  </a>
+                  <div className="caption">
+                    <ul className="actions fixed">
+                      <li><span className="button small">View</span></li>
+                    </ul>
+                  </div>
+                </article>
+              )
+            })}
           </div>
         </div>
       </div>

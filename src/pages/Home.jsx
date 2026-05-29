@@ -1,7 +1,6 @@
 import Banner        from '../components/Banner'
 import SpotlightSection from '../components/SpotlightSection'
 import GallerySection  from '../components/GallerySection'
-import Products        from '../components/Products'
 import AboutMe         from '../components/AboutMe'
 import TechProjects    from '../components/TechProjects'
 import Friends         from '../components/Friends'
@@ -81,7 +80,6 @@ export default function Home() {
       ))}
 
       <GallerySection />
-      <Products />
       <AboutMe />
       <TechProjects />
       <CreativeWriting />
