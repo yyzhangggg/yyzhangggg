@@ -27,11 +27,17 @@ Outside of tech: nature photography, multi-media painting, and creative writing.
 | Data Science | Python, R, SQL, pandas, NumPy, Matplotlib |
 | Systems | C, pthreads, Linux, POSIX |
 | Java | Decision trees, stream ciphers, backtracking solvers |
-| Web | React, Vite, HTML5, CSS3, JavaScript |
+| Web | React, Next.js, Vite, HTML5, CSS3, JavaScript |
 
 ---
 
 ## 📂 Projects
+
+### 🌐 Web Applications
+
+| Project | Stack | Highlights |
+|---------|-------|------------|
+| [Reference-Free Health](https://reference-free-health.vercel.app) | Next.js, React, Vercel | Plateforme bilingue (FR/EN) destinée aux utilisateurs francophones du Québec. Agrège les examens médicaux auto-payants au Canada et aux États-Unis — aucune lettre de référence requise. Recherche avancée, filtres personnalisés (localisation, type de test, prix), et fiches détaillées avec politiques et restrictions par clinique. |
 
 ### 🤖 Machine Learning & AI — [`ml-ai-projects/`](ml-ai-projects/)
 

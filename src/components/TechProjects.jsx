@@ -1,5 +1,13 @@
 const projects = [
   {
+    icon: 'fa-heartbeat',
+    name: 'Reference-Free Health',
+    tech: 'Next.js, React, Vercel',
+    desc: 'Plateforme bilingue (FR/EN) pour les Québécois : répertorie les tests médicaux auto-payants au Canada et aux États-Unis, sans lettre de référence. Recherche avancée, filtres personnalisés, et politiques détaillées pour chaque clinique.',
+    href: 'https://reference-free-health.vercel.app',
+    live: true,
+  },
+  {
     icon: 'fa-brain',
     name: 'CNN Image Classifier',
     tech: 'PyTorch & TensorFlow',
@@ -50,7 +58,7 @@ export default function TechProjects() {
         <div className="z-label">
           <h2>Technical Projects</h2>
           <p>
-            ML / AI &nbsp;·&nbsp; Data Science &nbsp;·&nbsp; Systems Programming
+            Web Apps &nbsp;·&nbsp; ML / AI &nbsp;·&nbsp; Data Science &nbsp;·&nbsp; Systems Programming
             &nbsp;·&nbsp; Java
           </p>
         </div>
@@ -71,7 +79,7 @@ export default function TechProjects() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  View on GitHub
+                  {p.live ? 'Live Demo' : 'View on GitHub'}
                 </a>
               </section>
             ))}
