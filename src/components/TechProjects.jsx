@@ -1,10 +1,10 @@
 const projects = [
   {
     icon: 'fa-heartbeat',
-    name: 'Reference-Free Health',
+    name: 'Canada Reference-Free Health Test Finder',
     tech: 'Next.js, React, Vercel',
-    desc: 'Plateforme bilingue (FR/EN) pour les Québécois : répertorie les tests médicaux auto-payants au Canada et aux États-Unis, sans lettre de référence. Recherche avancée, filtres personnalisés, et politiques détaillées pour chaque clinique.',
-    href: 'https://reference-free-health.vercel.app',
+    desc: 'Conçu pour les francophones du Québec — agrège des centaines d\'examens médicaux auto-payants au Canada et aux États-Unis sans lettre de référence. Recherche par mot-clé, filtres avancés (type de test, région, prix, délai), et fiches complètes avec politiques et restrictions de chaque clinique.',
+    href: 'https://ref-free-health.vercel.app/',
     live: true,
   },
   {

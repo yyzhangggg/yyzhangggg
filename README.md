@@ -37,7 +37,7 @@ Outside of tech: nature photography, multi-media painting, and creative writing.
 
 | Project | Stack | Highlights |
 |---------|-------|------------|
-| [Reference-Free Health](https://reference-free-health.vercel.app) | Next.js, React, Vercel | Plateforme bilingue (FR/EN) destinée aux utilisateurs francophones du Québec. Agrège les examens médicaux auto-payants au Canada et aux États-Unis — aucune lettre de référence requise. Recherche avancée, filtres personnalisés (localisation, type de test, prix), et fiches détaillées avec politiques et restrictions par clinique. |
+| [Canada Reference-Free Health Test Finder](https://ref-free-health.vercel.app/) | Next.js, React, Vercel | Conçu principalement pour les francophones du Québec. Agrège des examens médicaux auto-payants au Canada et aux États-Unis — aucune lettre de référence requise. Recherche par mot-clé, filtres avancés (type de test, région, prix, délai), et fiches complètes avec politiques et restrictions par clinique. |
 
 ### 🤖 Machine Learning & AI — [`ml-ai-projects/`](ml-ai-projects/)
 
