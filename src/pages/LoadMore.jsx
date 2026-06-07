@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { asset } from '../utils/assetPath'
 
@@ -30,22 +30,21 @@ export default function LoadMore() {
   const navigate   = useNavigate()
   const [images, setImages] = useState([])
   const [loading, setLoading] = useState(true)
-  const loadedRef = useRef(false)   // prevent double-run in StrictMode
 
   useEffect(() => {
-    if (loadedRef.current) return
-    loadedRef.current = true
-
     let cancelled = false
+    setImages([])
+    setLoading(true)
+
     async function load() {
-      let idx          = 0
-      let failCount    = 0
-      const loaded     = []
+      let idx       = 0
+      let failCount = 0
+      const loaded  = []
 
       while (idx <= MAX_TRY && failCount < FAIL_LIMIT) {
+        if (cancelled) return
         try {
           const src = await tryLoadImage(folder, idx)
-          if (cancelled) return
           loaded.push(src)
           setImages([...loaded])   // stream images in one by one
           setLoading(false)
@@ -55,7 +54,7 @@ export default function LoadMore() {
         }
         idx++
       }
-      setLoading(false)
+      if (!cancelled) setLoading(false)
     }
 
     load()

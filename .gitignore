@@ -46,3 +46,8 @@ ehthumbs.db
 # Misc
 *.docx
 virtual-wardrobe.html
+
+# Test / debug scripts and screenshots
+test-*.mjs
+test-*.js
+*-screenshot.png

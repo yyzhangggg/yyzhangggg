@@ -1,9 +1,36 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { asset } from '../utils/assetPath'
 
-const IMGS = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.JPG']
-const N = IMGS.length
+const EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG', 'WEBP']
+const FAIL_LIMIT  = 3
 const mod = (n, m) => ((n % m) + m) % m
+
+// Discover all images/gallery/1.ext, 2.ext, … sequentially until FAIL_LIMIT consecutive misses
+async function discoverGallery() {
+  const found = []
+  let idx       = 1   // gallery images start at 1
+  let failCount = 0
+  while (failCount < FAIL_LIMIT) {
+    let loaded = false
+    for (const ext of EXTENSIONS) {
+      const src = asset(`images/gallery/${idx}.${ext}`)
+      try {
+        await new Promise((resolve, reject) => {
+          const img = new Image()
+          img.onload  = resolve
+          img.onerror = reject
+          img.src = src
+        })
+        found.push(src)
+        loaded = true
+        break
+      } catch { /* try next extension */ }
+    }
+    failCount = loaded ? 0 : failCount + 1
+    idx++
+  }
+  return found
+}
 
 // Layout: [side 22%] [1% gap] [center 54%] [1% gap] [side 22%]
 const TRANS = 'left 0.42s ease, width 0.42s ease, opacity 0.42s ease'
@@ -16,16 +43,25 @@ const POS_STYLE = {
 }
 
 export default function GallerySection() {
+  const [imgs,   setImgs]   = useState([])
   const [center, setCenter] = useState(0)
   const slidingRef = useRef(false)
-  const hoverRef  = useRef(null)
+  const hoverRef   = useRef(null)
+
+  useEffect(() => {
+    let cancelled = false
+    discoverGallery().then(found => { if (!cancelled) setImgs(found) })
+    return () => { cancelled = true }
+  }, [])
+
+  const N = imgs.length
 
   const slide = useCallback((dir) => {
-    if (slidingRef.current) return
+    if (slidingRef.current || N < 2) return
     slidingRef.current = true
     setCenter(c => mod(c + dir, N))
     setTimeout(() => { slidingRef.current = false }, 440)
-  }, [])
+  }, [N])
 
   const startLeft  = useCallback(() => { slide(-1); hoverRef.current = setInterval(() => slide(-1), 1300) }, [slide])
   const startRight = useCallback(() => { slide(1);  hoverRef.current = setInterval(() => slide(1),  1300) }, [slide])
@@ -34,11 +70,10 @@ export default function GallerySection() {
   useEffect(() => () => clearInterval(hoverRef.current), [])
 
   // Compute which 5 image indices are visible and their positions
-  const idxAt = (d) => mod(center + d, N)
-  const posMap = {}
+  const idxAt    = (d) => mod(center + d, N)
+  const posMap   = {}
   for (const d of [-2, -1, 0, 1, 2]) posMap[idxAt(d)] = d
-
-  const toRender = [...new Set([-2, -1, 0, 1, 2].map(idxAt))]
+  const toRender = N > 0 ? [...new Set([-2, -1, 0, 1, 2].map(idxAt))] : []
 
   return (
     <section className="wrapper style1">
@@ -108,6 +143,14 @@ export default function GallerySection() {
           transition: background 0.3s, transform 0.3s;
         }
         .gl-dot.on { background: #fff; transform: scale(1.3); }
+        .gl-loading {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          color: #666;
+          font-size: 0.95em;
+        }
       `}</style>
 
       <div className="z-row">
@@ -121,32 +164,38 @@ export default function GallerySection() {
         <div className="z-body">
           <div className="gl-outer">
 
-            {toRender.map(i => {
-              const pos = posMap[i]
-              const s = POS_STYLE[String(pos)]
-              return (
-                <div
-                  key={i}
-                  className="gl-item"
-                  style={{ ...s, transition: TRANS }}
-                >
-                  <img src={asset(`images/gallery/${IMGS[i]}`)} alt={`Gallery ${i + 1}`} />
+            {N === 0 ? (
+              <div className="gl-loading">Loading…</div>
+            ) : (
+              <>
+                {toRender.map(i => {
+                  const pos = posMap[i]
+                  const s = POS_STYLE[String(pos)]
+                  return (
+                    <div
+                      key={i}
+                      className="gl-item"
+                      style={{ ...s, transition: TRANS }}
+                    >
+                      <img src={imgs[i]} alt={`Gallery ${i + 1}`} />
+                    </div>
+                  )
+                })}
+
+                <div className="gl-zone gl-zone-left"  onMouseEnter={startLeft}  onMouseLeave={stopSlide}>
+                  <span className="gl-arrow">‹</span>
                 </div>
-              )
-            })}
+                <div className="gl-zone gl-zone-right" onMouseEnter={startRight} onMouseLeave={stopSlide}>
+                  <span className="gl-arrow">›</span>
+                </div>
 
-            <div className="gl-zone gl-zone-left"  onMouseEnter={startLeft}  onMouseLeave={stopSlide}>
-              <span className="gl-arrow">‹</span>
-            </div>
-            <div className="gl-zone gl-zone-right" onMouseEnter={startRight} onMouseLeave={stopSlide}>
-              <span className="gl-arrow">›</span>
-            </div>
-
-            <div className="gl-dots">
-              {IMGS.map((_, i) => (
-                <span key={i} className={`gl-dot${i === center ? ' on' : ''}`} />
-              ))}
-            </div>
+                <div className="gl-dots">
+                  {imgs.map((_, i) => (
+                    <span key={i} className={`gl-dot${i === center ? ' on' : ''}`} />
+                  ))}
+                </div>
+              </>
+            )}
 
           </div>
         </div>
