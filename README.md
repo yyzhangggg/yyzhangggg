@@ -83,7 +83,7 @@ Built with **React + Vite**, deployed on Vercel. Sections include:
 - 💛 Friends & relationships wall
 - 📖 About & contact
 
-**Live:** [yyzhangggg.github.io/my_website](https://yyzhangggg.github.io/my_website/)
+**Live:**[ [[yyzhangggg.github.io/my_website](https://yyzhangggg.github.io/my_website/)](https://my-website-yanying.vercel.app/)](https://my-website-yanying.vercel.app/)
 
 ---
 
