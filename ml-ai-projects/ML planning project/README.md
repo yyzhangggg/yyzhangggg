@@ -18,7 +18,10 @@ Plan and frame out a machine learning application project.
 
 
 2. the Business Understanding phase of the CRISP-DM process for it:
-
+    ![alt text](image-2.png)
+    Edge -> Low latency
+    + ( Mainly Offline learning monthly Joint Online learning locally for recommendation and styling ) -> build connectivity
+    + Batch prediction ( low latency immediate response with new entry data )
     • Because it adds business value to users:
     – Automation
     – Prediction
@@ -48,13 +51,17 @@ Plan and frame out a machine learning application project.
 
     --- Potential risks in production: 
         -> possible drift concerns: 
+                - Excessive latency: one pieces of cloth could have thousands of different matchings, and many varies, could reduce the excessive latency by limited the output choice or present first and shift.
+                - Data drift: the newest fashion trends could vary fast .
+                - Concept drift: the customer have different taste, and one can change their taste by exploration over time, the recommendation for user cannot be solid as well.
         -> other potential issues your model might encounter in production?
             --- Probabilistic rather than deterministic
-                – How to define “good enough”
-                – Art of model building
-                – Variance of model outputs
+                – How to define “good enough” : beauty standard could be really abstract and subjective
+                – Art of model building : hard to regularize "good/beauty" by formula
+                – Variance of model outputs : could be multiple standards of "beautiful/good" OOTDs 
             --- Higher technical risk
-                – Data needs and quality
+                – Data needs and quality : need materials (ie: sparkling, mat, etc)
                 – Model limitations: tastes could be wired and cannot generalized by common sense
     
 4. Video records of the overview project:
+    Youtube: https://youtu.be/v5_NuWexa0c?si=b-Slw2Mr2iJbfwR3
