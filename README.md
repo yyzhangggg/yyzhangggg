@@ -27,7 +27,9 @@ Outside of tech: nature photography, multi-media painting, and creative writing.
 | Data Science | Python, R, SQL, pandas, NumPy, Matplotlib |
 | Systems | C, pthreads, Linux, POSIX |
 | Java | Decision trees, stream ciphers, backtracking solvers |
-| Web | React, Next.js, Vite, HTML5, CSS3, JavaScript |
+| Web | React, Next.js, Vite, TypeScript, HTML5, CSS3, JavaScript |
+| Backend | Django, Django REST Framework, PostgreSQL, Stripe, Celery, Redis |
+| Cloud | Google Cloud Run, Cloudflare Workers, Vercel, Docker |
 
 ---
 
@@ -37,6 +39,7 @@ Outside of tech: nature photography, multi-media painting, and creative writing.
 
 | Project | Stack | Highlights |
 |---------|-------|------------|
+| [ValleyRain — Mobile Massage Booking Platform](https://in-home-massage.vercel.app/#/) | React 19, TypeScript, Django 5, PostgreSQL, Stripe, Vite 8, Google Cloud Run | Full-stack bilingual (EN/FR) booking platform for in-home massage in Greater Montreal. Online booking, Stripe payments, gift cards, passwordless auth, admin dashboard, therapist onboarding, role-based access (dev/admin/therapist/member/guest), Celery + Redis async tasks, Sentry monitoring. |
 | [Canada Reference-Free Health Test Finder](https://ref-free-health.vercel.app/) | Next.js, React, Vercel | Conçu principalement pour les francophones du Québec. Agrège des examens médicaux auto-payants au Canada et aux États-Unis — aucune lettre de référence requise. Recherche par mot-clé, filtres avancés (type de test, région, prix, délai), et fiches complètes avec politiques et restrictions par clinique. |
 
 ### 🤖 Machine Learning & AI — [`ml-ai-projects/`](ml-ai-projects/)

@@ -1,5 +1,13 @@
 const projects = [
   {
+    icon: 'fa-spa',
+    name: 'ValleyRain — Mobile Massage Booking',
+    tech: 'React 19, TypeScript, Django 5, PostgreSQL, Stripe',
+    desc: 'Full-stack bilingual (EN/FR) booking platform for in-home massage in Greater Montreal. Online booking, Stripe payments, gift cards, passwordless auth, admin dashboard, and therapist onboarding with role-based access control.',
+    href: 'https://in-home-massage.vercel.app/#/',
+    live: true,
+  },
+  {
     icon: 'fa-heartbeat',
     name: 'Canada Reference-Free Health Test Finder',
     tech: 'Next.js, React, Vercel',
@@ -58,7 +66,7 @@ export default function TechProjects() {
         <div className="z-label">
           <h2>Technical Projects</h2>
           <p>
-            Web Apps &nbsp;·&nbsp; ML / AI &nbsp;·&nbsp; Data Science &nbsp;·&nbsp; Systems Programming
+            Full-Stack Web &nbsp;·&nbsp; ML / AI &nbsp;·&nbsp; Data Science &nbsp;·&nbsp; Systems Programming
             &nbsp;·&nbsp; Java
           </p>
         </div>
