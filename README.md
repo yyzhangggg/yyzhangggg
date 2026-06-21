@@ -1,5 +1,5 @@
 <div align="center">
-[![Yanying's GitHub Stats](https://github-readme-stats.vercel.app/api?username=yyzhangggg&show_icons=true&theme=tokyonight)](https://github.com/yyzhangggg/yyzhangggg)
+[![yyzhangggg's Trophies](https://github-profile-trophy.vercel.alloflights.repl.co/?username=yyzhangggg&theme=onedark)](https://github.com/yyzhangggg)
   
 <img src="docs/assets/sakura.svg" alt="sakura" width="800"/>
 
