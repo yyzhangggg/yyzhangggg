@@ -94,13 +94,11 @@ Built with **React + Vite**, deployed on Vercel. Sections include:
 - Friends & relationships wall
 - About & contact
 
-**Live:** https://my-website-yanying.vercel.app
-
 <img src="docs/assets/sakura-divider.svg" alt="" width="100%"/>
 
 ## Contact
 
-**Portfolio:** [my-website-yanying.vercel.app](https://my-website-yanying.vercel.app/)
+**Portfolio:** https://my-website-yanying.vercel.app
 **LinkedIn:** [linkedin.com/in/yanying-zhang-a61943232](https://www.linkedin.com/in/yanying-zhang-a61943232)  
 **GitHub:** [github.com/yyzhangggg](https://github.com/yyzhangggg)
 
