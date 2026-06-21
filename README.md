@@ -1,5 +1,4 @@
 <div align="center">
-[![yyzhangggg's Trophies](https://github-profile-trophy.vercel.alloflights.repl.co/?username=yyzhangggg&theme=onedark)](https://github.com/yyzhangggg)
   
 <img src="docs/assets/sakura.svg" alt="sakura" width="800"/>
 
