@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 120" width="800" height="120">
+  <style>
+    @keyframes fall1 { 0%{transform:translate(0,-20px) rotate(0deg);opacity:0} 10%{opacity:1} 90%{opacity:1} 100%{transform:translate(40px,130px) rotate(360deg);opacity:0} }
+    @keyframes fall2 { 0%{transform:translate(0,-20px) rotate(0deg);opacity:0} 10%{opacity:1} 90%{opacity:1} 100%{transform:translate(-30px,130px) rotate(-360deg);opacity:0} }
+    @keyframes fall3 { 0%{transform:translate(0,-20px) rotate(0deg);opacity:0} 10%{opacity:1} 90%{opacity:1} 100%{transform:translate(20px,130px) rotate(540deg);opacity:0} }
+    @keyframes sway { 0%,100%{transform:translateX(0)} 50%{transform:translateX(8px)} }
+    .p1{animation:fall1 4s ease-in infinite}
+    .p2{animation:fall2 5s ease-in infinite}
+    .p3{animation:fall3 4.5s ease-in infinite}
+    .p4{animation:fall1 5.5s ease-in infinite}
+    .p5{animation:fall2 3.8s ease-in infinite}
+    .p6{animation:fall3 6s ease-in infinite}
+    .p7{animation:fall1 4.2s ease-in infinite}
+    .p8{animation:fall2 5.2s ease-in infinite}
+    .p9{animation:fall3 3.5s ease-in infinite}
+    .p10{animation:fall1 4.8s ease-in infinite}
+    .p11{animation:fall2 5.8s ease-in infinite}
+    .p12{animation:fall3 4.1s ease-in infinite}
+    .p13{animation:fall1 3.9s ease-in infinite}
+    .p14{animation:fall2 6.2s ease-in infinite}
+    .p15{animation:fall3 5.3s ease-in infinite}
+    .branch{animation:sway 3s ease-in-out infinite}
+  </style>
+  <defs>
+    <g id="petal">
+      <ellipse cx="0" cy="0" rx="5" ry="8" fill="#FFB7C5" opacity="0.85"/>
+      <ellipse cx="3" cy="-6" rx="4.5" ry="7" fill="#FFC4D0" opacity="0.8" transform="rotate(30)"/>
+      <ellipse cx="-3" cy="-6" rx="4.5" ry="7" fill="#FFAEC0" opacity="0.8" transform="rotate(-30)"/>
+      <ellipse cx="5" cy="0" rx="4" ry="7" fill="#FFD0DA" opacity="0.75" transform="rotate(70)"/>
+      <ellipse cx="-5" cy="0" rx="4" ry="7" fill="#FFA8BB" opacity="0.75" transform="rotate(-70)"/>
+      <circle cx="0" cy="-1" r="2.5" fill="#FFE4EC"/>
+      <circle cx="0" cy="-1" r="1.2" fill="#FFCCD5"/>
+    </g>
+    <g id="small-petal">
+      <ellipse cx="0" cy="0" rx="3" ry="5" fill="#FFB7C5" opacity="0.7"/>
+      <ellipse cx="2" cy="-3" rx="2.5" ry="4" fill="#FFC4D0" opacity="0.65" transform="rotate(35)"/>
+      <ellipse cx="-2" cy="-3" rx="2.5" ry="4" fill="#FFAEC0" opacity="0.65" transform="rotate(-35)"/>
+      <circle cx="0" cy="0" r="1.5" fill="#FFE4EC"/>
+    </g>
+  </defs>
+
+  <!-- branch -->
+  <g class="branch">
+    <path d="M20,90 Q80,70 160,75 Q240,80 320,65 Q400,50 500,60 Q580,68 660,55 Q720,47 780,52" stroke="#8B6B4A" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M160,75 Q150,55 140,40" stroke="#8B6B4A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M320,65 Q330,45 325,30" stroke="#8B6B4A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M500,60 Q490,40 495,25" stroke="#8B6B4A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M660,55 Q665,35 660,20" stroke="#8B6B4A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+    <!-- flowers on branch -->
+    <use href="#petal" x="140" y="38"/>
+    <use href="#petal" x="240" y="72"/>
+    <use href="#petal" x="325" y="28"/>
+    <use href="#petal" x="420" y="55"/>
+    <use href="#petal" x="495" y="23"/>
+    <use href="#petal" x="580" y="62"/>
+    <use href="#petal" x="660" y="18"/>
+    <use href="#petal" x="750" y="50"/>
+    <use href="#small-petal" x="100" y="80"/>
+    <use href="#small-petal" x="200" y="76"/>
+    <use href="#small-petal" x="380" y="58"/>
+    <use href="#small-petal" x="540" y="60"/>
+    <use href="#small-petal" x="700" y="50"/>
+  </g>
+
+  <!-- falling petals -->
+  <use href="#small-petal" x="70" y="10" class="p1"/>
+  <use href="#small-petal" x="150" y="5" class="p2" style="animation-delay:0.8s"/>
+  <use href="#small-petal" x="230" y="15" class="p3" style="animation-delay:1.5s"/>
+  <use href="#small-petal" x="310" y="8" class="p4" style="animation-delay:0.3s"/>
+  <use href="#small-petal" x="390" y="12" class="p5" style="animation-delay:2.1s"/>
+  <use href="#small-petal" x="470" y="6" class="p6" style="animation-delay:1.0s"/>
+  <use href="#small-petal" x="550" y="18" class="p7" style="animation-delay:0.5s"/>
+  <use href="#small-petal" x="630" y="10" class="p8" style="animation-delay:1.8s"/>
+  <use href="#small-petal" x="710" y="14" class="p9" style="animation-delay:2.5s"/>
+  <use href="#small-petal" x="110" y="20" class="p10" style="animation-delay:3.0s"/>
+  <use href="#small-petal" x="270" y="10" class="p11" style="animation-delay:2.8s"/>
+  <use href="#small-petal" x="430" y="15" class="p12" style="animation-delay:1.3s"/>
+  <use href="#small-petal" x="590" y="8" class="p13" style="animation-delay:3.5s"/>
+  <use href="#small-petal" x="350" y="20" class="p14" style="animation-delay:0.6s"/>
+  <use href="#small-petal" x="670" y="5" class="p15" style="animation-delay:2.0s"/>
+</svg>

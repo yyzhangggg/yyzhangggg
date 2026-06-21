@@ -1,100 +1,147 @@
-import Banner        from '../components/Banner'
-import SpotlightSection from '../components/SpotlightSection'
-import GallerySection  from '../components/GallerySection'
-import AboutMe         from '../components/AboutMe'
-import TechProjects    from '../components/TechProjects'
-import Friends         from '../components/Friends'
-import CreativeWriting from '../components/CreativeWriting'
+import { useNavigate } from 'react-router-dom'
+import { asset } from '../utils/assetPath'
+import TechProjects from '../components/TechProjects'
+import AboutMe from '../components/AboutMe'
+import Snowflake from '../components/Snowflake'
 
-// All six spotlight rows defined as data to keep JSX clean
-const spotlights = [
-  {
-    id: 'first',
-    orient: 'right',
-    folder: 'backlight',
-    previewImg: 'images/backlight/0.jpg',
-    title: 'Back Light',
-    body: `Everything reflects some special colour when the sunlight is on its back.
-           I love how the creator of the universe designed human eyes that see vivid
-           colours even with strong light on the back. The best digital camera won't
-           capture the same amount of colour resolution as our bare eyes.`,
-  },
-  {
-    id: 'second',
-    orient: 'left',
-    folder: 'arch',
-    previewImg: 'images/arch/0.jpg',
-    title: 'Architecture',
-    body: '',
-  },
-  {
-    id: '3rd',
-    orient: 'right',
-    folder: 'flowers',
-    previewImg: 'images/flowers/0.jpg',
-    title: 'Colours',
-    body: `And yes, this is another section of nature. I was attracted by the abundant
-           variety in plants, trees and nature. Even though they don't work to buy new
-           clothes, they have the most pure colour that the luxury brands of fashion can
-           never mimic. The flowers are pretty, but the leaves are prettier!`,
-  },
-  {
-    id: '4th',
-    orient: 'left',
-    folder: 'nature',
-    previewImg: 'images/nature/0.jpg',
-    title: 'Nature',
-    body: `Influenced by the Asian concept of "changing scenery with each step," I often
-           find myself encountering nature's own canvas while walking through national
-           parks — a symphony composed of living and dead trees, shrubs, and creeks.
-           The entire sky seems to proclaim the glory and design of the Creator.`,
-  },
-  {
-    id: '5th',
-    orient: 'right',
-    folder: 'city',
-    previewImg: 'images/city/0.jpg',
-    title: 'City Walk',
-    body: '',
-  },
-  {
-    id: '6th',
-    orient: 'left',
-    folder: 'forest',
-    previewImg: 'images/forest/4.jpg',
-    title: 'Forest',
-    body: `Forests hold a mysterious quiet that no city can replicate. Walking through
-           a forest feels like entering a cathedral built by the Creator himself —
-           where light filters through canopies, every shadow tells a story of growth,
-           and the silence is alive with the sound of leaves and distant water.`,
-  },
-  {
-    id: '7th',
-    orient: 'right',
-    folder: 'painting',
-    previewImg: 'images/painting/0.jpg',
-    title: 'Painting w/ mixed multi-media',
-    body: `I have a deep love for oil painting, acrylics, pastel, and watercolor.
-           Impressionism is one of the art movements I admire most, and I enjoy adding
-           my own unique artistic touches to this style. Rather than replicating
-           real-life scenes, I prefer creating dreamlike landscapes.`,
-  },
-]
+function NavCards() {
+  const navigate = useNavigate()
+
+  return (
+    <section className="wrapper style1">
+      <style>{`
+        .nav-cards {
+          display: flex;
+          gap: 2rem;
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 0 2rem;
+        }
+        .nav-card {
+          flex: 1;
+          position: relative;
+          border-radius: 1.2em;
+          overflow: hidden;
+          cursor: pointer;
+          min-height: 280px;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .nav-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+        }
+        .nav-card-bg {
+          position: absolute;
+          inset: 0;
+          background-size: cover;
+          background-position: center;
+          transition: transform 0.4s ease;
+        }
+        .nav-card:hover .nav-card-bg {
+          transform: scale(1.05);
+        }
+        .nav-card-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%);
+        }
+        .nav-card-content {
+          position: relative;
+          z-index: 2;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: 2em;
+          color: #fff;
+        }
+        .nav-card-content h3 {
+          font-size: 1.4em;
+          margin: 0 0 0.3em;
+          color: #fff;
+        }
+        .nav-card-content p {
+          font-size: 0.9em;
+          opacity: 0.85;
+          margin: 0;
+          line-height: 1.5;
+        }
+        @media (max-width: 736px) {
+          .nav-cards {
+            flex-direction: column;
+          }
+          .nav-card {
+            min-height: 200px;
+          }
+        }
+      `}</style>
+
+      <div className="nav-cards">
+        <div className="nav-card" onClick={() => navigate('/art')}>
+          <div
+            className="nav-card-bg"
+            style={{ backgroundImage: `url(${asset('images/banner.jpg')})` }}
+          />
+          <div className="nav-card-overlay" />
+          <div className="nav-card-content">
+            <h3>Art Portfolio</h3>
+            <p>Photography, painting, and creative writing</p>
+          </div>
+        </div>
+
+        <div className="nav-card" onClick={() => navigate('/marketplace')}>
+          <div
+            className="nav-card-bg"
+            style={{ backgroundImage: `url(${asset('images/painting/0.jpg')})` }}
+          />
+          <div className="nav-card-overlay" />
+          <div className="nav-card-content">
+            <h3>Marketplace</h3>
+            <p>Photography sessions and services</p>
+          </div>
+        </div>
+
+        <div className="nav-card" onClick={() => navigate('/people')}>
+          <div
+            className="nav-card-bg"
+            style={{ backgroundImage: `url(${asset('images/friends/01.jpg')})` }}
+          />
+          <div className="nav-card-overlay" />
+          <div className="nav-card-content">
+            <h3>My People</h3>
+            <p>The beautiful souls who colour my world</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
 
 export default function Home() {
   return (
-    <div id="wrapper" className="divided">
-      <Banner />
+    <div id="wrapper" className="divided cyberpunk">
+      <Snowflake />
 
-      {spotlights.map((s) => (
-        <SpotlightSection key={s.id} {...s} />
-      ))}
+      <section className="cyber-hero">
+        <div className="cyber-hero-content">
+          <h1 className="cyber-hero-title">Yanying Zhang</h1>
+          <p className="cyber-hero-subtitle">
+            Full-Stack Developer · ML/AI · Data Science
+          </p>
+          <p className="cyber-hero-desc">
+            Building bilingual web platforms, training neural networks, and
+            turning data into insight. Explore my technical projects below,
+            or check out my art portfolio and marketplace.
+          </p>
+          <a href="#tech-projects" className="button big wide">
+            View Projects
+          </a>
+        </div>
+      </section>
 
-      <GallerySection />
-      <AboutMe />
       <TechProjects />
-      <CreativeWriting />
-      <Friends />
+      <NavCards />
+      <AboutMe />
     </div>
   )
 }

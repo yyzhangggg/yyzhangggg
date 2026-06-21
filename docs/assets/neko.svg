@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" width="200" height="140">
+  <style>
+    @keyframes tail-wag { 0%,100%{d:path('M145,105 Q165,85 170,70')} 50%{d:path('M145,105 Q170,90 175,80')} }
+    @keyframes blink { 0%,42%,46%,100%{ry:5} 44%{ry:0.5} }
+    @keyframes ear-twitch { 0%,90%,100%{transform:rotate(0deg)} 93%{transform:rotate(-5deg)} 96%{transform:rotate(3deg)} }
+    @keyframes purr { 0%,100%{transform:translateY(0)} 50%{transform:translateY(0.5px)} }
+    @keyframes paw-knead { 0%,40%,100%{transform:scaleY(1)} 20%{transform:scaleY(0.92)} }
+    @keyframes zzz1 { 0%{opacity:0;transform:translate(0,0) scale(0.5)} 50%{opacity:1} 100%{opacity:0;transform:translate(-10px,-20px) scale(1)} }
+    @keyframes zzz2 { 0%{opacity:0;transform:translate(0,0) scale(0.5)} 50%{opacity:1} 100%{opacity:0;transform:translate(-15px,-25px) scale(1.1)} }
+    .eye-l,.eye-r{animation:blink 4s ease-in-out infinite}
+    .eye-r{animation-delay:0.05s}
+    .ear-l{animation:ear-twitch 5s ease-in-out infinite;transform-origin:75px 35px}
+    .body{animation:purr 0.8s ease-in-out infinite}
+    .paw-l,.paw-r{animation:paw-knead 2s ease-in-out infinite}
+    .paw-r{animation-delay:1s}
+    .tail{animation:tail-wag 2.5s ease-in-out infinite}
+    .z1{animation:zzz1 3s ease-out infinite;font-family:sans-serif;font-size:10px;fill:#C4A0E0}
+    .z2{animation:zzz2 3s ease-out 1s infinite;font-family:sans-serif;font-size:12px;fill:#D4B0F0}
+  </style>
+
+  <!-- tail -->
+  <path class="tail" d="M145,105 Q165,85 170,70" stroke="#A0A0A0" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- body -->
+  <g class="body">
+    <!-- body shape -->
+    <ellipse cx="105" cy="108" rx="48" ry="25" fill="#B0B0B0"/>
+    <!-- belly -->
+    <ellipse cx="100" cy="112" rx="30" ry="16" fill="#E8E8E8"/>
+
+    <!-- back paws -->
+    <ellipse cx="140" cy="120" rx="10" ry="6" fill="#A0A0A0"/>
+    <ellipse cx="140" cy="120" rx="6" ry="4" fill="#E0D0D0"/>
+
+    <!-- front paws -->
+    <g class="paw-l" style="transform-origin:75px 125px">
+      <ellipse cx="75" cy="122" rx="8" ry="5" fill="#B0B0B0"/>
+      <ellipse cx="75" cy="123" rx="5" ry="3" fill="#E0D0D0"/>
+    </g>
+    <g class="paw-r" style="transform-origin:90px 125px">
+      <ellipse cx="90" cy="124" rx="8" ry="5" fill="#B0B0B0"/>
+      <ellipse cx="90" cy="125" rx="5" ry="3" fill="#E0D0D0"/>
+    </g>
+
+    <!-- head -->
+    <circle cx="80" cy="75" r="30" fill="#B8B8B8"/>
+
+    <!-- inner face -->
+    <circle cx="80" cy="78" r="22" fill="#D0D0D0"/>
+
+    <!-- ears -->
+    <g class="ear-l">
+      <polygon points="58,55 52,28 72,48" fill="#B0B0B0"/>
+      <polygon points="60,52 55,33 69,48" fill="#FFBBCC"/>
+    </g>
+    <g>
+      <polygon points="102,55 108,28 88,48" fill="#B0B0B0"/>
+      <polygon points="100,52 105,33 91,48" fill="#FFBBCC"/>
+    </g>
+
+    <!-- eyes -->
+    <ellipse class="eye-l" cx="70" cy="72" rx="4" ry="5" fill="#3A3A3A"/>
+    <ellipse class="eye-r" cx="90" cy="72" rx="4" ry="5" fill="#3A3A3A"/>
+    <ellipse cx="68" cy="70" rx="1.5" ry="2" fill="white" opacity="0.8"/>
+    <ellipse cx="88" cy="70" rx="1.5" ry="2" fill="white" opacity="0.8"/>
+
+    <!-- nose -->
+    <polygon points="80,78 77,81 83,81" fill="#FFB0B0"/>
+
+    <!-- mouth -->
+    <path d="M77,83 Q80,87 83,83" stroke="#888" stroke-width="0.8" fill="none"/>
+    <path d="M73,82 Q70,85 66,83" stroke="#CCC" stroke-width="0.6" fill="none"/>
+    <path d="M87,82 Q90,85 94,83" stroke="#CCC" stroke-width="0.6" fill="none"/>
+
+    <!-- whiskers -->
+    <line x1="55" y1="76" x2="40" y2="73" stroke="#CCC" stroke-width="0.7"/>
+    <line x1="55" y1="80" x2="38" y2="81" stroke="#CCC" stroke-width="0.7"/>
+    <line x1="55" y1="84" x2="40" y2="88" stroke="#CCC" stroke-width="0.7"/>
+    <line x1="105" y1="76" x2="120" y2="73" stroke="#CCC" stroke-width="0.7"/>
+    <line x1="105" y1="80" x2="122" y2="81" stroke="#CCC" stroke-width="0.7"/>
+    <line x1="105" y1="84" x2="120" y2="88" stroke="#CCC" stroke-width="0.7"/>
+
+    <!-- blush -->
+    <circle cx="62" cy="82" r="5" fill="#FFD0D0" opacity="0.5"/>
+    <circle cx="98" cy="82" r="5" fill="#FFD0D0" opacity="0.5"/>
+  </g>
+
+  <!-- zzz -->
+  <text x="115" y="50" class="z1">z</text>
+  <text x="120" y="42" class="z2">z</text>
+</svg>

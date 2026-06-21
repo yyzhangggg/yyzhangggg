@@ -1,3 +1,7 @@
+<div align="center">
+
+<img src="docs/assets/sakura.svg" alt="sakura" width="800"/>
+
 # Hi, I'm Yanying Zhang 👋
 
 **CS student at McGill University** — Machine Learning · Data Science · Systems Programming  
@@ -7,7 +11,11 @@ Outside of tech: nature photography, multi-media painting, and creative writing.
 🌱 &nbsp;Learning: BERT fine-tuning, MLOps, advanced SQL  
 💼 &nbsp;Open to: ML Engineer / Data Scientist internships and entry-level roles
 
----
+<img src="docs/assets/neko.svg" alt="neko" width="160"/>
+
+</div>
+
+<img src="docs/assets/sakura-divider.svg" alt="" width="100%"/>
 
 ## 🔧 Tech Stack
 
@@ -31,7 +39,7 @@ Outside of tech: nature photography, multi-media painting, and creative writing.
 | Backend | Django, Django REST Framework, PostgreSQL, Stripe, Celery, Redis |
 | Cloud | Google Cloud Run, Cloudflare Workers, Vercel, Docker |
 
----
+<img src="docs/assets/sakura-divider.svg" alt="" width="100%"/>
 
 ## 📂 Projects
 
@@ -73,7 +81,7 @@ Outside of tech: nature photography, multi-media painting, and creative writing.
 | [Solitaire Cipher](java-projects/solitaire-cipher/) | Java | Bruce Schneier's card cipher on a circular doubly-linked list; 24/24 tests pass |
 | [Chess Sudoku Solver](java-projects/chess-sudoku-solver/) | Java | Backtracking solver with Knight/King/Queen constraints; 9×9 to 25×25 grids |
 
----
+<img src="docs/assets/sakura-divider.svg" alt="" width="100%"/>
 
 ## 🌐 Portfolio Website
 
@@ -86,12 +94,20 @@ Built with **React + Vite**, deployed on Vercel. Sections include:
 - 💛 Friends & relationships wall
 - 📖 About & contact
 
-**Live:* https://my-website-yanying.vercel.app
+**Live:** https://my-website-yanying.vercel.app
 
----
+<img src="docs/assets/sakura-divider.svg" alt="" width="100%"/>
 
 ## 📫 Contact
 
 🌐 &nbsp;**Portfolio:** [yyzhangggg.github.io/my_website](https://yyzhangggg.github.io/my_website/)  
 💼 &nbsp;**LinkedIn:** [linkedin.com/in/yanying-zhang-a61943232](https://www.linkedin.com/in/yanying-zhang-a61943232)  
 🐙 &nbsp;**GitHub:** [github.com/yyzhangggg](https://github.com/yyzhangggg)
+
+<div align="center">
+
+<img src="docs/assets/sakura.svg" alt="sakura" width="600"/>
+
+<sub>Thanks for visiting~ have a nice day!</sub>
+
+</div>

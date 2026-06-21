@@ -13,43 +13,6 @@ export default function AboutMe() {
 
         <div className="index align-left">
 
-          {/* Why Photography */}
-          <section>
-            <header>
-              <h3><b>Why photography?</b></h3>
-            </header>
-            <div className="content">
-              <p>
-                I was grown up with a doctor family, and for my whole life I&apos;ve
-                been taught to study Bio in order to get into a med school. I
-                followed the instruction and lived to fulfil the expectations of
-                parents. My career in health was quite successful until I got
-                admitted to Marianopolis college, which has the best private
-                health program in Montreal. However, this was also where I
-                encountered the greatest setback in my journey of biological
-                professions, and it ended up becoming the turning point in my
-                life decision.
-              </p>
-              <p>
-                I started by being interested in Photoshop digital editing in my
-                young age, then gradually got into presenting as a model and
-                producing dramatic photos. Yet later on, I gradually became more
-                sure of what output I wanted to produce. What I long for is more
-                freedom to record and actively capture moments of beauty, rather
-                than merely appreciating my own beauty. Because of this shift in
-                mindset, I began studying the theory of light and shadow, and
-                fell in love with the style of film.
-              </p>
-              <p>
-                I have always believed that if a gift is not used to its
-                fullest, it is wasted — and I don&apos;t like waste! In the
-                future, I will continue to use the black eyes God has given me
-                to search for light, and to capture with my camera the shapes of
-                light and the fleeting moments of shadow and illumination.
-              </p>
-            </div>
-          </section>
-
           {/* Favourite Verses */}
           <section>
             <header>
@@ -157,62 +120,6 @@ export default function AboutMe() {
                   </li>
                 </ul>
               </form>
-            </div>
-          </section>
-
-          {/* Price Table */}
-          <section>
-            <header>
-              <h3>Price Table</h3>
-            </header>
-            <div className="content">
-              <h4>Seasonal</h4>
-              <div className="table-wrapper">
-                <table>
-                  <thead>
-                    <tr><th>Name</th><th>Description</th><th>Price</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>Summer Pack 1</td><td>Ante turpis integer aliquet porttitor.</td><td>59.99</td></tr>
-                    <tr><td>Summer Pack 2</td><td>Vis ac commodo adipiscing arcu aliquet.</td><td>84.99</td></tr>
-                    <tr><td>Winter Pack 1</td><td>Morbi faucibus arcu accumsan lorem.</td><td>69.99</td></tr>
-                    <tr><td>Winter Pack 2</td><td>Vitae integer tempus condimentum.</td><td>99.99</td></tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <h4>Regular</h4>
-              <div className="table-wrapper">
-                <table className="alt">
-                  <thead>
-                    <tr><th>Name</th><th>Description</th><th>Price</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>Portraits</td><td>Ante turpis integer aliquet porttitor.</td><td>59.99</td></tr>
-                    <tr><td>Birthday</td><td>Vis ac commodo adipiscing arcu aliquet.</td><td>49.99</td></tr>
-                    <tr><td>Couple</td><td>Morbi faucibus arcu accumsan lorem.</td><td>99.99</td></tr>
-                    <tr><td>Pets</td><td>Vitae integer tempus condimentum.</td><td>29.99</td></tr>
-                    <tr><td>Customize</td><td>Ante turpis integer aliquet porttitor.</td><td>79.99</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </section>
-
-          {/* Disclaimer */}
-          <section>
-            <header><h3></h3></header>
-            <div className="content">
-              <div className="box">
-                <p>
-                  All items on display for sales are guaranteed to be handmade
-                  by families, which means they are not industrially produced
-                  and may have imperfections due to manual craftsmanship. If you
-                  are concerned about this, please refrain from purchasing. We
-                  will not accept returns or provide after-sales service because
-                  of the perceived imperfections.
-                </p>
-              </div>
             </div>
           </section>
 
