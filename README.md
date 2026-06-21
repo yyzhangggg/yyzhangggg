@@ -1,5 +1,6 @@
 <div align="center">
-
+[![Yanying's GitHub Stats](https://github-readme-stats.vercel.app/api?username=yyzhangggg&show_icons=true&theme=tokyonight)](https://github.com/yyzhangggg/yyzhangggg)
+  
 <img src="docs/assets/sakura.svg" alt="sakura" width="800"/>
 
 # Hi, I'm Yanying Zhang 👋
@@ -109,5 +110,6 @@ Built with **React + Vite**, deployed on Vercel. Sections include:
 <img src="docs/assets/sakura.svg" alt="sakura" width="600"/>
 
 <sub>Thanks for visiting~ have a nice day!</sub>
+![Visitors](https://api.visitorbadge.io/api/visitors?id=yyzhangggg&theme=clouds)
 
 </div>
