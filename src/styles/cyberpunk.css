@@ -1,12 +1,12 @@
-/* ── Cyberpunk Theme — Main Page Only ─────────────────────────
+/* ── Cyberpunk Theme — Main Page Only ─────────────��───────────
    Applied via .cyberpunk class on the wrapper.
-   Purple + neon orange-red gradients, dark background,
+   Pink + blue + cherry red + white, dark background,
    glassmorphism transparency effects.
-   ──────────────────────────────────────────────────────────── */
+   ────────────────────────────────────────────────���─────────── */
 
 .cyberpunk {
   background: #0a0a1a;
-  color: #e0e0f0;
+  color: #ffffff;
 }
 
 /* ── Cyber Hero (no image, pure neon) ── */
@@ -18,9 +18,9 @@
   text-align: center;
   padding: 4rem 2rem;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(196, 113, 245, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 50%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 100%, rgba(255, 159, 67, 0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 20% 50%, rgba(244, 114, 182, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(96, 165, 250, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(220, 20, 60, 0.08) 0%, transparent 40%),
     #0a0a1a;
 }
 
@@ -29,19 +29,19 @@
   background: rgba(15, 15, 40, 0.6);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(196, 113, 245, 0.2);
+  border: 1px solid rgba(244, 114, 182, 0.2);
   border-radius: 1.5em;
   padding: 4em 3.5em;
   box-shadow:
-    0 0 60px rgba(196, 113, 245, 0.08),
-    0 0 120px rgba(255, 107, 107, 0.04);
+    0 0 60px rgba(244, 114, 182, 0.08),
+    0 0 120px rgba(96, 165, 250, 0.04);
 }
 
 .cyber-hero-title {
   font-size: 3.2em;
   font-weight: 800;
   margin: 0 0 0.2em;
-  background: linear-gradient(90deg, #c471f5, #ff6b6b, #ff9f43);
+  background: linear-gradient(90deg, #f472b6, #60a5fa, #dc143c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -50,7 +50,7 @@
 
 .cyber-hero-subtitle {
   font-size: 1.2em;
-  color: #c471f5;
+  color: #f472b6;
   margin: 0 0 1em;
   letter-spacing: 0.05em;
 }
@@ -60,7 +60,7 @@
   line-height: 1.8;
   opacity: 0.8;
   margin: 0 0 2em;
-  color: #d0d0e8;
+  color: #fecdd3;
 }
 
 /* ── Section backgrounds — glassmorphism ── */
@@ -68,73 +68,73 @@
   background: rgba(10, 10, 26, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  color: #e0e0f0;
-  border-top: 1px solid rgba(196, 113, 245, 0.08);
+  color: #ffffff;
+  border-top: 1px solid rgba(244, 114, 182, 0.08);
 }
 
 /* ── Headings ── */
 .cyberpunk h2 {
-  color: #e8d5f5;
+  color: #fce7f3;
 }
 
 .cyberpunk h3 {
-  color: #ddd0ee;
+  color: #fbcfe8;
 }
 
 /* ── Tech project cards — glass effect ── */
 .cyberpunk .items.style1 > section {
-  background: rgba(196, 113, 245, 0.04);
+  background: rgba(244, 114, 182, 0.04);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(196, 113, 245, 0.15);
+  border: 1px solid rgba(244, 114, 182, 0.15);
   border-radius: 1em;
   padding: 2em 1.8em;
   transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
 }
 
 .cyberpunk .items.style1 > section:hover {
-  background: rgba(196, 113, 245, 0.08);
-  border-color: rgba(255, 107, 107, 0.4);
-  box-shadow: 0 0 20px rgba(196, 113, 245, 0.15), 0 0 40px rgba(255, 107, 107, 0.08);
+  background: rgba(244, 114, 182, 0.08);
+  border-color: rgba(96, 165, 250, 0.4);
+  box-shadow: 0 0 20px rgba(244, 114, 182, 0.15), 0 0 40px rgba(96, 165, 250, 0.08);
 }
 
 .cyberpunk .items.style1 > section .icon {
-  color: #c471f5;
+  color: #f472b6;
 }
 
 /* ── Buttons ── */
 .cyberpunk .button {
-  background: linear-gradient(135deg, #c471f5, #ff6b6b);
+  background: linear-gradient(135deg, #f472b6, #60a5fa);
   color: #fff;
   border: none;
   text-shadow: none;
 }
 
 .cyberpunk .button:hover {
-  background: linear-gradient(135deg, #d48af7, #ff8585);
-  box-shadow: 0 0 16px rgba(196, 113, 245, 0.4);
+  background: linear-gradient(135deg, #f9a8d4, #93c5fd);
+  box-shadow: 0 0 16px rgba(244, 114, 182, 0.4);
 }
 
 .cyberpunk .button.small {
   background: transparent;
-  border: 1px solid rgba(196, 113, 245, 0.5);
-  color: #c471f5;
+  border: 1px solid rgba(244, 114, 182, 0.5);
+  color: #f472b6;
 }
 
 .cyberpunk .button.small:hover {
-  background: rgba(196, 113, 245, 0.15);
-  border-color: #c471f5;
-  box-shadow: 0 0 12px rgba(196, 113, 245, 0.3);
+  background: rgba(244, 114, 182, 0.15);
+  border-color: #f472b6;
+  box-shadow: 0 0 12px rgba(244, 114, 182, 0.3);
 }
 
 /* ── Nav Cards — glass + neon glow ── */
 .cyberpunk .nav-card {
-  border: 1px solid rgba(196, 113, 245, 0.25);
+  border: 1px solid rgba(244, 114, 182, 0.25);
 }
 
 .cyberpunk .nav-card:hover {
-  border-color: rgba(255, 107, 107, 0.5);
-  box-shadow: 0 0 30px rgba(196, 113, 245, 0.25), 0 16px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(96, 165, 250, 0.5);
+  box-shadow: 0 0 30px rgba(244, 114, 182, 0.25), 0 16px 40px rgba(0, 0, 0, 0.4);
 }
 
 .cyberpunk .nav-card-overlay {
@@ -147,63 +147,63 @@
 }
 
 .cyberpunk .nav-card-content h3 {
-  text-shadow: 0 0 12px rgba(196, 113, 245, 0.6);
+  text-shadow: 0 0 12px rgba(244, 114, 182, 0.6);
 }
 
 /* ── About section — glass panels ── */
 .cyberpunk .index > section > header h3 {
-  color: #c471f5;
+  color: #f472b6;
 }
 
 .cyberpunk .index > section > .content {
-  background: rgba(196, 113, 245, 0.03);
+  background: rgba(244, 114, 182, 0.03);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border-radius: 0.8em;
   padding: 1.5em;
-  border: 1px solid rgba(196, 113, 245, 0.08);
+  border: 1px solid rgba(244, 114, 182, 0.08);
 }
 
 .cyberpunk blockquote {
-  border-left-color: #c471f5;
+  border-left-color: #f472b6;
 }
 
 /* ── Links ── */
 .cyberpunk a {
-  color: #c471f5;
+  color: #60a5fa;
 }
 
 .cyberpunk a:hover {
-  color: #ff6b6b;
+  color: #dc143c;
 }
 
 /* ── Social icons ── */
 .cyberpunk .icons li a {
-  border-color: rgba(196, 113, 245, 0.3);
-  color: #c471f5;
+  border-color: rgba(244, 114, 182, 0.3);
+  color: #f472b6;
 }
 
 .cyberpunk .icons li a:hover {
-  border-color: #ff6b6b;
-  color: #ff6b6b;
+  border-color: #60a5fa;
+  color: #60a5fa;
 }
 
 /* ── Friend cards — glass ── */
 .cyberpunk .friend-card {
-  background: rgba(196, 113, 245, 0.04);
+  background: rgba(244, 114, 182, 0.04);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border-color: rgba(196, 113, 245, 0.15);
+  border-color: rgba(244, 114, 182, 0.15);
 }
 
 .cyberpunk .friend-card:hover {
-  background: rgba(196, 113, 245, 0.08);
-  border-color: rgba(255, 107, 107, 0.35);
-  box-shadow: 0 0 20px rgba(196, 113, 245, 0.12), 0 10px 28px rgba(0, 0, 0, 0.25);
+  background: rgba(244, 114, 182, 0.08);
+  border-color: rgba(96, 165, 250, 0.35);
+  box-shadow: 0 0 20px rgba(244, 114, 182, 0.12), 0 10px 28px rgba(0, 0, 0, 0.25);
 }
 
 .cyberpunk .friend-tag {
-  background: rgba(196, 113, 245, 0.2);
+  background: rgba(244, 114, 182, 0.2);
 }
 
 /* ── Form inputs — glass ── */
@@ -213,26 +213,26 @@
 .cyberpunk textarea {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(4px);
-  border-color: rgba(196, 113, 245, 0.25);
-  color: #e0e0f0;
+  border-color: rgba(244, 114, 182, 0.25);
+  color: #ffffff;
 }
 
 .cyberpunk input[type="text"]:focus,
 .cyberpunk input[type="email"]:focus,
 .cyberpunk select:focus,
 .cyberpunk textarea:focus {
-  border-color: #c471f5;
-  box-shadow: 0 0 8px rgba(196, 113, 245, 0.3);
+  border-color: #60a5fa;
+  box-shadow: 0 0 8px rgba(96, 165, 250, 0.3);
 }
 
 /* ── Scrollbar ── */
 .cyberpunk ::-webkit-scrollbar-thumb {
-  background: rgba(196, 113, 245, 0.3);
+  background: rgba(244, 114, 182, 0.3);
 }
 
 /* ── Neon accent lines ── */
 .cyberpunk .z-row {
-  border-bottom: 1px solid rgba(196, 113, 245, 0.06);
+  border-bottom: 1px solid rgba(244, 114, 182, 0.06);
 }
 
 /* ── Responsive ── */
