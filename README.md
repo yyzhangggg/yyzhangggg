@@ -98,7 +98,7 @@ Built with **React + Vite**, deployed on Vercel. Sections include:
 
 ## Contact
 
-**Portfolio:** https://my-website-yanying.vercel.app <br>
+**Portfolio:** https://my-website-yanying.vercel.app  
 **LinkedIn:** [linkedin.com/in/yanying-zhang-a61943232](https://www.linkedin.com/in/yanying-zhang-a61943232)  
 **GitHub:** [github.com/yyzhangggg](https://github.com/yyzhangggg)
 
