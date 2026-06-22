@@ -63,6 +63,61 @@
   color: #fecdd3;
 }
 
+/* ── Education cards ── */
+.edu-cards {
+  display: flex;
+  gap: 1rem;
+  margin: 0 0 2em;
+}
+.edu-card {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 1.2em 1.4em;
+  border-radius: 1em;
+  background: rgba(244, 114, 182, 0.06);
+  border: 1px solid rgba(244, 114, 182, 0.18);
+  text-align: left;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.edu-card:hover {
+  border-color: rgba(244, 114, 182, 0.4);
+  box-shadow: 0 0 20px rgba(244, 114, 182, 0.1);
+}
+.edu-icon {
+  font-size: 1.6em;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 0.1em;
+}
+.edu-info h4 {
+  margin: 0 0 0.2em;
+  font-size: 1em;
+  font-weight: 700;
+  color: #f472b6;
+}
+.edu-info p {
+  margin: 0;
+  font-size: 0.85em;
+  line-height: 1.4;
+  color: #fecdd3;
+  opacity: 0.85;
+}
+.edu-year {
+  display: inline-block;
+  margin-top: 0.4em;
+  font-size: 0.75em;
+  color: #60a5fa;
+  letter-spacing: 0.04em;
+  opacity: 0.8;
+}
+@media (max-width: 736px) {
+  .edu-cards {
+    flex-direction: column;
+  }
+}
+
 /* ── Section backgrounds — glassmorphism ── */
 .cyberpunk .wrapper.style1 {
   background: rgba(10, 10, 26, 0.85);
@@ -103,28 +158,34 @@
 }
 
 /* ── Buttons ── */
-.cyberpunk .button {
-  background: linear-gradient(135deg, #f472b6, #60a5fa);
-  color: #fff;
-  border: none;
+.cyberpunk .button,
+.cyberpunk input[type="submit"] {
+  background: transparent;
+  border: 1px solid rgba(244, 114, 182, 0.35);
+  border-radius: 999px;
+  color: #f472b6;
   text-shadow: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
-.cyberpunk .button:hover {
-  background: linear-gradient(135deg, #f9a8d4, #93c5fd);
-  box-shadow: 0 0 16px rgba(244, 114, 182, 0.4);
+.cyberpunk .button:hover,
+.cyberpunk input[type="submit"]:hover {
+  background: linear-gradient(135deg, rgba(244, 114, 182, 0.15), rgba(96, 165, 250, 0.1));
+  border-color: rgba(244, 114, 182, 0.6);
+  box-shadow: 0 0 24px rgba(244, 114, 182, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15);
+  color: #fff;
+  transform: translateY(-2px);
 }
 
 .cyberpunk .button.small {
-  background: transparent;
-  border: 1px solid rgba(244, 114, 182, 0.5);
-  color: #f472b6;
+  border-color: rgba(244, 114, 182, 0.4);
 }
 
 .cyberpunk .button.small:hover {
-  background: rgba(244, 114, 182, 0.15);
+  background: rgba(244, 114, 182, 0.12);
   border-color: #f472b6;
-  box-shadow: 0 0 12px rgba(244, 114, 182, 0.3);
+  box-shadow: 0 0 16px rgba(244, 114, 182, 0.25);
 }
 
 /* ── Nav Cards — glass + neon glow ── */
@@ -243,4 +304,28 @@
   .cyber-hero-title {
     font-size: 2.2em;
   }
+}
+
+/* ══════════════════════════════════════════════════════
+   Global Button Redesign — Capsule + Glassmorphism
+   (applies to ALL pages, not just .cyberpunk)
+   ══════════════════════════════════════════════════════ */
+.button,
+input[type="submit"],
+input[type="button"],
+button.button {
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+button.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }

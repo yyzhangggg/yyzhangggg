@@ -32,9 +32,11 @@ export default function SpotlightSection({
         <h2>{title}</h2>
         {body && <p>{body}</p>}
         <ul className="actions stacked">
-          <button onClick={() => navigate(`/gallery/${folder}`)}>
-            Load More
-          </button>
+          <li>
+            <button className="button" onClick={() => navigate(`/gallery/${folder}`)}>
+              Load More
+            </button>
+          </li>
         </ul>
       </div>
       <div className="image">

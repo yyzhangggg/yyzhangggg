@@ -110,6 +110,24 @@ export default function Home() {
             turning data into insight. Explore my technical projects below,
             or check out my art portfolio and marketplace.
           </p>
+          <div className="edu-cards">
+            <div className="edu-card">
+              <span className="edu-icon">🎓</span>
+              <div className="edu-info">
+                <h4>McGill University</h4>
+                <p>B.Sc. Computer Science, Minor in Mathematics</p>
+                <span className="edu-year">2020 – 2025</span>
+              </div>
+            </div>
+            <div className="edu-card">
+              <span className="edu-icon">📐</span>
+              <div className="edu-info">
+                <h4>Marianopolis College</h4>
+                <p>Pure &amp; Applied Mathematics</p>
+                <span className="edu-year">2018 – 2019</span>
+              </div>
+            </div>
+          </div>
           <img
             src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fmy-website-yanying.vercel.app&label=visitors&countColor=%23f472b6&style=flat-square&labelColor=0a0a1a"
             alt="Visitors"
