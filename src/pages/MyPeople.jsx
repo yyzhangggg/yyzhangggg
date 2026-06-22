@@ -126,10 +126,7 @@ export default function MyPeople() {
           font-size: 2.8em;
           font-weight: 800;
           margin: 0 0 0.3em;
-          background: linear-gradient(90deg, #f472b6, #ec4899, #db2777);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: #000000;
           line-height: 1.15;
         }
         .np-hero p {
@@ -167,7 +164,7 @@ export default function MyPeople() {
           align-items: center;
           gap: 0.45em;
           padding: 0.25em 1.8em;
-          color: #7c5a7a;
+          color: #000000;
           font-size: 0.72rem;
           text-decoration: none;
           letter-spacing: 0.03em;
@@ -175,15 +172,15 @@ export default function MyPeople() {
           flex-shrink: 0;
         }
         .ticker-item:hover {
-          color: #db2777;
+          color: #333333;
         }
         .ticker-item i {
-          color: #f472b6;
+          color: #000000;
           font-size: 0.9em;
           transition: color 0.2s;
         }
         .ticker-item:hover i {
-          color: #db2777;
+          color: #333333;
         }
         .ticker-sep {
           color: rgba(244,114,182,0.2);
