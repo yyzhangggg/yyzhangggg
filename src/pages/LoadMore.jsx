@@ -110,9 +110,6 @@ export default function LoadMore() {
       <div style={{ padding: '20px', paddingTop: '5rem' }}>
         <div className="lm-header">
           <h1>{title}</h1>
-          <button className="lm-back" onClick={() => navigate('/')}>
-            ← Back to main page
-          </button>
         </div>
 
         {loading && images.length === 0 && (

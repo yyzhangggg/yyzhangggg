@@ -97,11 +97,6 @@ export default function ArtPortfolio() {
             lens. I also enjoy painting about landscapes and architecture.
           </p>
           <ul className="actions stacked">
-            <li>
-              <button className="button" onClick={() => navigate('/')}>
-                ← Back to Main
-              </button>
-            </li>
           </ul>
         </div>
         <div className="image">

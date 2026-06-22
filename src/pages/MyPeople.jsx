@@ -212,9 +212,6 @@ export default function MyPeople() {
       <PerspectiveGrid />
 
       <div className="np-hero">
-        <button className="np-back" onClick={() => navigate('/')}>
-          &larr; Back to Main
-        </button>
         <h1>Network</h1>
         <p>
           The beautiful souls who colour my world &mdash; friends who&apos;ve walked

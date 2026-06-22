@@ -200,9 +200,6 @@ export default function Marketplace() {
 
       <section className="wrapper style1 align-center">
         <div className="mp-container">
-          <button className="mp-back" onClick={() => navigate('/')}>
-            &larr; Back to Main
-          </button>
 
           <div className="mp-header">
             <h1>Marketplace</h1>
