@@ -88,8 +88,8 @@ export default function NavBar() {
           color: #f472b6 !important;
           text-shadow: 0 0 8px rgba(244, 114, 182, 0.5), 0 0 16px rgba(244, 114, 182, 0.25);
           font-size: 0.82rem;
-          font-weight: 500;
-          letter-spacing: 0.04em;
+          font-weight: 300;
+          letter-spacing: -0.05em;
           cursor: pointer;
           transition: color 0.35s ease, text-shadow 0.35s ease;
           white-space: nowrap;

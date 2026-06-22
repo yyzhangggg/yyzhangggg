@@ -24,57 +24,6 @@ export default function AboutMe() {
             </div>
           </section>
 
-          {/* Social Media */}
-          <section>
-            <header>
-              <h3>Social Media</h3>
-            </header>
-            <div className="content">
-              <ul className="icons">
-                <li>
-                  <a
-                    href="https://www.instagram.com/my_photoraphy_site?igsh=MXIxYnQ0cm9vZmRpNQ%3D%3D&utm_source=qr"
-                    className="icon brands style2 fa-instagram"
-                  >
-                    <span className="label">Instagram</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.linkedin.com/in/yanying-zhang-a61943232"
-                    className="icon brands style2 fa-linkedin"
-                  >
-                    <span className="label">LinkedIn</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="mailto:product_sup_wYY@hotmail.com"
-                    className="icon style2 fa-envelope"
-                  >
-                    <span className="label">Email</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/yyzhangggg/my_website"
-                    className="icon brands style2 fa-github"
-                  >
-                    <span className="label">Github</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://xhslink.com/m/88ViesB2Tzd"
-                    className="icon brands style2 fa-rednote"
-                  >
-                    <span className="label">RedNotes</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </section>
-
           {/* Contact Form */}
           <section>
             <header>
