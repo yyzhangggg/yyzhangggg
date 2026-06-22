@@ -42,11 +42,14 @@ function SakuraFall() {
       ctx.translate(p.x, p.y)
       ctx.rotate(p.rotation)
       ctx.globalAlpha = p.opacity
+      const s = p.size
       ctx.beginPath()
       ctx.moveTo(0, 0)
-      ctx.bezierCurveTo(p.size / 2, -p.size / 2, p.size, 0, 0, p.size)
-      ctx.bezierCurveTo(-p.size, 0, -p.size / 2, -p.size / 2, 0, 0)
-      ctx.fillStyle = `hsl(${340 + Math.random() * 10}, 80%, ${82 + Math.random() * 8}%)`
+      ctx.bezierCurveTo(s * 0.4, -s * 0.3, s * 0.5, -s * 0.7, s * 0.15, -s)
+      ctx.lineTo(0, -s * 0.85)
+      ctx.lineTo(-s * 0.15, -s)
+      ctx.bezierCurveTo(-s * 0.5, -s * 0.7, -s * 0.4, -s * 0.3, 0, 0)
+      ctx.fillStyle = `hsl(${340 + Math.random() * 12}, 75%, ${84 + Math.random() * 8}%)`
       ctx.fill()
       ctx.restore()
     }
@@ -114,7 +117,7 @@ export default function MyPeople() {
     <div id="wrapper" className="divided" style={{ position: 'relative', minHeight: '100vh' }}>
       <style>{`
         #wrapper.divided {
-          background: linear-gradient(180deg, #fff5f9 0%, #fdf2f8 30%, #fce7f3 70%, #fbcfe8 100%);
+          background: linear-gradient(180deg, #f0fdf4 0%, #ecfdf5 30%, #d1fae5 70%, #a7f3d0 100%);
         }
         .np-hero {
           position: relative;
@@ -130,7 +133,7 @@ export default function MyPeople() {
           line-height: 1.15;
         }
         .np-hero p {
-          color: #6b4c6a;
+          color: #374151;
           max-width: 500px;
           margin: 0 auto 1.5rem;
           line-height: 1.7;
@@ -146,8 +149,8 @@ export default function MyPeople() {
           padding: 0.65rem 0;
           margin: 1rem 0 2rem;
           background: rgba(255, 255, 255, 0.6);
-          border-top: 1px solid rgba(244,114,182,0.15);
-          border-bottom: 1px solid rgba(244,114,182,0.15);
+          border-top: 1px solid rgba(110,231,183,0.3);
+          border-bottom: 1px solid rgba(110,231,183,0.3);
           backdrop-filter: blur(8px);
         }
         .ticker-track {
@@ -183,7 +186,7 @@ export default function MyPeople() {
           color: #333333;
         }
         .ticker-sep {
-          color: rgba(244,114,182,0.2);
+          color: rgba(110,231,183,0.3);
           padding: 0 0.5em;
           font-size: 0.6em;
         }
