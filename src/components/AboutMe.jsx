@@ -13,21 +13,6 @@ export default function AboutMe() {
 
         <div className="index align-left">
 
-          {/* Education */}
-          <section>
-            <header>
-              <h3>Education</h3>
-            </header>
-            <div className="content">
-              <dl>
-                <dt>McGill University <span style={{ fontWeight: 'normal', opacity: 0.7 }}>— 2020 – 2025</span></dt>
-                <dd>Bachelor of Computer Science, Minor in Mathematics</dd>
-                <dt>Marianopolis College <span style={{ fontWeight: 'normal', opacity: 0.7 }}>— 2018 – 2019</span></dt>
-                <dd>Pure &amp; Applied Mathematics</dd>
-              </dl>
-            </div>
-          </section>
-
           {/* Favourite Verses */}
           <section>
             <header>

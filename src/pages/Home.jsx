@@ -110,9 +110,6 @@ export default function Home() {
             turning data into insight. Explore my technical projects below,
             or check out my art portfolio and marketplace.
           </p>
-          <a href="#tech-projects" className="button big wide">
-            View Projects
-          </a>
           <img
             src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fmy-website-yanying.vercel.app&label=visitors&countColor=%23f472b6&style=flat-square&labelColor=0a0a1a"
             alt="Visitors"
