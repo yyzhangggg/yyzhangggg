@@ -136,6 +136,28 @@
   color: #fbcfe8;
 }
 
+/* ── Override all dark-purple text → pink + glow ── */
+.cyberpunk strong,
+.cyberpunk b {
+  color: #f472b6;
+  text-shadow: 0 0 8px rgba(244, 114, 182, 0.6), 0 0 20px rgba(244, 114, 182, 0.3);
+}
+
+.cyberpunk label {
+  color: #f472b6;
+  text-shadow: 0 0 8px rgba(244, 114, 182, 0.6), 0 0 20px rgba(244, 114, 182, 0.3);
+}
+
+.cyberpunk table th {
+  color: #f472b6;
+  text-shadow: 0 0 8px rgba(244, 114, 182, 0.6), 0 0 20px rgba(244, 114, 182, 0.3);
+}
+
+.cyberpunk .index > section > header h3 {
+  color: #f472b6;
+  text-shadow: 0 0 8px rgba(244, 114, 182, 0.6), 0 0 20px rgba(244, 114, 182, 0.3);
+}
+
 /* ── Tech project cards — glass effect ── */
 .cyberpunk .items.style1 > section {
   background: rgba(244, 114, 182, 0.04);
