@@ -4,112 +4,89 @@ import TechProjects from '../components/TechProjects'
 import AboutMe from '../components/AboutMe'
 import Snowflake from '../components/Snowflake'
 
-function NavCards() {
+function ArtHero() {
   const navigate = useNavigate()
 
   return (
     <section className="wrapper style1">
       <style>{`
-        .nav-cards {
-          display: flex;
-          gap: 2rem;
+        .art-hero-wrap {
           max-width: 900px;
           margin: 0 auto;
           padding: 0 2rem;
         }
-        .nav-card {
-          flex: 1;
+        .art-hero-card {
           position: relative;
-          border-radius: 1.2em;
+          border-radius: 1.5em;
           overflow: hidden;
           cursor: pointer;
-          min-height: 280px;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          height: 380px;
+          transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
-        .nav-card:hover {
+        .art-hero-card:hover {
           transform: translateY(-6px);
-          box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+          box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
-        .nav-card-bg {
+        .art-hero-bg {
           position: absolute;
           inset: 0;
           background-size: cover;
           background-position: center;
-          transition: transform 0.4s ease;
+          transition: transform 0.55s ease;
         }
-        .nav-card:hover .nav-card-bg {
-          transform: scale(1.05);
+        .art-hero-card:hover .art-hero-bg {
+          transform: scale(1.04);
         }
-        .nav-card-overlay {
+        .art-hero-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%);
+          background: linear-gradient(
+            to top,
+            rgba(10,10,26,0.82) 0%,
+            rgba(10,10,26,0.2) 100%
+          );
         }
-        .nav-card-content {
+        .art-hero-content {
           position: relative;
           z-index: 2;
           height: 100%;
           display: flex;
           flex-direction: column;
           justify-content: flex-end;
-          padding: 2em;
+          padding: 2.5em 3em;
           color: #fff;
         }
-        .nav-card-content h3 {
-          font-size: 1.4em;
+        .art-hero-content h3 {
+          font-size: 1.8em;
           margin: 0 0 0.3em;
           color: #fff;
+          text-shadow: 0 0 20px rgba(244,114,182,0.4);
         }
-        .nav-card-content p {
-          font-size: 0.9em;
+        .art-hero-content p {
+          font-size: 1em;
           opacity: 0.85;
           margin: 0;
-          line-height: 1.5;
+          line-height: 1.6;
+          max-width: 500px;
+          color: #fecdd3;
         }
         @media (max-width: 736px) {
-          .nav-cards {
-            flex-direction: column;
-          }
-          .nav-card {
-            min-height: 200px;
-          }
+          .art-hero-card { height: 260px; }
+          .art-hero-content { padding: 2em; }
+          .art-hero-content h3 { font-size: 1.4em; }
         }
       `}</style>
 
-      <div className="nav-cards">
-        <div className="nav-card" onClick={() => navigate('/art')}>
+      <div className="art-hero-wrap">
+        <div className="art-hero-card" onClick={() => navigate('/art')}>
           <div
-            className="nav-card-bg"
+            className="art-hero-bg"
             style={{ backgroundImage: `url(${asset('images/banner.jpg')})` }}
           />
-          <div className="nav-card-overlay" />
-          <div className="nav-card-content">
+          <div className="art-hero-overlay" />
+          <div className="art-hero-content">
             <h3>Art Portfolio</h3>
-            <p>Photography, painting, and creative writing</p>
-          </div>
-        </div>
-
-        <div className="nav-card" onClick={() => navigate('/marketplace')}>
-          <div
-            className="nav-card-bg"
-            style={{ backgroundImage: `url(${asset('images/painting/0.jpg')})` }}
-          />
-          <div className="nav-card-overlay" />
-          <div className="nav-card-content">
-            <h3>Marketplace</h3>
-            <p>Photography sessions and services</p>
-          </div>
-        </div>
-
-        <div className="nav-card" onClick={() => navigate('/people')}>
-          <div
-            className="nav-card-bg"
-            style={{ backgroundImage: `url(${asset('images/friends/01.jpg')})` }}
-          />
-          <div className="nav-card-overlay" />
-          <div className="nav-card-content">
-            <h3>My People</h3>
-            <p>The beautiful souls who colour my world</p>
+            <p>Photography, painting, and creative writing — explore my artistic journey</p>
           </div>
         </div>
       </div>
@@ -136,11 +113,16 @@ export default function Home() {
           <a href="#tech-projects" className="button big wide">
             View Projects
           </a>
+          <img
+            src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fmy-website-yanying.vercel.app&label=visitors&countColor=%23f472b6&style=flat-square&labelColor=0a0a1a"
+            alt="Visitors"
+            style={{ display: 'block', margin: '1.5rem auto 0', height: '20px', opacity: 0.75 }}
+          />
         </div>
       </section>
 
       <TechProjects />
-      <NavCards />
+      <ArtHero />
       <AboutMe />
     </div>
   )

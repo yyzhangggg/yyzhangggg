@@ -4,6 +4,7 @@ import ArtPortfolio from './pages/ArtPortfolio'
 import Marketplace from './pages/Marketplace'
 import MyPeople from './pages/MyPeople'
 import LoadMore from './pages/LoadMore'
+import NavBar from './components/NavBar'
 import { usePreload, useScrollReveal } from './hooks/useScrollReveal'
 
 function ScrollRevealManager() {
@@ -16,6 +17,7 @@ export default function App() {
   return (
     <HashRouter>
       <ScrollRevealManager />
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/art" element={<ArtPortfolio />} />

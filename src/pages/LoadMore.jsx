@@ -107,7 +107,7 @@ export default function LoadMore() {
         .lm-empty { text-align: center; padding: 40px; color: #666; }
       `}</style>
 
-      <div style={{ padding: '20px' }}>
+      <div style={{ padding: '20px', paddingTop: '5rem' }}>
         <div className="lm-header">
           <h1>{title}</h1>
           <button className="lm-back" onClick={() => navigate('/')}>

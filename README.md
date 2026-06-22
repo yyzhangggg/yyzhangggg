@@ -2,6 +2,8 @@
 
 <img src="docs/assets/sakura.svg" alt="sakura" width="800"/>
 
+![Visitors](https://komarev.com/ghpvc/?username=yyzhangggg&label=Profile%20Views&color=f472b6&style=flat-square)
+
 # Hi, I'm Yanying Zhang 👋
 
 **CS student at McGill University** — Machine Learning · Full-Stack Software Engineering  
