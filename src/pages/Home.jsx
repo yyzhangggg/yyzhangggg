@@ -4,6 +4,14 @@ import TechProjects from '../components/TechProjects'
 import AboutMe from '../components/AboutMe'
 import Snowflake from '../components/Snowflake'
 
+const socialLinks = [
+  { icon: 'fab fa-linkedin-in', href: 'https://www.linkedin.com/in/yanying-zhang-a61943232' },
+  { icon: 'fab fa-instagram', href: 'https://www.instagram.com/dumpmylibrary/' },
+  { icon: 'fab fa-github', href: 'https://github.com/yyzhangggg/my_website' },
+  { icon: 'fas fa-envelope', href: 'mailto:product_sup_wYY@hotmail.com' },
+  { icon: 'fas fa-pen-nib', href: 'https://xhslink.com/m/88ViesB2Tzd' },
+]
+
 function ArtHero() {
   const navigate = useNavigate()
 
@@ -133,6 +141,19 @@ export default function Home() {
             alt="Visitors"
             style={{ display: 'block', margin: '1.5rem auto 0', height: '20px', opacity: 0.75 }}
           />
+          <div className="hero-social-links">
+            {socialLinks.map((link, i) => (
+              <a
+                key={i}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                className="hero-social-icon"
+              >
+                <i className={link.icon} />
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 

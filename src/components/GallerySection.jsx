@@ -2,34 +2,30 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import { asset } from '../utils/assetPath'
 
 const EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG', 'WEBP']
-const FAIL_LIMIT  = 3
+const MAX_INDEX  = 30
 const mod = (n, m) => ((n % m) + m) % m
 
-// Discover all images/gallery/1.ext, 2.ext, … sequentially until FAIL_LIMIT consecutive misses
-async function discoverGallery() {
-  const found = []
-  let idx       = 1   // gallery images start at 1
-  let failCount = 0
-  while (failCount < FAIL_LIMIT) {
-    let loaded = false
-    for (const ext of EXTENSIONS) {
+function probeImage(idx) {
+  return Promise.any(
+    EXTENSIONS.map(ext => {
       const src = asset(`images/gallery/${idx}.${ext}`)
-      try {
-        await new Promise((resolve, reject) => {
-          const img = new Image()
-          img.onload  = resolve
-          img.onerror = reject
-          img.src = src
-        })
-        found.push(src)
-        loaded = true
-        break
-      } catch { /* try next extension */ }
-    }
-    failCount = loaded ? 0 : failCount + 1
-    idx++
-  }
-  return found
+      return new Promise((resolve, reject) => {
+        const img = new Image()
+        img.onload  = () => resolve(src)
+        img.onerror = reject
+        img.src = src
+      })
+    })
+  )
+}
+
+async function discoverGallery() {
+  const results = await Promise.allSettled(
+    Array.from({ length: MAX_INDEX }, (_, i) => probeImage(i + 1))
+  )
+  return results
+    .filter(r => r.status === 'fulfilled')
+    .map(r => r.value)
 }
 
 // Layout: [side 22%] [1% gap] [center 54%] [1% gap] [side 22%]
@@ -177,7 +173,7 @@ export default function GallerySection() {
                       className="gl-item"
                       style={{ ...s, transition: TRANS }}
                     >
-                      <img src={imgs[i]} alt={`Gallery ${i + 1}`} />
+                      <img src={imgs[i]} alt={`Gallery ${i + 1}`} loading="lazy" />
                     </div>
                   )
                 })}
