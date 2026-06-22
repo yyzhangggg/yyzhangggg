@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
 import Friends from '../components/Friends'
 
 const socialLinks = [
@@ -9,75 +10,77 @@ const socialLinks = [
   { icon: 'fas fa-pen-nib', text: 'RedNote · xiaohongshu', href: 'https://xhslink.com/m/88ViesB2Tzd' },
 ]
 
-function PerspectiveGrid() {
-  const vx = 500, vy = 80
-  const lines = []
+function SakuraFall() {
+  const canvasRef = useRef(null)
 
-  for (let x = -300; x <= 1300; x += 50) {
-    lines.push(
-      <line key={`r${x}`} x1={vx} y1={vy} x2={x} y2={900}
-        stroke="rgba(244,114,182,0.06)" strokeWidth="0.5" />
-    )
-  }
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    let animId
 
-  const ys = [160, 220, 275, 325, 372, 416, 458, 500, 542, 586, 634, 688, 750, 820, 900]
-  ys.forEach((y, i) => {
-    const ratio = (y - vy) / (900 - vy)
-    const hw = ratio * 800
-    lines.push(
-      <line key={`h${i}`} x1={vx - hw} y1={y} x2={vx + hw} y2={y}
-        stroke="rgba(96,165,250,0.045)" strokeWidth="0.5" />
-    )
-  })
+    function resize() {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    }
+    resize()
+    window.addEventListener('resize', resize)
 
-  const mazeWalls = [
-    [180, 350, 180, 275], [320, 500, 320, 416], [680, 500, 680, 416],
-    [150, 634, 250, 634], [750, 634, 850, 634],
-    [400, 325, 400, 220], [600, 325, 600, 220],
-    [250, 458, 350, 458], [650, 458, 750, 458],
-    [100, 750, 100, 688], [900, 750, 900, 688],
-    [450, 586, 550, 586], [300, 820, 300, 750], [700, 820, 700, 750],
-  ]
-  mazeWalls.forEach(([x1, y1, x2, y2], i) => {
-    lines.push(
-      <line key={`m${i}`} x1={x1} y1={y1} x2={x2} y2={y2}
-        stroke="rgba(244,114,182,0.1)" strokeWidth="1" />
-    )
-  })
+    const petals = Array.from({ length: 35 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height - canvas.height,
+      size: Math.random() * 12 + 8,
+      speedY: Math.random() * 1.2 + 0.5,
+      speedX: Math.random() * 0.8 - 0.4,
+      rotation: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.02,
+      opacity: Math.random() * 0.4 + 0.3,
+    }))
 
-  const dots = [
-    [vx, vy], [180, 275], [320, 416], [680, 416],
-    [400, 220], [600, 220], [100, 688], [900, 688],
-    [300, 750], [700, 750], [450, 586], [550, 586],
-  ]
-  dots.forEach(([cx, cy], i) => {
-    lines.push(
-      <circle key={`d${i}`} cx={cx} cy={cy} r="2"
-        fill="rgba(244,114,182,0.25)" />
-    )
-    lines.push(
-      <circle key={`dg${i}`} cx={cx} cy={cy} r="4"
-        fill="none" stroke="rgba(244,114,182,0.08)" strokeWidth="1" />
-    )
-  })
+    function drawPetal(p) {
+      ctx.save()
+      ctx.translate(p.x, p.y)
+      ctx.rotate(p.rotation)
+      ctx.globalAlpha = p.opacity
+      ctx.beginPath()
+      ctx.moveTo(0, 0)
+      ctx.bezierCurveTo(p.size / 2, -p.size / 2, p.size, 0, 0, p.size)
+      ctx.bezierCurveTo(-p.size, 0, -p.size / 2, -p.size / 2, 0, 0)
+      ctx.fillStyle = `hsl(${340 + Math.random() * 10}, 80%, ${82 + Math.random() * 8}%)`
+      ctx.fill()
+      ctx.restore()
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      petals.forEach(p => {
+        p.y += p.speedY
+        p.x += p.speedX + Math.sin(p.y * 0.01) * 0.3
+        p.rotation += p.rotSpeed
+        if (p.y > canvas.height + 20) {
+          p.y = -20
+          p.x = Math.random() * canvas.width
+        }
+        drawPetal(p)
+      })
+      animId = requestAnimationFrame(animate)
+    }
+    animate()
+
+    return () => {
+      cancelAnimationFrame(animId)
+      window.removeEventListener('resize', resize)
+    }
+  }, [])
 
   return (
-    <svg
+    <canvas
+      ref={canvasRef}
       style={{
         position: 'fixed', inset: 0, width: '100%', height: '100%',
-        pointerEvents: 'none', zIndex: 0,
+        pointerEvents: 'none', zIndex: 2,
       }}
-      viewBox="0 0 1000 900" preserveAspectRatio="xMidYMid slice"
-    >
-      <defs>
-        <radialGradient id="vp-glow">
-          <stop offset="0%" stopColor="rgba(244,114,182,0.12)" />
-          <stop offset="100%" stopColor="transparent" />
-        </radialGradient>
-      </defs>
-      <circle cx={vx} cy={vy} r="60" fill="url(#vp-glow)" />
-      {lines}
-    </svg>
+    />
   )
 }
 
@@ -108,8 +111,11 @@ export default function MyPeople() {
   const navigate = useNavigate()
 
   return (
-    <div id="wrapper" className="divided cyberpunk" style={{ position: 'relative', minHeight: '100vh' }}>
+    <div id="wrapper" className="divided" style={{ position: 'relative', minHeight: '100vh' }}>
       <style>{`
+        #wrapper.divided {
+          background: linear-gradient(180deg, #fff5f9 0%, #fdf2f8 30%, #fce7f3 70%, #fbcfe8 100%);
+        }
         .np-hero {
           position: relative;
           z-index: 1;
@@ -120,32 +126,19 @@ export default function MyPeople() {
           font-size: 2.8em;
           font-weight: 800;
           margin: 0 0 0.3em;
-          background: linear-gradient(90deg, #f472b6, #60a5fa, #dc143c);
+          background: linear-gradient(90deg, #f472b6, #ec4899, #db2777);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
           line-height: 1.15;
         }
         .np-hero p {
-          color: #fecdd3;
-          opacity: 0.75;
+          color: #6b4c6a;
           max-width: 500px;
           margin: 0 auto 1.5rem;
           line-height: 1.7;
           font-size: 0.95em;
         }
-        .np-back {
-          display: inline-block;
-          margin-bottom: 1.5rem;
-          cursor: pointer;
-          font-size: 0.85em;
-          color: rgba(244,114,182,0.6);
-          background: none;
-          border: none;
-          text-decoration: underline;
-          transition: color 0.2s;
-        }
-        .np-back:hover { color: #f472b6; }
 
         /* ── Scrolling Ticker ── */
         .ticker-wrap {
@@ -155,9 +148,9 @@ export default function MyPeople() {
           width: 100%;
           padding: 0.65rem 0;
           margin: 1rem 0 2rem;
-          background: rgba(15, 15, 40, 0.5);
-          border-top: 1px solid rgba(244,114,182,0.1);
-          border-bottom: 1px solid rgba(244,114,182,0.1);
+          background: rgba(255, 255, 255, 0.6);
+          border-top: 1px solid rgba(244,114,182,0.15);
+          border-bottom: 1px solid rgba(244,114,182,0.15);
           backdrop-filter: blur(8px);
         }
         .ticker-track {
@@ -174,7 +167,7 @@ export default function MyPeople() {
           align-items: center;
           gap: 0.45em;
           padding: 0.25em 1.8em;
-          color: rgba(255,255,255,0.45);
+          color: #7c5a7a;
           font-size: 0.72rem;
           text-decoration: none;
           letter-spacing: 0.03em;
@@ -182,18 +175,18 @@ export default function MyPeople() {
           flex-shrink: 0;
         }
         .ticker-item:hover {
-          color: #f472b6;
+          color: #db2777;
         }
         .ticker-item i {
-          color: rgba(244,114,182,0.5);
+          color: #f472b6;
           font-size: 0.9em;
           transition: color 0.2s;
         }
         .ticker-item:hover i {
-          color: #f472b6;
+          color: #db2777;
         }
         .ticker-sep {
-          color: rgba(244,114,182,0.15);
+          color: rgba(244,114,182,0.2);
           padding: 0 0.5em;
           font-size: 0.6em;
         }
@@ -202,14 +195,14 @@ export default function MyPeople() {
           100% { transform: translateX(-33.333%); }
         }
 
-        /* ── Friends section override for cyberpunk ── */
-        .cyberpunk #friends {
+        /* ── Friends section ── */
+        #friends {
           position: relative;
           z-index: 1;
         }
       `}</style>
 
-      <PerspectiveGrid />
+      <SakuraFall />
 
       <div className="np-hero">
         <h1>Network</h1>

@@ -52,8 +52,8 @@ export default function NavBar() {
           transform: translateX(-50%);
           z-index: 9999;
           display: flex;
-          gap: 0.25rem;
-          padding: 0.38rem;
+          gap: 0.15rem;
+          padding: 0.25rem;
           border-radius: 999px;
           background: rgba(15, 15, 40, 0.55);
           backdrop-filter: blur(24px) saturate(1.8);
@@ -69,8 +69,8 @@ export default function NavBar() {
         }
         .capsule-nav-indicator {
           position: absolute;
-          top: 0.38rem;
-          height: calc(100% - 0.76rem);
+          top: 0.25rem;
+          height: calc(100% - 0.5rem);
           border-radius: 999px;
           background: linear-gradient(135deg, rgba(244, 114, 182, 0.3), rgba(96, 165, 250, 0.2));
           box-shadow: 0 0 20px rgba(244, 114, 182, 0.15), inset 0 0 8px rgba(244, 114, 182, 0.08);
@@ -81,7 +81,7 @@ export default function NavBar() {
         .capsule-nav-item {
           position: relative;
           z-index: 1;
-          padding: 0.5rem 1.35rem;
+          padding: 0.4rem 1rem;
           border-radius: 999px;
           border: none;
           background: transparent;
