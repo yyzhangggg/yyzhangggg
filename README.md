@@ -1,5 +1,5 @@
 <div align="center">
-
+  
 <img src="docs/assets/sakura.svg" alt="sakura" width="800"/>
 
 ![Visitors](https://komarev.com/ghpvc/?username=yyzhangggg&label=Profile%20Views&color=f472b6&style=flat-square)
@@ -96,13 +96,11 @@ Built with **React + Vite**, deployed on Vercel. Sections include:
 - Friends & relationships wall
 - About & contact
 
-**Live:** https://my-website-yanying.vercel.app
-
 <img src="docs/assets/sakura-divider.svg" alt="" width="100%"/>
 
 ## Contact
 
-**Portfolio:** [yyzhangggg.github.io/my_website](https://yyzhangggg.github.io/my_website/)  
+**Portfolio:** https://my-website-yanying.vercel.app  
 **LinkedIn:** [linkedin.com/in/yanying-zhang-a61943232](https://www.linkedin.com/in/yanying-zhang-a61943232)  
 **GitHub:** [github.com/yyzhangggg](https://github.com/yyzhangggg)
 
@@ -111,5 +109,6 @@ Built with **React + Vite**, deployed on Vercel. Sections include:
 <img src="docs/assets/sakura.svg" alt="sakura" width="600"/>
 
 <sub>Thanks for visiting~ have a nice day!</sub>
+![Visitors](https://api.visitorbadge.io/api/visitors?id=yyzhangggg&theme=clouds)
 
 </div>
