@@ -118,6 +118,35 @@
   }
 }
 
+/* ── Hero Social Links ── */
+.hero-social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.hero-social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(244, 114, 182, 0.08);
+  border: 1px solid rgba(244, 114, 182, 0.25);
+  color: #f472b6;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.hero-social-icon:hover {
+  background: rgba(244, 114, 182, 0.2);
+  border-color: #f472b6;
+  color: #fff;
+  box-shadow: 0 0 18px rgba(244, 114, 182, 0.3);
+  transform: translateY(-2px);
+}
+
 /* ── Section backgrounds — glassmorphism ── */
 .cyberpunk .wrapper.style1 {
   background: rgba(10, 10, 26, 0.85);
