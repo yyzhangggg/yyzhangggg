@@ -4,7 +4,7 @@ import Friends from '../components/Friends'
 
 const socialLinks = [
   { icon: 'fab fa-linkedin-in', text: 'LinkedIn · yanying-zhang', href: 'https://www.linkedin.com/in/yanying-zhang-a61943232' },
-  { icon: 'fab fa-instagram', text: 'Instagram · @my_photography', href: 'https://www.instagram.com/my_photoraphy_site?igsh=MXIxYnQ0cm9vZmRpNQ%3D%3D&utm_source=qr' },
+  { icon: 'fab fa-instagram', text: 'Instagram · @dumpmylibrary', href: 'https://www.instagram.com/dumpmylibrary/' },
   { icon: 'fab fa-github', text: 'GitHub · yyzhangggg', href: 'https://github.com/yyzhangggg/my_website' },
   { icon: 'fas fa-envelope', text: 'Email · product_sup_wYY', href: 'mailto:product_sup_wYY@hotmail.com' },
   { icon: 'fas fa-pen-nib', text: 'RedNote · xiaohongshu', href: 'https://xhslink.com/m/88ViesB2Tzd' },

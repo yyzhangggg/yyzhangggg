@@ -47,7 +47,7 @@ export default function NavBar() {
       <style>{`
         .capsule-nav {
           position: fixed;
-          top: 1.2rem;
+          top: 0.5rem;
           left: 50%;
           transform: translateX(-50%);
           z-index: 9999;
