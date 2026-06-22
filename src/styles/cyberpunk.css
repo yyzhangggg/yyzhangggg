@@ -143,8 +143,10 @@
   text-shadow: 0 0 8px rgba(244, 114, 182, 0.6), 0 0 20px rgba(244, 114, 182, 0.3);
 }
 
-.cyberpunk label {
-  color: #f472b6;
+.cyberpunk label,
+.cyberpunk input[type="checkbox"] + label,
+.cyberpunk input[type="radio"] + label {
+  color: #f472b6 !important;
   text-shadow: 0 0 8px rgba(244, 114, 182, 0.6), 0 0 20px rgba(244, 114, 182, 0.3);
 }
 

@@ -85,21 +85,23 @@ export default function NavBar() {
           border-radius: 999px;
           border: none;
           background: transparent;
-          color: rgba(255, 255, 255, 0.55);
+          color: #f472b6 !important;
+          text-shadow: 0 0 8px rgba(244, 114, 182, 0.5), 0 0 16px rgba(244, 114, 182, 0.25);
           font-size: 0.82rem;
           font-weight: 500;
           letter-spacing: 0.04em;
           cursor: pointer;
-          transition: color 0.35s ease;
+          transition: color 0.35s ease, text-shadow 0.35s ease;
           white-space: nowrap;
           font-family: inherit;
         }
         .capsule-nav-item:hover {
-          color: rgba(255, 255, 255, 0.92);
+          color: #fff !important;
+          text-shadow: 0 0 12px rgba(255, 255, 255, 0.6), 0 0 24px rgba(244, 114, 182, 0.4);
         }
         .capsule-nav-item.active {
-          color: #fff;
-          text-shadow: 0 0 12px rgba(244, 114, 182, 0.4);
+          color: #fff !important;
+          text-shadow: 0 0 12px rgba(244, 114, 182, 0.7), 0 0 24px rgba(244, 114, 182, 0.4);
         }
         @media (max-width: 500px) {
           .capsule-nav {
