@@ -12,6 +12,7 @@ Outside of tech: nature photography, multi-media painting, and creative writing.
 Currently working on: CNN image classifiers, NLP pipelines, full-stack web apps  
 Learning: BERT fine-tuning, MLOps, cloud deployment, system design  
 Open to: ML Engineer / Software Engineer internships and entry-level roles
+**Portfolio:** https://my-website-yanying.vercel.app  
 
 <img src="docs/assets/neko.svg" alt="neko" width="160"/>
 
@@ -100,10 +101,7 @@ Built with **React + Vite**, deployed on Vercel. Sections include:
 <img src="docs/assets/sakura-divider.svg" alt="" width="100%"/>
 
 ## Contact
-
-**Portfolio:** https://my-website-yanying.vercel.app  
 **LinkedIn:** [linkedin.com/in/yanying-zhang-a61943232](https://www.linkedin.com/in/yanying-zhang-a61943232)  
-**GitHub:** [github.com/yyzhangggg](https://github.com/yyzhangggg)
 
 <div align="center">
 
