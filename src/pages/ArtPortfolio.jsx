@@ -1,158 +1,113 @@
+import { useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { asset } from '../utils/assetPath'
-import SpotlightSection from '../components/SpotlightSection'
-import PhotoGallery from '../components/PhotoGallery'
-import CreativeWriting from '../components/CreativeWriting'
-import { useNavigate } from 'react-router-dom'
+import { leopardTile } from '../utils/leopard'
+import useImageFolder from '../hooks/useImageFolder'
+import Lightbox from '../components/Lightbox'
+import SocialLinks from '../components/SocialLinks'
+import writings from '../content/writings'
+import '../styles/pages.css'
+import '../styles/art.css'
 
-const spotlights = [
-  {
-    id: 'first',
-    orient: 'right',
-    folder: 'backlight',
-    previewImg: 'images/backlight/0.jpg',
-    title: 'Back Light',
-    body: `Everything reflects some special colour when the sunlight is on its back.
-           I love how the creator of the universe designed human eyes that see vivid
-           colours even with strong light on the back. The best digital camera won't
-           capture the same amount of colour resolution as our bare eyes.`,
-  },
-  {
-    id: 'second',
-    orient: 'left',
-    folder: 'arch',
-    previewImg: 'images/arch/0.jpg',
-    title: 'Architecture',
-    body: '',
-  },
-  {
-    id: '3rd',
-    orient: 'right',
-    folder: 'flowers',
-    previewImg: 'images/flowers/0.jpg',
-    title: 'Colours',
-    body: `And yes, this is another section of nature. I was attracted by the abundant
-           variety in plants, trees and nature. Even though they don't work to buy new
-           clothes, they have the most pure colour that the luxury brands of fashion can
-           never mimic. The flowers are pretty, but the leaves are prettier!`,
-  },
-  {
-    id: '4th',
-    orient: 'left',
-    folder: 'nature',
-    previewImg: 'images/nature/0.jpg',
-    title: 'Nature',
-    body: `Influenced by the Asian concept of "changing scenery with each step," I often
-           find myself encountering nature's own canvas while walking through national
-           parks — a symphony composed of living and dead trees, shrubs, and creeks.
-           The entire sky seems to proclaim the glory and design of the Creator.`,
-  },
-  {
-    id: '5th',
-    orient: 'right',
-    folder: 'city',
-    previewImg: 'images/city/0.jpg',
-    title: 'City Walk',
-    body: '',
-  },
-  {
-    id: '6th',
-    orient: 'left',
-    folder: 'forest',
-    previewImg: 'images/forest/4.jpg',
-    title: 'Forest',
-    body: `Forests hold a mysterious quiet that no city can replicate. Walking through
-           a forest feels like entering a cathedral built by the Creator himself —
-           where light filters through canopies, every shadow tells a story of growth,
-           and the silence is alive with the sound of leaves and distant water.`,
-  },
-  {
-    id: '7th',
-    orient: 'right',
-    folder: 'painting',
-    previewImg: 'images/painting/0.jpg',
-    title: 'Painting w/ mixed multi-media',
-    body: `I have a deep love for oil painting, acrylics, pastel, and watercolor.
-           Impressionism is one of the art movements I admire most, and I enjoy adding
-           my own unique artistic touches to this style. Rather than replicating
-           real-life scenes, I prefer creating dreamlike landscapes.`,
-  },
-]
+function WritingModal({ piece, onClose }) {
+  if (!piece) return null
+  return (
+    <div className="art-modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
+      <article className="art-modal" onClick={(e) => e.stopPropagation()}>
+        <button className="art-modal-close" onClick={onClose} aria-label="Close">×</button>
+        <p className="art-eyebrow">{piece.genre}</p>
+        <h2>{piece.title}</h2>
+        <p className="art-modal-setting">{piece.setting}</p>
+        {piece.parts.map((part, i) => (
+          <section key={i} className="art-modal-part">
+            <h3>{part.heading}</h3>
+            {part.body.split('\n\n').map((para, j) => <p key={j}>{para.trim()}</p>)}
+          </section>
+        ))}
+        {piece.docxPath && (
+          <a className="art-btn" href={asset(piece.docxPath)} download>Download .docx</a>
+        )}
+      </article>
+    </div>
+  )
+}
 
 export default function ArtPortfolio() {
-  const navigate = useNavigate()
+  const { images, loading } = useImageFolder('painting')
+  const [open, setOpen] = useState(null)
+  const [reading, setReading] = useState(null)
+
+  const leopard = useMemo(() => leopardTile({ seed: 11 }), [])
+  const leopardDark = useMemo(
+    () => leopardTile({ seed: 23, base: '#2b1820', center: '#5a2c3c', ring: '#ff5c9d', size: 220 }),
+    [],
+  )
 
   return (
-    <div id="wrapper" className="divided">
-      {/* Art Banner */}
-      <section className="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
-        <div className="content">
-          <h1>Art Portfolio</h1>
-          <p className="major">
-            Photography, painting, and creative writing — a collection of my
-            artistic explorations across different media and styles.
+    <div className="pg art-root" style={{ '--leopard': leopard, '--leopard-dark': leopardDark }}>
+      {/* Hero */}
+      <header className="art-hero">
+        <div className="art-hero-card">
+          <p className="art-eyebrow">Portfolio · Painting &amp; Writing</p>
+          <h1>Art</h1>
+          <p className="art-lede">
+            Oil, acrylic, pastel and watercolour. I admire Impressionism and add my own
+            touches to it — rather than replicating real scenes, I prefer to paint
+            dreamlike landscapes.
           </p>
-          <p>
-            I primarily focus on nature photography, capturing colours, special
-            spices of plantes, and expressing beauty and imagination through my
-            lens. I also enjoy painting about landscapes and architecture.
-          </p>
-          <ul className="actions stacked">
-          </ul>
+          <SocialLinks page="art" className="art-social" />
         </div>
-        <div className="image">
-          <img src={asset('images/banner.jpg')} alt="Art Portfolio" />
+      </header>
+
+      {/* The wall */}
+      <section className="art-section">
+        <div className="art-section-head">
+          <span className="art-num">01</span>
+          <h2>The Wall</h2>
+          <span className="art-count">{images.length ? `${images.length} works` : ''}</span>
+        </div>
+        {loading && !images.length && <p className="art-loading">Hanging the paintings…</p>}
+        <div className="art-wall">
+          {images.map((src, i) => (
+            <button key={src} className="art-frame" onClick={() => setOpen(i)} aria-label={`Open painting ${i + 1}`}>
+              <img src={src} alt={`Painting ${i + 1}`} loading="lazy" />
+              <span className="art-frame-tag">No. {String(i + 1).padStart(2, '0')}</span>
+            </button>
+          ))}
+        </div>
+        <p className="art-buy">
+          Originals available — <Link to="/marketplace">see prices &amp; contact →</Link>
+        </p>
+      </section>
+
+      <div className="art-strip" aria-hidden="true" />
+
+      {/* Writing */}
+      <section className="art-section">
+        <div className="art-section-head">
+          <span className="art-num">02</span>
+          <h2>Creative Writing</h2>
+        </div>
+        <div className="art-writing">
+          {writings.map((w) => (
+            <article key={w.title} className="art-card">
+              <p className="art-eyebrow">{w.genre}</p>
+              <h3>{w.title}</h3>
+              <p className="art-card-setting">{w.setting}</p>
+              <p className="art-card-excerpt">“{w.excerpt}”</p>
+              <button className="art-btn" onClick={() => setReading(w)}>Read</button>
+            </article>
+          ))}
         </div>
       </section>
 
-      {/* Why Photography */}
-      <section className="wrapper style1 align-center">
-        <div className="inner">
-          <div className="index align-left">
-            <section>
-              <header>
-                <h3><b>Why photography?</b></h3>
-              </header>
-              <div className="content">
-                <p>
-                  I was grown up with a doctor family, and for my whole life I&apos;ve
-                  been taught to study Bio in order to get into a med school. I
-                  followed the instruction and lived to fulfil the expectations of
-                  parents. My career in health was quite successful until I got
-                  admitted to Marianopolis college, which has the best private
-                  health program in Montreal. However, this was also where I
-                  encountered the greatest setback in my journey of biological
-                  professions, and it ended up becoming the turning point in my
-                  life decision.
-                </p>
-                <p>
-                  I started by being interested in Photoshop digital editing in my
-                  young age, then gradually got into presenting as a model and
-                  producing dramatic photos. Yet later on, I gradually became more
-                  sure of what output I wanted to produce. What I long for is more
-                  freedom to record and actively capture moments of beauty, rather
-                  than merely appreciating my own beauty. Because of this shift in
-                  mindset, I began studying the theory of light and shadow, and
-                  fell in love with the style of film.
-                </p>
-                <p>
-                  I have always believed that if a gift is not used to its
-                  fullest, it is wasted — and I don&apos;t like waste! In the
-                  future, I will continue to use the black eyes God has given me
-                  to search for light, and to capture with my camera the shapes of
-                  light and the fleeting moments of shadow and illumination.
-                </p>
-              </div>
-            </section>
-          </div>
-        </div>
-      </section>
+      <footer className="art-foot">
+        <h2>Follow the studio</h2>
+        <SocialLinks page="art" className="art-social" />
+      </footer>
 
-      {spotlights.map((s) => (
-        <SpotlightSection key={s.id} {...s} />
-      ))}
-
-      <PhotoGallery />
-      <CreativeWriting />
+      <Lightbox images={images} index={open} onClose={() => setOpen(null)} onIndex={setOpen} className="art-lightbox" />
+      <WritingModal piece={reading} onClose={() => setReading(null)} />
     </div>
   )
 }

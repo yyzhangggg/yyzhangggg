@@ -1,0 +1,274 @@
+/* ── Art: leopard print + pink ────────────────────────────────────────────── */
+
+.art-root {
+  --pink: #ff5c9d;
+  --blush: #ffe4ee;
+  --petal: #ffc7da;
+  --ink: #2b1820;
+  --display: 'Playfair Display', 'Bodoni 72', Didot, Georgia, serif;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  background: var(--blush);
+  color: var(--ink);
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.art-eyebrow, .art-num, .art-count, .art-frame-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* hero */
+.art-hero {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 110px 24px 72px;
+  background: var(--leopard) repeat;
+  background-size: 260px 260px;
+  border-bottom: 6px solid var(--pink);
+}
+
+.art-hero-card {
+  max-width: 620px;
+  padding: 44px 48px 40px;
+  background: var(--blush);
+  border: 3px solid var(--ink);
+  box-shadow: 14px 14px 0 var(--pink);
+}
+
+.art-hero-card .art-eyebrow { color: var(--pink); }
+
+.pg.art-root h1 {
+  margin-top: 8px;
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(88px, 16vw, 168px);
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.pg .art-lede {
+  margin-top: 20px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.art-social { margin-top: 26px; }
+.art-social .social-chip { color: var(--ink); border: 2px solid var(--ink); background: #fff; font-weight: 500; }
+.art-social .social-chip:not(.is-todo):hover { background: var(--pink); color: #fff; border-color: var(--pink); }
+
+/* sections */
+.art-section {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 88px 32px 40px;
+}
+
+.art-section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 14px;
+  margin-bottom: 36px;
+  border-bottom: 3px solid var(--ink);
+}
+
+.art-num { color: var(--pink); }
+
+.pg .art-section-head h2 {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(38px, 6vw, 64px);
+  line-height: 1;
+  color: var(--ink);
+}
+
+.art-count { margin-left: auto; opacity: 0.6; }
+.art-loading { opacity: 0.6; }
+
+/* painting wall — masonry columns, framed */
+.art-wall {
+  column-count: 3;
+  column-gap: 28px;
+}
+
+.pg .art-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0 0 28px;
+  padding: 14px;
+  background: #fff;
+  border: 2px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--petal);
+  break-inside: avoid;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pg .art-frame:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 11px 11px 0 var(--pink);
+}
+
+.art-frame img { width: 100%; height: auto; }
+
+.art-frame-tag {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  padding: 3px 8px;
+  background: var(--ink);
+  color: var(--blush);
+  font-size: 10px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.art-frame:hover .art-frame-tag { opacity: 1; }
+
+.pg .art-buy { margin-top: 12px; font-size: 15px; }
+.pg .art-buy a { color: var(--pink); font-weight: 600; border-bottom: 2px solid var(--pink); }
+
+/* leopard strip */
+.art-strip {
+  height: 90px;
+  margin-top: 56px;
+  background: var(--leopard-dark) repeat;
+  background-size: 220px 220px;
+  border-top: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+}
+
+/* writing */
+.art-writing {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.art-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 28px;
+  background: #fff;
+  border: 2px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--pink);
+}
+
+.art-card .art-eyebrow { color: var(--pink); }
+
+.pg .art-card h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.15;
+}
+
+.art-card-setting { font-size: 13px; opacity: 0.65; }
+.art-card-excerpt { font-size: 15px; line-height: 1.6; flex: 1; }
+
+.pg .art-btn {
+  align-self: flex-start;
+  display: inline-block;
+  padding: 10px 22px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+.pg .art-btn:hover { background: var(--pink); border-color: var(--pink); }
+
+/* modal */
+.art-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  padding: 72px 16px 24px;
+  overflow-y: auto;
+  background: rgba(43, 24, 32, 0.6);
+}
+
+.art-modal {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  height: max-content;
+  padding: 44px;
+  background: var(--blush);
+  border: 3px solid var(--ink);
+  box-shadow: 12px 12px 0 var(--pink);
+}
+
+.pg .art-modal h2 {
+  margin: 6px 0;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.1;
+}
+
+.art-modal .art-eyebrow { color: var(--pink); }
+.art-modal-setting { opacity: 0.65; margin-bottom: 20px !important; }
+.art-modal-part { margin-bottom: 24px; }
+.pg .art-modal-part h3 { margin-bottom: 10px; font-family: var(--display); font-size: 20px; }
+.pg .art-modal-part p { margin-bottom: 14px; font-size: 16px; line-height: 1.75; }
+
+.pg .art-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 30px;
+  line-height: 1;
+}
+
+/* footer */
+.art-foot {
+  margin-top: 72px;
+  padding: 64px 24px 72px;
+  text-align: center;
+  background: var(--leopard) repeat;
+  background-size: 260px 260px;
+  border-top: 6px solid var(--pink);
+}
+
+.pg .art-foot h2 {
+  display: inline-block;
+  padding: 10px 24px;
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 34px;
+  background: var(--blush);
+  border: 3px solid var(--ink);
+}
+
+.art-foot .art-social { justify-content: center; }
+
+.art-lightbox { background: rgba(43, 24, 32, 0.94); }
+.art-lightbox img { border: 12px solid #fff; }
+
+@media (max-width: 900px) { .art-wall { column-count: 2; } }
+
+@media (max-width: 600px) {
+  .art-hero { padding: 96px 16px 56px; }
+  .art-hero-card { padding: 28px 22px; box-shadow: 8px 8px 0 var(--pink); }
+  .art-section { padding: 64px 16px 24px; }
+  .art-wall { column-count: 1; }
+  .art-modal { padding: 28px 20px; }
+}

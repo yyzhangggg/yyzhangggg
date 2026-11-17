@@ -1,99 +1,116 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { asset } from '../utils/assetPath'
-import { projects } from '../components/TechProjects'
+import { built, code, academic } from '../content/site'
 import WorldBackground from '../components/WorldBackground'
+import SocialLinks from '../components/SocialLinks'
+import '../styles/pages.css'
 import '../styles/index-home.css'
 
-const socialLinks = [
-  { icon: 'fab fa-linkedin-in', label: 'LinkedIn', href: 'https://www.linkedin.com/in/yanying-zhang-a61943232' },
-  { icon: 'fab fa-github', label: 'GitHub', href: 'https://github.com/yyzhangggg/my_website' },
-  { icon: 'fab fa-instagram', label: 'Instagram', href: 'https://www.instagram.com/dumpmylibrary/' },
-  { icon: 'fas fa-pen-nib', label: 'Rednote', href: 'https://xhslink.com/m/88ViesB2Tzd' },
-  { icon: 'fas fa-envelope', label: 'Email', href: 'mailto:product_sup_wYY@hotmail.com' },
+const pad = (n) => String(n).padStart(2, '0')
+
+const explore = [
+  { to: '/art', numeral: 'A', title: 'Art', note: 'painting · mixed media · writing', img: 'images/painting/0.jpg', accent: 'cherry' },
+  { to: '/photography', numeral: 'P', title: 'Photography', note: 'film · light · nature', img: 'images/backlight/0.jpg', accent: 'sage' },
+  { to: '/network', numeral: 'N', title: 'Network', note: 'friends & their pages', img: 'images/friendships/LUXI.JPG', accent: 'blue' },
+  { to: '/marketplace', numeral: 'M', title: 'Market', note: 'knitwear · sessions · prices', img: 'images/city/0.jpg', accent: 'gray' },
 ]
 
-const artLinks = [
-  { name: 'Art Portfolio', meta: 'overview · statement', to: '/art', img: 'images/banner.jpg' },
-  { name: 'Painting w/ mixed media', meta: 'oil · acrylic · pastel · watercolour', to: '/gallery/painting', img: 'images/painting/0.jpg' },
-  { name: 'Creative Writing', meta: 'essays · verses', to: '/art', img: 'images/flowers/0.jpg' },
-]
+function scrollTo(id) {
+  return (e) => {
+    e.preventDefault()
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  }
+}
 
-const photoLinks = [
-  { name: 'Back Light', meta: 'series', to: '/gallery/backlight', img: 'images/backlight/0.jpg' },
-  { name: 'Architecture', meta: 'series', to: '/gallery/arch', img: 'images/arch/0.jpg' },
-  { name: 'Colours', meta: 'flora', to: '/gallery/flowers', img: 'images/flowers/0.jpg' },
-  { name: 'Nature', meta: 'national parks', to: '/gallery/nature', img: 'images/nature/0.jpg' },
-  { name: 'City Walk', meta: 'street', to: '/gallery/city', img: 'images/city/0.jpg' },
-  { name: 'Forest', meta: 'series', to: '/gallery/forest', img: 'images/forest/4.jpg' },
-  { name: 'Instagram', meta: '@dumpmylibrary ↗', href: 'https://www.instagram.com/dumpmylibrary/' },
-]
-
-const elsewhere = [
-  { name: 'Marketplace', meta: 'shop', to: '/marketplace' },
-  { name: 'Network', meta: 'my people', to: '/people' },
-]
-
-function Row({ n, item, onHover }) {
-  const inner = (
-    <>
-      <span className="idx-n">{String(n).padStart(2, '0')}</span>
-      <span className="idx-name">
-        {item.name}
-        {item.live && <span className="idx-live">live</span>}
-      </span>
-      <span className="idx-meta">{item.meta}</span>
-      <span className="idx-arrow" aria-hidden="true">{item.href ? '↗' : '→'}</span>
-    </>
-  )
-  const handlers = item.img
-    ? { onMouseEnter: () => onHover(item.img), onMouseLeave: () => onHover(null), onFocus: () => onHover(item.img), onBlur: () => onHover(null) }
-    : {}
+function ChapterHead({ numeral, title, note }) {
   return (
-    <li>
-      {item.to ? (
-        <Link className="idx-row" to={item.to} {...handlers}>{inner}</Link>
-      ) : (
-        <a className="idx-row" href={item.href} target="_blank" rel="noreferrer" {...handlers}>{inner}</a>
-      )}
+    <header className="idx-chapter-head">
+      <span className="idx-numeral">{numeral}</span>
+      <h2>{title}</h2>
+      {note && <span className="idx-note">{note}</span>}
+    </header>
+  )
+}
+
+function Tbd() {
+  return <span className="tbd">TBD</span>
+}
+
+/* I. Built — each row has its own Live / Code actions */
+function BuiltRow({ n, p }) {
+  return (
+    <li className="idx-row idx-row-built">
+      <span className="idx-n">{pad(n)}</span>
+      <div className="idx-body">
+        <span className="idx-name">
+          {p.name}
+          {p.live && <span className="idx-live">live</span>}
+        </span>
+        <span className="idx-desc">{p.desc}</span>
+        <span className="idx-meta">{p.tech}</span>
+      </div>
+      <div className="idx-actions">
+        {p.live && <a className="idx-chip" href={p.live} target="_blank" rel="noreferrer">Demo ↗</a>}
+        {p.code && <a className="idx-chip" href={p.code} target="_blank" rel="noreferrer">Code ↗</a>}
+        {!p.code && p.codePrivate && <span className="idx-chip is-muted">Private repo</span>}
+        {p.todo && <Tbd />}
+      </div>
     </li>
   )
 }
 
-function Chapter({ numeral, title, note, accent, items, onHover }) {
+/* II. Code — whole row is a link */
+function CodeRow({ n, p }) {
   return (
-    <section className="idx-chapter" style={{ '--accent': `var(--${accent})` }}>
-      <header className="idx-chapter-head">
-        <span className="idx-numeral">{numeral}</span>
-        <h2>{title}</h2>
-        <span className="idx-note">{note}</span>
-      </header>
-      <ol className="idx-list">
-        {items.map((item, i) => (
-          <Row key={item.name} n={i + 1} item={item} onHover={onHover} />
-        ))}
-      </ol>
-    </section>
+    <li>
+      <a className="idx-row idx-row-link" href={p.href} target="_blank" rel="noreferrer">
+        <span className="idx-n">{pad(n)}</span>
+        <span className="idx-name">{p.name}</span>
+        <span className="idx-meta">{p.tech}</span>
+        <span className="idx-arrow" aria-hidden="true">↗</span>
+      </a>
+    </li>
+  )
+}
+
+/* III. Academic — compact sub-lists */
+function AcademicBlock({ title, items }) {
+  return (
+    <div className="idx-acad">
+      <h3>{title}</h3>
+      <ul>
+        {items.map((it, i) => {
+          const inner = (
+            <>
+              <span className="idx-acad-name">{it.name}{it.todo && <Tbd />}</span>
+              <span className="idx-acad-meta">{it.meta}</span>
+              {it.year && <span className="idx-acad-year">{it.year}</span>}
+            </>
+          )
+          return (
+            <li key={i}>
+              {it.href ? (
+                <a className="idx-acad-row" href={it.href} target="_blank" rel="noreferrer">{inner}</a>
+              ) : (
+                <div className="idx-acad-row">{inner}</div>
+              )}
+            </li>
+          )
+        })}
+      </ul>
+    </div>
   )
 }
 
 export default function Home() {
-  const [preview, setPreview] = useState(null)
-
-  const techItems = projects.map((p) => ({
-    name: p.name,
-    meta: p.tech,
-    href: p.href,
-    live: p.live,
-  }))
+  const [codeGroup, setCodeGroup] = useState('All')
+  const groups = ['All', ...new Set(code.map((c) => c.group))]
+  const visibleCode = codeGroup === 'All' ? code : code.filter((c) => c.group === codeGroup)
 
   return (
-    <div className="idx-root">
+    <div className="pg idx-root">
       <WorldBackground />
-
-      <div className={`idx-preview${preview ? ' show' : ''}`} aria-hidden="true">
-        {preview && <img src={asset(preview)} alt="" />}
-      </div>
 
       <main className="idx-main">
         <header className="idx-hero">
@@ -101,41 +118,72 @@ export default function Home() {
           <h1>Yanying Zhang</h1>
           <p className="idx-sub">
             Full-stack developer · ML / AI · data science —
-            and a photographer &amp; painter on the side.
+            and a photographer, painter &amp; knitter on the side.
           </p>
           <nav className="idx-jump" aria-label="Sections">
-            <a href="#tech" onClick={(e) => { e.preventDefault(); document.getElementById('tech')?.scrollIntoView({ behavior: 'smooth' }) }}>I. Technical</a>
-            <a href="#art" onClick={(e) => { e.preventDefault(); document.getElementById('art')?.scrollIntoView({ behavior: 'smooth' }) }}>II. Art</a>
-            <a href="#photo" onClick={(e) => { e.preventDefault(); document.getElementById('photo')?.scrollIntoView({ behavior: 'smooth' }) }}>III. Photography</a>
+            <a href="#built" onClick={scrollTo('built')}>I. Built</a>
+            <a href="#code" onClick={scrollTo('code')}>II. Code</a>
+            <a href="#academic" onClick={scrollTo('academic')}>III. Academic</a>
+            <a href="#explore" onClick={scrollTo('explore')}>IV. Explore</a>
           </nav>
-          <ul className="idx-social">
-            {socialLinks.map((l) => (
-              <li key={l.label}>
-                <a href={l.href} target="_blank" rel="noreferrer" aria-label={l.label} title={l.label}>
-                  <i className={l.icon} />
-                </a>
-              </li>
-            ))}
-          </ul>
+          <SocialLinks page="home" className="idx-social" showHandle={false} />
         </header>
 
-        <div id="tech">
-          <Chapter numeral="I." title="Technical" note="web · ml · data · systems" accent="blue" items={techItems} onHover={setPreview} />
-        </div>
-        <div id="art">
-          <Chapter numeral="II." title="Art Portfolio" note="painting · writing" accent="cherry" items={artLinks} onHover={setPreview} />
-        </div>
-        <div id="photo">
-          <Chapter numeral="III." title="Photography" note="film · light · nature" accent="sage" items={photoLinks} onHover={setPreview} />
-        </div>
-        <Chapter numeral="IV." title="Elsewhere" note="" accent="gray" items={elsewhere} onHover={setPreview} />
+        <section id="built" className="idx-chapter" style={{ '--accent': 'var(--cherry)' }}>
+          <ChapterHead numeral="I." title="Built" note="websites · demos · live products" />
+          <ol className="idx-list">
+            {built.map((p, i) => <BuiltRow key={p.name} n={i + 1} p={p} />)}
+          </ol>
+        </section>
+
+        <section id="code" className="idx-chapter" style={{ '--accent': 'var(--blue)' }}>
+          <ChapterHead numeral="II." title="Code" note="computer science projects · github" />
+          <div className="idx-filters" role="tablist" aria-label="Filter projects">
+            {groups.map((g) => (
+              <button key={g} role="tab" aria-selected={codeGroup === g}
+                className={`idx-filter${codeGroup === g ? ' is-on' : ''}`}
+                onClick={() => setCodeGroup(g)}>
+                {g}
+              </button>
+            ))}
+          </div>
+          <ol className="idx-list">
+            {visibleCode.map((p, i) => <CodeRow key={p.name} n={i + 1} p={p} />)}
+          </ol>
+        </section>
+
+        <section id="academic" className="idx-chapter" style={{ '--accent': 'var(--sage)' }}>
+          <ChapterHead numeral="III." title="Academic" note="school · research · awards" />
+          <div className="idx-acad-grid">
+            <AcademicBlock title="Education" items={academic.education} />
+            <AcademicBlock title="Research" items={academic.research} />
+            <AcademicBlock title="Competitions" items={academic.competitions} />
+            <AcademicBlock title="Certificates" items={academic.certificates} />
+            <AcademicBlock title="ML on YouTube" items={academic.videos} />
+          </div>
+        </section>
+
+        <section id="explore" className="idx-chapter" style={{ '--accent': 'var(--white)' }}>
+          <ChapterHead numeral="IV." title="Explore" note="the other rooms of this house" />
+          <div className="idx-explore">
+            {explore.map((e) => (
+              <Link key={e.to} to={e.to} className="idx-card" style={{ '--accent': `var(--${e.accent})` }}>
+                <div className="idx-card-img">
+                  <img src={asset(e.img)} alt="" loading="lazy" />
+                </div>
+                <div className="idx-card-body">
+                  <span className="idx-card-num">{e.numeral}</span>
+                  <h3>{e.title}</h3>
+                  <span className="idx-card-note">{e.note}</span>
+                  <span className="idx-card-arrow" aria-hidden="true">→</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
 
         <footer className="idx-foot">
-          <div>
-            <span className="idx-foot-label">Education</span>
-            <p>McGill University — B.Sc. Computer Science, Minor in Mathematics · 2020–2025</p>
-            <p>Marianopolis College — Health Science &amp; Pure and Applied Mathematics · 2018–2019</p>
-          </div>
+          <span>© {new Date().getFullYear()} Yanying Zhang</span>
           <img
             className="idx-visitors"
             src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fmy-website-yanying.vercel.app&label=visitors&countColor=%23c41e3a&style=flat-square&labelColor=1b2028"
