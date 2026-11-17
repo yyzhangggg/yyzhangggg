@@ -1,6 +1,6 @@
 import ProjectCard from './ProjectCard'
 
-const projects = [
+export const projects = [
   {
     icon: 'fa-spa',
     name: 'ValleyRain — Mobile Massage Booking',

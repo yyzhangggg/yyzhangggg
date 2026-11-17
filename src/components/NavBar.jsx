@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 const navItems = [
-  { path: '/', label: 'Home' },
+  { path: '/', label: 'Index' },
   { path: '/art', label: 'Art' },
   { path: '/marketplace', label: 'Market' },
   { path: '/people', label: 'Network' },
@@ -55,25 +55,25 @@ export default function Navbar() {
           gap: 0.15rem;
           padding: 0.25rem;
           border-radius: 999px;
-          background: rgba(15, 15, 40, 0.55);
+          background: rgba(15, 18, 22, 0.6);
           backdrop-filter: blur(24px) saturate(1.8);
           -webkit-backdrop-filter: blur(24px) saturate(1.8);
-          border: 1px solid rgba(244, 114, 182, 0.18);
+          border: 1px solid rgba(244, 242, 238, 0.14);
           box-shadow:
             0 8px 32px rgba(0, 0, 0, 0.35),
             inset 0 1px 0 rgba(255, 255, 255, 0.06);
           transition: background 0.3s ease;
         }
         .capsule-nav:hover {
-          background: rgba(15, 15, 40, 0.7);
+          background: rgba(15, 18, 22, 0.78);
         }
         .capsule-nav-indicator {
           position: absolute;
           top: 0.25rem;
           height: calc(100% - 0.5rem);
           border-radius: 999px;
-          background: linear-gradient(135deg, rgba(244, 114, 182, 0.3), rgba(96, 165, 250, 0.2));
-          box-shadow: 0 0 20px rgba(244, 114, 182, 0.15), inset 0 0 8px rgba(244, 114, 182, 0.08);
+          background: linear-gradient(135deg, rgba(196, 30, 58, 0.45), rgba(74, 120, 190, 0.3));
+          box-shadow: 0 0 16px rgba(196, 30, 58, 0.18);
           transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
                       width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           pointer-events: none;
@@ -85,23 +85,27 @@ export default function Navbar() {
           border-radius: 999px;
           border: none;
           background: transparent;
-          color: #f472b6 !important;
-          text-shadow: 0 0 8px rgba(244, 114, 182, 0.5), 0 0 16px rgba(244, 114, 182, 0.25);
+          color: rgba(244, 242, 238, 0.7) !important;
+          text-shadow: none;
           font-size: 0.82rem;
           font-weight: 300;
-          letter-spacing: -0.05em;
+          letter-spacing: 0.02em;
           cursor: pointer;
           transition: color 0.35s ease, text-shadow 0.35s ease;
           white-space: nowrap;
-          font-family: inherit;
+          font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+          text-transform: none;
+          height: auto;
+          line-height: 1.4;
+          box-shadow: none;
         }
         .capsule-nav-item:hover {
           color: #fff !important;
-          text-shadow: 0 0 12px rgba(255, 255, 255, 0.6), 0 0 24px rgba(244, 114, 182, 0.4);
+          text-shadow: none;
         }
         .capsule-nav-item.active {
           color: #fff !important;
-          text-shadow: 0 0 12px rgba(244, 114, 182, 0.7), 0 0 24px rgba(244, 114, 182, 0.4);
+          text-shadow: none;
         }
         @media (max-width: 500px) {
           .capsule-nav {
