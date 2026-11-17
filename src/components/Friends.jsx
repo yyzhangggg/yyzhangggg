@@ -137,7 +137,7 @@ export default function Friends() {
             alongside me through every season of life.
             <br />
             <em style={{ fontSize: '0.85em', opacity: 0.65 }}>
-              Drop photos into <code>docs/images/friends/</code> and update the
+              Drop photos into <code>public/images/friends/</code> and update the
               name / tag / note in{' '}
               <code>src/components/Friends.jsx</code>.
             </em>

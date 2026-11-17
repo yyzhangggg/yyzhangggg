@@ -1,11 +1,11 @@
 import { HashRouter, Routes, Route } from 'react-router-dom'
-import Home from './pages/Home'
-import ArtPortfolio from './pages/ArtPortfolio'
-import Marketplace from './pages/Marketplace'
-import MyPeople from './pages/MyPeople'
-import LoadMore from './pages/LoadMore'
-import NavBar from './components/NavBar'
-import { usePreload, useScrollReveal } from './hooks/useScrollReveal'
+import Home from '../pages/Home'
+import ArtPortfolio from '../pages/ArtPortfolio'
+import Marketplace from '../pages/Marketplace'
+import MyPeople from '../pages/MyPeople'
+import LoadMore from '../pages/LoadMore'
+import Navbar from '../components/Navbar'
+import { usePreload, useScrollReveal } from '../hooks/useScrollReveal'
 
 function ScrollRevealManager() {
   usePreload()
@@ -17,7 +17,7 @@ export default function App() {
   return (
     <HashRouter>
       <ScrollRevealManager />
-      <NavBar />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/art" element={<ArtPortfolio />} />

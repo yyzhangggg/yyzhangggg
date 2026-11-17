@@ -1,6 +1,6 @@
 import { asset } from '../utils/assetPath'
 import SpotlightSection from '../components/SpotlightSection'
-import GallerySection from '../components/GallerySection'
+import PhotoGallery from '../components/PhotoGallery'
 import CreativeWriting from '../components/CreativeWriting'
 import { useNavigate } from 'react-router-dom'
 
@@ -151,7 +151,7 @@ export default function ArtPortfolio() {
         <SpotlightSection key={s.id} {...s} />
       ))}
 
-      <GallerySection />
+      <PhotoGallery />
       <CreativeWriting />
     </div>
   )

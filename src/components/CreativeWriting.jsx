@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { asset } from '../utils/assetPath'
-import writings from '../data/writings'
+import writings from '../content/writings'
 
 /* ── Modal overlay ─────────────────────────────────────────── */
 function Modal({ piece, onClose }) {

@@ -38,7 +38,7 @@ const POS_STYLE = {
    '2': { left: '100%', width: '22%', opacity: 0,    zIndex: 1 },
 }
 
-export default function GallerySection() {
+export default function PhotoGallery() {
   const [imgs,   setImgs]   = useState([])
   const [center, setCenter] = useState(0)
   const slidingRef = useRef(false)

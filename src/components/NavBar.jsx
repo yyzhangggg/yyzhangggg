@@ -8,7 +8,7 @@ const navItems = [
   { path: '/people', label: 'Network' },
 ]
 
-export default function NavBar() {
+export default function Navbar() {
   const navigate = useNavigate()
   const location = useLocation()
   const navRef = useRef(null)

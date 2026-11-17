@@ -1,3 +1,5 @@
+import ProjectCard from './ProjectCard'
+
 const projects = [
   {
     icon: 'fa-spa',
@@ -79,26 +81,8 @@ export default function TechProjects() {
         </div>
         <div className="z-body">
           <div className="items style1 medium onscroll-fade-in">
-            {projects.map((p) => (
-              <section key={p.name}>
-                <div className="inner">
-                  <span className={`icon solid style2 major ${p.icon}`} />
-                  <h3>{p.name}</h3>
-                  <p>
-                    <strong>{p.tech}</strong>
-                    <br />
-                    {p.desc}
-                  </p>
-                  <a
-                    href={p.href}
-                    className="button small"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {p.live ? 'Live Demo' : 'View on GitHub'}
-                  </a>
-                </div>
-              </section>
+            {projects.map((project) => (
+              <ProjectCard key={project.name} project={project} />
             ))}
           </div>
         </div>
