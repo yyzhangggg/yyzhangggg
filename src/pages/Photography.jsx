@@ -1,4 +1,15 @@
+import { useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { photoSeries } from '../content/site'
+
 export default function Photography() {
+  const { hash } = useLocation()
+
+  useEffect(() => {
+    if (!hash) return
+    document.getElementById(hash.slice(1))?.scrollIntoView()
+  }, [hash])
+
   return (
     <div id="wrapper" className="divided">
       <style>{`
@@ -12,8 +23,26 @@ export default function Photography() {
           margin-bottom: 3rem;
         }
         .mp-header h1 { margin-bottom: 0.5em; }
-        .mp-section { margin-bottom: 3rem; }
+        .mp-section { margin-bottom: 3rem; scroll-margin-top: 5rem; }
         .mp-section h3 { margin-bottom: 1em; }
+        .photo-jump {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.75rem 1.5rem;
+        }
+        .photo-series {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+          gap: 1rem;
+        }
+        .photo-series a {
+          display: block;
+          padding: 1rem;
+          border: 1px solid currentColor;
+          text-align: left;
+        }
+        .photo-series strong, .photo-series span { display: block; }
       `}</style>
 
       <section className="wrapper style1 align-center">
@@ -22,10 +51,27 @@ export default function Photography() {
           <div className="mp-header">
             <h1>Photography</h1>
             <p>Portrait and couple sessions</p>
+            <nav className="photo-jump" aria-label="Photography sections">
+              <Link to="#galleries">Galleries</Link>
+              <Link to="#pricing">Pricing</Link>
+              <Link to="#booking">Book a Session</Link>
+            </nav>
           </div>
 
+          <section className="mp-section" id="galleries">
+            <h2>Galleries</h2>
+            <div className="photo-series">
+              {photoSeries.map(({ folder, title, note }) => (
+                <Link key={folder} to={`/gallery/${folder}`}>
+                  <strong>{title}</strong>
+                  <span>{note}</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+
           {/* ── Photography Price Table ── */}
-          <div className="mp-section">
+          <div className="mp-section" id="pricing">
             <div className="inner">
               <div className="index align-left">
                 <section>
@@ -59,7 +105,7 @@ export default function Photography() {
           </div>
 
           {/* ── Book a Session ── */}
-          <div className="mp-section">
+          <div className="mp-section" id="booking">
             <div className="inner">
               <div className="index align-left">
                 <section>

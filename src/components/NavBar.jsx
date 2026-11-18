@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { photoSeries } from '../content/site'
 
 const navItems = [
   { path: '/', label: 'Index' },
@@ -17,8 +18,10 @@ export default function Navbar() {
 
   const isActive = useCallback(
     (path) => {
-      if (path === '/art') {
-        return location.pathname === '/art' || location.pathname.startsWith('/gallery')
+      if (location.pathname.startsWith('/gallery/')) {
+        const folder = location.pathname.slice('/gallery/'.length)
+        const isPhotoGallery = photoSeries.some((series) => series.folder === folder)
+        return path === (isPhotoGallery ? '/photography' : '/art')
       }
       return location.pathname === path
     },

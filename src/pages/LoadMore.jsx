@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { asset } from '../utils/assetPath'
+import { photoSeries } from '../content/site'
 
 const EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG', 'WEBP']
 const MAX_TRY    = 500
@@ -27,11 +28,12 @@ function tryLoadImage(folder, index) {
 
 export default function LoadMore() {
   const { folder } = useParams()
-  const navigate   = useNavigate()
+  const series = photoSeries.find((entry) => entry.folder === folder)
   const [images, setImages] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     let cancelled = false
     setImages([])
     setLoading(true)
@@ -61,9 +63,9 @@ export default function LoadMore() {
     return () => { cancelled = true }
   }, [folder])
 
-  const title = folder
+  const title = series?.title ?? (folder
     ? folder.charAt(0).toUpperCase() + folder.slice(1)
-    : 'Gallery'
+    : 'Gallery')
 
   return (
     <>
@@ -110,6 +112,7 @@ export default function LoadMore() {
       <div style={{ padding: '20px', paddingTop: '5rem' }}>
         <div className="lm-header">
           <h1>{title}</h1>
+          {series && <Link className="lm-back" to="/photography#galleries">Back to Photography</Link>}
         </div>
 
         {loading && images.length === 0 && (
