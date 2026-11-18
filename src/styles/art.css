@@ -61,8 +61,8 @@
 
 @supports (-webkit-text-stroke: 1px black) {
   .art-title-initial {
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 0.015em var(--ink);
+    -webkit-text-fill-color: color-mix(in srgb, var(--ink) 14%, transparent);
+    -webkit-text-stroke: 0.028em #20171b;
   }
 }
 

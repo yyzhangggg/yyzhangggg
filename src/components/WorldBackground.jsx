@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 
 /**
- * Full-screen canvas: a woven tree above a moving perspective grid, with depth-sorted snowfall.
+ * Full-screen canvas: a weeping willow above a moving perspective grid, with depth-sorted snowfall.
  *
  * Palette: cherry red, blue, white, sage green, gray.
  */
@@ -66,58 +66,101 @@ export default function WorldBackground() {
       flakes = Array.from({ length: count }, () => spawn({}, true))
     }
 
-    const treeStrands = []
+    const willowLines = []
     const fullTurn = Math.PI * 2
+    const trunkX = (y) => Math.sin(y * 5) * 0.055
+    const trunkZ = (y) => Math.sin(y * 3.5) * 0.045
 
-    // Helical strands converge at the top, crossing in opposite directions.
-    for (let strand = 0; strand < 32; strand++) {
-      const direction = strand % 2 === 0 ? 1 : -1
-      const start = (strand / 32) * fullTurn
-      const points = Array.from({ length: 73 }, (_, index) => {
-        const t = index / 72
-        const tier = Math.pow(Math.sin(t * Math.PI * 4), 2)
-        const radius = (1 - t) * (0.74 + tier * 0.29)
-        const angle = start + direction * t * fullTurn * 1.3
-        return [radius * Math.cos(angle), 0.2 + t * 1.65, radius * Math.sin(angle)]
+    function addWillowLine(segments, width, opacity, point) {
+      willowLines.push({
+        points: Array.from({ length: segments + 1 }, (_, i) => point(i / segments)),
+        width,
+        opacity,
       })
-      treeStrands.push({ points, color: direction === 1 ? C.sage : C.white, crown: true })
     }
 
-    for (let strand = 0; strand < 8; strand++) {
-      const points = Array.from({ length: 25 }, (_, index) => {
-        const t = index / 24
-        const radius = 0.12 - t * 0.04
-        const angle = (strand / 8 + t * 0.7) * fullTurn
-        return [radius * Math.cos(angle), t * 0.36, radius * Math.sin(angle)]
+    for (let strand = 0; strand < 11; strand++) {
+      const start = strand * fullTurn / 11
+      addWillowLine(32, 1.1, 0.63, (t) => {
+        const y = t * 1.82
+        const radius = 0.025 + 0.22 * Math.exp(-t * 20) + 0.062 * (1 - t)
+        const twist = start + t * 7
+        return [trunkX(y) + Math.cos(twist) * radius, y, trunkZ(y) + Math.sin(twist) * radius]
       })
-      treeStrands.push({ points, color: C.sage, crown: false })
+    }
+
+    for (let branch = 0; branch < 16; branch++) {
+      const angle = branch * 2.39996
+      const rise = branch / 15
+      const startY = 0.68 + rise * 1.05
+      const spread = 1.02 - rise * 0.53
+      const limb = (t, offset = 0) => {
+        const radius = spread * t
+        return [
+          trunkX(startY) + Math.cos(angle + 0.25 * t) * radius + offset * (1 - t),
+          startY + 0.44 * Math.sin(Math.PI * t * 0.78) - 0.12 * t + offset * (1 - t),
+          trunkZ(startY) + Math.sin(angle + 0.25 * t) * radius,
+        ]
+      }
+
+      addWillowLine(24, 1.15, 0.68, (t) => limb(t))
+      addWillowLine(24, 0.8, 0.49, (t) => limb(t, 0.042))
+
+      for (let frond = 0; frond < 8; frond++) {
+        const along = 0.27 + frond * 0.10
+        const [x, y, z] = limb(along)
+        const variation = 0.5 + 0.5 * Math.sin(branch * 9.7 + frond * 4.9)
+        const length = 0.28 + along * 0.46 + variation * 0.32
+        const bearing = angle + (frond % 2 ? 0.8 : -0.8)
+        const drape = (t) => {
+          const bend = Math.sin(t * 2.2) * (0.08 + along * 0.14)
+          return [x + Math.cos(bearing) * bend, y - length * t * t, z + Math.sin(bearing) * bend]
+        }
+
+        addWillowLine(12, 0.75, 0.54, drape)
+
+        for (let leaf = 1; leaf <= 7; leaf++) {
+          const t = 0.18 + leaf * 0.10
+          const [lx, ly, lz] = drape(t)
+          const leafLength = (0.075 - t * 0.034) * (leaf % 2 ? 1 : -1)
+          addWillowLine(3, 0.65, 0.42, (u) => [
+            lx + Math.cos(bearing + Math.PI / 2) * leafLength * Math.sin(u * 1.97),
+            ly - u * (0.024 + Math.abs(leafLength)),
+            lz + Math.sin(bearing + Math.PI / 2) * leafLength * Math.sin(u * 1.97),
+          ])
+        }
+      }
     }
 
     function drawTree(t) {
-      const angle = reduceMotion ? 0.3 : t * 0.17
+      const angle = reduceMotion ? 0.45 : t * 0.12
       const cos = Math.cos(angle)
       const sin = Math.sin(angle)
-      const size = Math.min(w * 0.5, h * 0.29, 330)
+      const size = Math.min(w * 0.40, h * 0.28, 350)
       const base = proj(0, 0, 34)
 
-      for (const { points, color, crown } of treeStrands) {
-        let previous
-        ctx.lineWidth = crown ? 1 : 1.4
-        for (const [x, y, z] of points) {
+      ctx.save()
+      ctx.lineCap = 'round'
+      ctx.lineJoin = 'round'
+      for (const { points, width, opacity } of willowLines) {
+        const [startX, , startZ] = points[0]
+        const startDepth = startZ * cos - startX * sin
+        ctx.strokeStyle = rgba(C.white, opacity * (0.78 - startDepth * 0.22))
+        ctx.lineWidth = width
+        ctx.beginPath()
+
+        for (let i = 0; i < points.length; i++) {
+          const [x, y, z] = points[i]
           const depth = z * cos - x * sin
-          const scale = size / (1 + depth * 0.19)
+          const scale = size / (1 + depth * 0.18)
           const px = base.x + (x * cos + z * sin) * scale
-          const py = base.y - (y - depth * 0.15) * scale
-          if (previous) {
-            ctx.strokeStyle = rgba(color, 0.38 - depth * 0.27)
-            ctx.beginPath()
-            ctx.moveTo(previous.x, previous.y)
-            ctx.lineTo(px, py)
-            ctx.stroke()
-          }
-          previous = { x: px, y: py }
+          const py = base.y - (y - depth * 0.14) * scale
+          if (i === 0) ctx.moveTo(px, py)
+          else ctx.lineTo(px, py)
         }
+        ctx.stroke()
       }
+      ctx.restore()
     }
 
     // ── ground grid ─────────────────────────────────────────────────────────
