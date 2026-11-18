@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { photoSeries } from '../content/site'
+import SocialLinks from '../components/SocialLinks'
+import '../styles/pages.css'
 
 export default function Photography() {
   const { hash } = useLocation()
@@ -23,6 +25,7 @@ export default function Photography() {
           margin-bottom: 3rem;
         }
         .mp-header h1 { margin-bottom: 0.5em; }
+        .photo-social { justify-content: center; margin-bottom: 1.5rem; }
         .mp-section { margin-bottom: 3rem; scroll-margin-top: 5rem; }
         .mp-section h3 { margin-bottom: 1em; }
         .photo-jump {
@@ -51,6 +54,7 @@ export default function Photography() {
           <div className="mp-header">
             <h1>Photography</h1>
             <p>Portrait and couple sessions</p>
+            <SocialLinks page="photography" className="photo-social" />
             <nav className="photo-jump" aria-label="Photography sections">
               <Link to="#galleries">Galleries</Link>
               <Link to="#pricing">Pricing</Link>

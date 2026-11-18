@@ -9,6 +9,7 @@
  */
 
 const GH = 'https://github.com/yyzhangggg/my_website/tree/main'
+const REDNOTE_PROFILE = 'https://xhslink.com/m/88ViesB2Tzd'
 
 /* ── Social accounts (shared) ─────────────────────────────────────────────── */
 export const social = {
@@ -19,10 +20,10 @@ export const social = {
 
   // photography
   photoIg:    { icon: 'fab fa-instagram',   label: 'Instagram', handle: '@dumpmylibrary',  href: 'https://www.instagram.com/dumpmylibrary/' },
-  photoXhs:   { icon: 'fas fa-camera-retro', label: '小红书 · Photography', handle: 'photo account', href: '', todo: true },
+  photoXhs:   { icon: 'fas fa-camera-retro', label: 'RedNote · Portrait & Photoshoot Inquiries', handle: 'yanying', href: REDNOTE_PROFILE },
 
   // art
-  rednote:    { icon: 'fas fa-pen-nib',     label: '小红书 RedNote', handle: 'yanying',     href: 'https://xhslink.com/m/88ViesB2Tzd' },
+  rednote:    { icon: 'fas fa-pen-nib',     label: '小红书 RedNote', handle: 'yanying',     href: REDNOTE_PROFILE },
   artIg:      { icon: 'fab fa-instagram',   label: 'Instagram · Art', handle: 'art account', href: '', todo: true },
 
   // market
@@ -32,10 +33,10 @@ export const social = {
 
 /** Which accounts show on which page */
 export const pageSocials = {
-  home:        ['linkedin', 'github', 'youtube', 'photoIg', 'rednote', 'email'],
+  home:        ['linkedin', 'github', 'youtube', 'rednote', 'email'],
   art:         ['artIg', 'rednote', 'email'],
-  photography: ['photoIg', 'photoXhs', 'email'],
-  network:     ['linkedin', 'github', 'photoIg', 'rednote', 'email'],
+  photography: ['photoIg', 'photoXhs'],
+  network:     ['linkedin', 'github', 'rednote', 'email'],
   market:      ['sweaterIg', 'rednote', 'wechat', 'email'],
 }
 
