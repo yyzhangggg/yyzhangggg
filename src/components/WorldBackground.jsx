@@ -141,12 +141,14 @@ export default function WorldBackground() {
       }
     }
 
-    function drawTree(t) {
+    function drawTree(t, recession) {
       const angle = reduceMotion ? 0.45 : t * 0.12
       const cos = Math.cos(angle)
       const sin = Math.sin(angle)
-      const size = Math.min(w * 0.40, h * 0.28, 350)
-      const base = proj(0, 0, 34)
+      const distance = reduceMotion ? 34 : 34 + recession * 8
+      const size = Math.min(w * 0.40, h * 0.28, 350) * (34 / distance)
+      const base = proj(0, 0, distance)
+      const light = 0.76 - recession * 0.38
 
       ctx.save()
       ctx.lineCap = 'round'
@@ -154,7 +156,7 @@ export default function WorldBackground() {
       for (const { points, width, opacity } of willowLines) {
         const [startX, , startZ] = points[0]
         const startDepth = startZ * cos - startX * sin
-        ctx.strokeStyle = rgba(C.white, opacity * (0.78 - startDepth * 0.22))
+        ctx.strokeStyle = rgba(C.white, opacity * light * (0.72 - startDepth * 0.31))
         ctx.lineWidth = width
         ctx.beginPath()
 
@@ -228,10 +230,15 @@ export default function WorldBackground() {
     // ── frame ───────────────────────────────────────────────────────────────
     let last = performance.now()
     let raf = 0
+    let recession = 0
+    const scrollDepth = () => Math.min(1, Math.max(0, window.scrollY / (h * 1.6)))
+
     function frame(now) {
       const dt = Math.min(0.05, (now - last) / 1000)
       last = now
       const t = now / 1000
+      const targetDepth = scrollDepth()
+      recession = reduceMotion ? targetDepth : recession + (targetDepth - recession) * (1 - Math.exp(-dt * 4))
 
       pointer.x += (pointer.tx - pointer.x) * 0.03
       pointer.y += (pointer.ty - pointer.y) * 0.03
@@ -253,7 +260,7 @@ export default function WorldBackground() {
       ctx.fillStyle = ground
       ctx.fillRect(0, hy, w, h - hy)
       drawGrid(t)
-      drawTree(t)
+      drawTree(t, recession)
 
       // snow: far → near
       flakes.sort((a, b) => b.z - a.z)
@@ -285,16 +292,23 @@ export default function WorldBackground() {
       buildSnow()
       if (reduceMotion) frame(performance.now())
     }
+    function onScroll() {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(frame)
+    }
 
     resize()
     buildSnow()
+    recession = scrollDepth()
     window.addEventListener('resize', onResize)
-    if (!reduceMotion) window.addEventListener('pointermove', onMove)
+    if (reduceMotion) window.addEventListener('scroll', onScroll, { passive: true })
+    else window.addEventListener('pointermove', onMove)
     raf = requestAnimationFrame(frame)
 
     return () => {
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', onResize)
+      window.removeEventListener('scroll', onScroll)
       window.removeEventListener('pointermove', onMove)
     }
   }, [])
