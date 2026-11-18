@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 
 /**
- * Full-screen canvas: a cat above a moving perspective grid, with depth-sorted snowfall.
+ * Full-screen canvas: a woven tree above a moving perspective grid, with depth-sorted snowfall.
  *
  * Palette: cherry red, blue, white, sage green, gray.
  */
@@ -62,103 +62,62 @@ export default function WorldBackground() {
     }
     let flakes = []
     function buildSnow() {
-      const count = Math.round(Math.min(560, Math.max(120, (w * h) / 2100)))
+      const count = Math.round(Math.min(850, Math.max(210, (w * h) / 1400)))
       flakes = Array.from({ length: count }, () => spawn({}, true))
     }
 
-    function drawCat(t) {
-      const size = Math.min(w * 0.84, h * 0.69, 690)
-      const center = proj(0, 4.2, 34)
-      const bob = reduceMotion ? 0 : Math.sin(t * 0.65) * 7
+    const treeStrands = []
+    const fullTurn = Math.PI * 2
 
-      ctx.save()
-      ctx.translate(center.x, horizon - size * 0.29 + bob + (center.y - horizon) * 0.15)
-      ctx.scale(size / 240, size / 240)
-      ctx.lineJoin = 'round'
-      ctx.lineCap = 'round'
+    // Helical strands converge at the top, crossing in opposite directions.
+    for (let strand = 0; strand < 32; strand++) {
+      const direction = strand % 2 === 0 ? 1 : -1
+      const start = (strand / 32) * fullTurn
+      const points = Array.from({ length: 73 }, (_, index) => {
+        const t = index / 72
+        const tier = Math.pow(Math.sin(t * Math.PI * 4), 2)
+        const radius = (1 - t) * (0.74 + tier * 0.29)
+        const angle = start + direction * t * fullTurn * 1.3
+        return [radius * Math.cos(angle), 0.2 + t * 1.65, radius * Math.sin(angle)]
+      })
+      treeStrands.push({ points, color: direction === 1 ? C.sage : C.white, crown: true })
+    }
 
-      const halo = ctx.createRadialGradient(0, 0, 25, 0, 0, 145)
-      halo.addColorStop(0, rgba(C.blue, 0.25))
-      halo.addColorStop(1, rgba(C.blue, 0))
-      ctx.fillStyle = halo
-      ctx.fillRect(-145, -145, 290, 290)
+    for (let strand = 0; strand < 8; strand++) {
+      const points = Array.from({ length: 25 }, (_, index) => {
+        const t = index / 24
+        const radius = 0.12 - t * 0.04
+        const angle = (strand / 8 + t * 0.7) * fullTurn
+        return [radius * Math.cos(angle), t * 0.36, radius * Math.sin(angle)]
+      })
+      treeStrands.push({ points, color: C.sage, crown: false })
+    }
 
-      const fur = ctx.createLinearGradient(0, -96, 0, 68)
-      fur.addColorStop(0, '#293853')
-      fur.addColorStop(1, '#1b222f')
+    function drawTree(t) {
+      const angle = reduceMotion ? 0.3 : t * 0.17
+      const cos = Math.cos(angle)
+      const sin = Math.sin(angle)
+      const size = Math.min(w * 0.5, h * 0.29, 330)
+      const base = proj(0, 0, 34)
 
-      ctx.beginPath()
-      ctx.moveTo(-89, -22)
-      ctx.lineTo(-91, -91)
-      ctx.quadraticCurveTo(-91, -104, -80, -96)
-      ctx.lineTo(-42, -66)
-      ctx.quadraticCurveTo(0, -78, 42, -66)
-      ctx.lineTo(80, -96)
-      ctx.quadraticCurveTo(91, -104, 91, -91)
-      ctx.lineTo(89, -22)
-      ctx.bezierCurveTo(124, 38, 78, 68, 0, 68)
-      ctx.bezierCurveTo(-78, 68, -124, 38, -89, -22)
-      ctx.closePath()
-      ctx.fillStyle = fur
-      ctx.fill()
-      ctx.strokeStyle = rgba(C.blue, 0.95)
-      ctx.lineWidth = 2
-      ctx.shadowColor = rgba(C.blue, 0.85)
-      ctx.shadowBlur = 16
-      ctx.stroke()
-      ctx.shadowBlur = 0
-
-      for (const side of [-1, 1]) {
-        ctx.save()
-        ctx.scale(side, 1)
-
-        ctx.beginPath()
-        ctx.moveTo(78, -78)
-        ctx.lineTo(79, -38)
-        ctx.lineTo(54, -60)
-        ctx.closePath()
-        ctx.fillStyle = rgba(C.cherry, 0.45)
-        ctx.fill()
-
-        ctx.beginPath()
-        ctx.ellipse(37, -9, 19, 13, -0.15, 0, Math.PI * 2)
-        ctx.fillStyle = rgba(C.sage, 0.95)
-        ctx.fill()
-        ctx.beginPath()
-        ctx.ellipse(37, -9, 4.5, 11, -0.1, 0, Math.PI * 2)
-        ctx.fillStyle = '#101317'
-        ctx.fill()
-
-        ctx.beginPath()
-        ctx.moveTo(64, 19)
-        ctx.lineTo(117, 9)
-        ctx.moveTo(67, 28)
-        ctx.lineTo(119, 30)
-        ctx.moveTo(64, 36)
-        ctx.lineTo(110, 50)
-        ctx.strokeStyle = rgba(C.white, 0.6)
-        ctx.lineWidth = 1.4
-        ctx.stroke()
-        ctx.restore()
+      for (const { points, color, crown } of treeStrands) {
+        let previous
+        ctx.lineWidth = crown ? 1 : 1.4
+        for (const [x, y, z] of points) {
+          const depth = z * cos - x * sin
+          const scale = size / (1 + depth * 0.19)
+          const px = base.x + (x * cos + z * sin) * scale
+          const py = base.y - (y - depth * 0.15) * scale
+          if (previous) {
+            ctx.strokeStyle = rgba(color, 0.38 - depth * 0.27)
+            ctx.beginPath()
+            ctx.moveTo(previous.x, previous.y)
+            ctx.lineTo(px, py)
+            ctx.stroke()
+          }
+          previous = { x: px, y: py }
+        }
       }
-
-      ctx.beginPath()
-      ctx.moveTo(0, 22)
-      ctx.lineTo(0, 32)
-      ctx.quadraticCurveTo(-9, 44, -19, 34)
-      ctx.moveTo(0, 32)
-      ctx.quadraticCurveTo(9, 44, 19, 34)
-      ctx.strokeStyle = rgba(C.white, 0.7)
-      ctx.stroke()
-
-      ctx.beginPath()
-      ctx.moveTo(-10, 16)
-      ctx.quadraticCurveTo(0, 12, 10, 16)
-      ctx.quadraticCurveTo(10, 19, 0, 25)
-      ctx.quadraticCurveTo(-10, 19, -10, 16)
-      ctx.fillStyle = '#dd8294'
-      ctx.fill()
-      ctx.restore()
     }
 
     // ── ground grid ─────────────────────────────────────────────────────────
@@ -242,7 +201,7 @@ export default function WorldBackground() {
       ctx.fillStyle = ground
       ctx.fillRect(0, hy, w, h - hy)
       drawGrid(t)
-      drawCat(t)
+      drawTree(t)
 
       // snow: far → near
       flakes.sort((a, b) => b.z - a.z)
