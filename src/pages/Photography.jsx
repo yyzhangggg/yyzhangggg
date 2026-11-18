@@ -64,9 +64,19 @@ export default function Photography() {
         .photo-page input[type="submit"] { box-shadow: inset 0 0 0 1px #aaa; }
         .photo-page tbody tr:nth-child(odd) { background-color: #ffffff12; }
         .mp-container {
-          max-width: 960px;
+          max-width: 1120px;
           margin: 0 auto;
-          padding: 6rem 2rem 4rem;
+          padding: 6rem clamp(16px, 4vw, 48px) 4rem;
+        }
+        .photo-glass {
+          border: 1px solid #ffffff38;
+          border-radius: 20px;
+          background: linear-gradient(145deg, #ffffff16, #ffffff07);
+          backdrop-filter: blur(18px);
+          box-shadow: 0 18px 44px #0008, inset 0 1px 0 #ffffff14;
+        }
+        .mp-header, .mp-section {
+          padding: clamp(16px, 4vw, 42px);
         }
         .mp-header {
           text-align: center;
@@ -84,19 +94,24 @@ export default function Photography() {
         }
         .photo-series {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-          gap: 1rem;
+          gap: clamp(18px, 4vw, 42px);
         }
-        .photo-series a {
-          display: block;
+        .photo-series-card {
+          display: grid;
+          grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+          grid-template-areas: 'images copy';
+          align-items: center;
           overflow: hidden;
-          border: 1px solid #ffffff48;
-          background: #0c0c0ced;
           text-align: left;
           text-decoration: none;
         }
-        .photo-series a:hover, .photo-series a:focus-visible { border-color: #fff; }
+        .photo-series-card:nth-child(even) {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+          grid-template-areas: 'copy images';
+        }
+        .photo-series-card:hover, .photo-series-card:focus-visible { border-color: #fff; }
         .photo-series-images {
+          grid-area: images;
           display: grid;
           grid-template-columns: 3fr 2fr;
           gap: 2px;
@@ -104,19 +119,25 @@ export default function Photography() {
         .photo-series-images img {
           display: block;
           width: 100%;
-          height: clamp(130px, 22vw, 210px);
+          height: clamp(180px, 25vw, 320px);
           object-fit: cover;
         }
-        .photo-series-copy { padding: 1rem; }
+        .photo-series-copy { grid-area: copy; padding: clamp(16px, 3vw, 32px); }
         .photo-series-copy h3 { margin-bottom: 0.35rem; }
         .photo-series-copy p { margin: 0 0 0.75rem; }
         .photo-series-action { text-decoration: underline; text-underline-offset: 0.2em; }
+        @media (max-width: 700px) {
+          .photo-series-card, .photo-series-card:nth-child(even) {
+            grid-template-columns: minmax(0, 1fr);
+            grid-template-areas: 'images' 'copy';
+          }
+        }
       `}</style>
 
       <section className="align-center">
         <div className="mp-container">
 
-          <div className="mp-header">
+          <div className="mp-header photo-glass">
             <h1>Photography</h1>
             <p>Portrait and couple sessions</p>
             <SocialLinks page="photography" className="photo-social" />
@@ -127,11 +148,11 @@ export default function Photography() {
             </nav>
           </div>
 
-          <section className="mp-section" id="galleries">
+          <section className="mp-section photo-glass" id="galleries">
             <h2>Galleries</h2>
             <div className="photo-series">
               {photoSeries.map(({ folder, title, cover }) => (
-                <Link key={folder} to={`/gallery/${folder}`}>
+                <Link key={folder} className="photo-series-card photo-glass" to={`/gallery/${folder}`}>
                   <div className="photo-series-images">
                     <img src={asset(cover)} alt="" loading="lazy" />
                     <img src={asset(`images/${folder}/${folder === 'forest' ? 7 : 1}.jpg`)} alt="" loading="lazy" />
@@ -147,7 +168,7 @@ export default function Photography() {
           </section>
 
           {/* ── Photography Price Table ── */}
-          <div className="mp-section" id="pricing">
+          <div className="mp-section photo-glass" id="pricing">
             <div className="inner">
               <div className="index align-left">
                 <section>
@@ -181,7 +202,7 @@ export default function Photography() {
           </div>
 
           {/* ── Book a Session ── */}
-          <div className="mp-section" id="booking">
+          <div className="mp-section photo-glass" id="booking">
             <div className="inner">
               <div className="index align-left">
                 <section>
