@@ -71,7 +71,12 @@ export default function LoadMore() {
     <>
       {/* Inline styles matching load_more.html exactly */}
       <style>{`
-        body { background: #fdf5f9; }
+        .lm-gallery-page {
+          min-height: 100vh;
+          padding: 5rem 20px 20px;
+          background: #fdf5f9;
+        }
+        .lm-gallery-page.is-photography { background: #fff; }
         .lm-header {
           text-align: center; margin-bottom: 30px; padding: 20px;
           background: white; border-radius: 8px;
@@ -109,7 +114,7 @@ export default function LoadMore() {
         .lm-empty { text-align: center; padding: 40px; color: #666; }
       `}</style>
 
-      <div style={{ padding: '20px', paddingTop: '5rem' }}>
+      <div className={series ? 'lm-gallery-page is-photography' : 'lm-gallery-page'}>
         <div className="lm-header">
           <h1>{title}</h1>
           {series && <Link className="lm-back" to="/photography#galleries">Back to Photography</Link>}

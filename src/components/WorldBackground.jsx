@@ -120,15 +120,17 @@ export default function WorldBackground() {
 
         addWillowLine(12, 0.75, 0.54, drape)
 
-        for (let leaf = 1; leaf <= 7; leaf++) {
-          const t = 0.18 + leaf * 0.10
+        for (let leaf = 1; leaf <= 9; leaf++) {
+          const t = 0.07 + leaf * 0.098
           const [lx, ly, lz] = drape(t)
-          const leafLength = 0.1 - t * 0.05
-          const side = leaf % 2 ? 1 : -1
-          addWillowLine(6, 0.65, 0.54, (u) => {
-            const along = 1 - Math.abs(2 * u - 1)
+          const leafLength = 0.105 - t * 0.062
+          addWillowLine(10, 0.75, 0.68, (u) => {
+            // Draw both leaves in one stroke, meeting at the frond.
+            const side = u < 0.5 ? 1 : -1
+            const loop = (u * 2) % 1
+            const along = 1 - Math.abs(2 * loop - 1)
             const tip = side * leafLength * along
-            const edge = Math.sin(u * fullTurn) * 0.012
+            const edge = Math.sin(loop * fullTurn) * 0.013
             return [
               lx + Math.cos(bearing + Math.PI / 2) * tip + Math.cos(bearing) * edge,
               ly - along * leafLength,
