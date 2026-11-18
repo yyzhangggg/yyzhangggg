@@ -4,7 +4,7 @@ import ArtPortfolio from '../pages/ArtPortfolio'
 import Marketplace from '../pages/Marketplace'
 import MyPeople from '../pages/MyPeople'
 import LoadMore from '../pages/LoadMore'
-import Navbar from '../components/Navbar'
+import Navbar from '../components/NavBar'
 import { usePreload, useScrollReveal } from '../hooks/useScrollReveal'
 
 function ScrollRevealManager() {
