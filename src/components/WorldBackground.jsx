@@ -3,14 +3,13 @@ import { useEffect, useRef } from 'react'
 /**
  * Full-screen canvas: a weeping willow above a moving perspective grid, with depth-sorted snowfall.
  *
- * Palette: cherry red, blue, white, sage green, gray.
+ * Palette: cherry red, blue, white, and sage green.
  */
 const C = {
   cherry: [196, 30, 58],
   blue: [74, 120, 190],
   white: [244, 242, 238],
   sage: [157, 180, 154],
-  gray: [128, 133, 140],
 }
 const rgba = ([r, g, b], a) => `rgba(${r},${g},${b},${a})`
 
@@ -45,7 +44,9 @@ export default function WorldBackground() {
 
     // ── snow ────────────────────────────────────────────────────────────────
     const ZMIN = 1.5, ZMAX = 40
-    const snowColors = [C.white, C.white, C.white, C.white, C.sage, C.blue, C.gray]
+    const snowWhite = [255, 255, 255]
+    const glacierBlue = [158, 216, 250]
+    const snowColors = [snowWhite, snowWhite, glacierBlue]
     function spawn(flake, anywhere) {
       flake.z = ZMIN + Math.pow(Math.random(), 0.7) * (ZMAX - ZMIN)
       const halfW = ((w / 2) * flake.z) / f * 1.3
@@ -89,16 +90,16 @@ export default function WorldBackground() {
       })
     }
 
-    for (let branch = 0; branch < 16; branch++) {
+    for (let branch = 0; branch < 22; branch++) {
       const angle = branch * 2.39996
-      const rise = branch / 15
+      const rise = branch / 21
       const startY = 0.68 + rise * 1.05
-      const spread = 1.02 - rise * 0.53
+      const spread = 0.96 + 0.32 * Math.sin(rise * Math.PI) - rise * 0.36
       const limb = (t, offset = 0) => {
         const radius = spread * t
         return [
           trunkX(startY) + Math.cos(angle + 0.25 * t) * radius + offset * (1 - t),
-          startY + 0.44 * Math.sin(Math.PI * t * 0.78) - 0.12 * t + offset * (1 - t),
+          startY + 0.51 * Math.sin(Math.PI * t * 0.83) - 0.12 * t + offset * (1 - t),
           trunkZ(startY) + Math.sin(angle + 0.25 * t) * radius,
         ]
       }
@@ -122,12 +123,18 @@ export default function WorldBackground() {
         for (let leaf = 1; leaf <= 7; leaf++) {
           const t = 0.18 + leaf * 0.10
           const [lx, ly, lz] = drape(t)
-          const leafLength = (0.075 - t * 0.034) * (leaf % 2 ? 1 : -1)
-          addWillowLine(3, 0.65, 0.42, (u) => [
-            lx + Math.cos(bearing + Math.PI / 2) * leafLength * Math.sin(u * 1.97),
-            ly - u * (0.024 + Math.abs(leafLength)),
-            lz + Math.sin(bearing + Math.PI / 2) * leafLength * Math.sin(u * 1.97),
-          ])
+          const leafLength = 0.1 - t * 0.05
+          const side = leaf % 2 ? 1 : -1
+          addWillowLine(6, 0.65, 0.54, (u) => {
+            const along = 1 - Math.abs(2 * u - 1)
+            const tip = side * leafLength * along
+            const edge = Math.sin(u * fullTurn) * 0.012
+            return [
+              lx + Math.cos(bearing + Math.PI / 2) * tip + Math.cos(bearing) * edge,
+              ly - along * leafLength,
+              lz + Math.sin(bearing + Math.PI / 2) * tip + Math.sin(bearing) * edge,
+            ]
+          })
         }
       }
     }

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { photoSeries } from '../content/site'
 import { asset } from '../utils/assetPath'
@@ -12,6 +12,34 @@ const seriesStories = {
   nature: 'On a walk through a national park, the view changes with each step. These frames collect the quiet shifts between one view and the next.',
   city: 'An afternoon walk makes room for small scenes between destinations. These photographs notice streets, passing strangers, and the spaces they share.',
   forest: 'Under the canopy, light comes through in patches. The trees give those bright openings the stillness of a cathedral.',
+}
+
+function SeriesPreview({ folder, title, cover }) {
+  const [index, setIndex] = useState(0)
+  const extraPhotos = folder === 'forest' ? [7, 8] : [1, 2]
+  const photos = [cover, ...extraPhotos.map((number) => `images/${folder}/${number}.jpg`)]
+
+  function scrub(event) {
+    if (event.pointerType !== 'mouse') return
+    const { left, width } = event.currentTarget.getBoundingClientRect()
+    setIndex(Math.min(photos.length - 1, Math.max(0, Math.floor((event.clientX - left) / width * photos.length))))
+  }
+
+  return (
+    <div className="photo-series-images">
+      <div className="photo-preview-window" onPointerMove={scrub}>
+        <div className="photo-preview-track" style={{ transform: `translateX(-${index * 100}%)` }}>
+          {photos.map((src, i) => (
+            <img key={src} src={asset(src)} alt={`${title} preview ${i + 1}`} aria-hidden={i !== index} loading="lazy" />
+          ))}
+        </div>
+      </div>
+      <button type="button" className="photo-preview-prev" aria-label={`Previous ${title} photo`}
+        onClick={() => setIndex((index + photos.length - 1) % photos.length)}>‹</button>
+      <button type="button" className="photo-preview-next" aria-label={`Next ${title} photo`}
+        onClick={() => setIndex((index + 1) % photos.length)}>›</button>
+    </div>
+  )
 }
 
 export default function Photography() {
@@ -30,50 +58,24 @@ export default function Photography() {
           isolation: isolate;
           overflow: hidden;
           min-height: 100vh;
-          color: #f5f5f5;
-          background: #080808;
-          color-scheme: dark;
-        }
-        .photo-page::before, .photo-page::after {
-          content: '';
-          position: absolute;
-          inset: -12%;
-          z-index: -1;
-          pointer-events: none;
-          background:
-            radial-gradient(ellipse at 26% 25%, #ffffff46, transparent 44%),
-            radial-gradient(ellipse at 78% 62%, #ffffff30, transparent 43%),
-            radial-gradient(ellipse at 42% 83%, #ffffff26, transparent 40%);
-          filter: blur(48px);
-          animation: photo-smoke 16s ease-in-out infinite alternate;
-        }
-        .photo-page::after {
-          opacity: 0.65;
-          animation: photo-smoke 22s ease-in-out infinite alternate-reverse;
-        }
-        @keyframes photo-smoke {
-          0% { transform: translate(-5%, -3%) scale(1); }
-          50% { transform: translate(3%, 2%) scale(1.09) rotate(5deg); }
-          100% { transform: translate(6%, -4%) scale(1.14) rotate(-4deg); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .photo-page::before, .photo-page::after { animation: none; }
+          color: #191919;
+          background: #fff;
+          color-scheme: light;
         }
         .photo-page :is(h1, h2, h3, a, strong, label) { color: inherit; }
-        .photo-page :is(input, select, textarea) { color: #f5f5f5; background-color: #181818; }
+        .photo-page :is(input, select, textarea) { color: #191919; background-color: #fff; }
         .photo-page input[type="submit"] { box-shadow: inset 0 0 0 1px #aaa; }
-        .photo-page tbody tr:nth-child(odd) { background-color: #ffffff12; }
+        .photo-page tbody tr:nth-child(odd) { background-color: #fff; }
         .mp-container {
           max-width: 1120px;
           margin: 0 auto;
           padding: 6rem clamp(16px, 4vw, 48px) 4rem;
         }
-        .photo-glass {
-          border: 1px solid #ffffff38;
+        .photo-panel {
+          border: 1px solid #dedede;
           border-radius: 20px;
-          background: linear-gradient(145deg, #ffffff16, #ffffff07);
-          backdrop-filter: blur(18px);
-          box-shadow: 0 18px 44px #0008, inset 0 1px 0 #ffffff14;
+          background: #fff;
+          box-shadow: 0 12px 30px #0000000f;
         }
         .mp-header, .mp-section {
           padding: clamp(16px, 4vw, 42px);
@@ -109,19 +111,43 @@ export default function Photography() {
           grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
           grid-template-areas: 'copy images';
         }
-        .photo-series-card:hover, .photo-series-card:focus-visible { border-color: #fff; }
+        .photo-series-card:hover, .photo-series-card:focus-within { border-color: #545454; }
         .photo-series-images {
           grid-area: images;
-          display: grid;
-          grid-template-columns: 3fr 2fr;
-          gap: 2px;
+          position: relative;
+          min-width: 0;
+        }
+        .photo-preview-window { overflow: hidden; }
+        .photo-preview-track {
+          display: flex;
+          transition: transform 240ms ease-out;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .photo-preview-track { transition: none; }
         }
         .photo-series-images img {
           display: block;
+          flex: 0 0 100%;
+          min-width: 0;
           width: 100%;
           height: clamp(180px, 25vw, 320px);
           object-fit: cover;
         }
+        .photo-series-images button {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 44px;
+          height: 44px;
+          padding: 0;
+          line-height: 1;
+          font-size: 24px;
+          border-radius: 50%;
+          color: #fff !important;
+          background: #000b;
+        }
+        .photo-preview-prev { left: 8px; }
+        .photo-preview-next { right: 8px; }
         .photo-series-copy { grid-area: copy; padding: clamp(16px, 3vw, 32px); }
         .photo-series-copy h3 { margin-bottom: 0.35rem; }
         .photo-series-copy p { margin: 0 0 0.75rem; }
@@ -137,7 +163,7 @@ export default function Photography() {
       <section className="align-center">
         <div className="mp-container">
 
-          <div className="mp-header photo-glass">
+          <div className="mp-header">
             <h1>Photography</h1>
             <p>Portrait and couple sessions</p>
             <SocialLinks page="photography" className="photo-social" />
@@ -148,27 +174,24 @@ export default function Photography() {
             </nav>
           </div>
 
-          <section className="mp-section photo-glass" id="galleries">
+          <section className="mp-section photo-panel" id="galleries">
             <h2>Galleries</h2>
             <div className="photo-series">
               {photoSeries.map(({ folder, title, cover }) => (
-                <Link key={folder} className="photo-series-card photo-glass" to={`/gallery/${folder}`}>
-                  <div className="photo-series-images">
-                    <img src={asset(cover)} alt="" loading="lazy" />
-                    <img src={asset(`images/${folder}/${folder === 'forest' ? 7 : 1}.jpg`)} alt="" loading="lazy" />
-                  </div>
+                <article key={folder} className="photo-series-card photo-panel">
+                  <SeriesPreview folder={folder} title={title} cover={cover} />
                   <div className="photo-series-copy">
                     <h3>{title}</h3>
                     <p>{seriesStories[folder]}</p>
-                    <span className="photo-series-action">View gallery →</span>
+                    <Link className="photo-series-action" to={`/gallery/${folder}`} aria-label={`View ${title} gallery`}>View gallery →</Link>
                   </div>
-                </Link>
+                </article>
               ))}
             </div>
           </section>
 
           {/* ── Photography Price Table ── */}
-          <div className="mp-section photo-glass" id="pricing">
+          <div className="mp-section photo-panel" id="pricing">
             <div className="inner">
               <div className="index align-left">
                 <section>
@@ -202,7 +225,7 @@ export default function Photography() {
           </div>
 
           {/* ── Book a Session ── */}
-          <div className="mp-section photo-glass" id="booking">
+          <div className="mp-section photo-panel" id="booking">
             <div className="inner">
               <div className="index align-left">
                 <section>
