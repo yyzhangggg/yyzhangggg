@@ -34,7 +34,7 @@ export const social = {
 /** Which accounts show on which page */
 export const pageSocials = {
   home:        ['linkedin', 'github', 'youtube', 'rednote', 'email'],
-  art:         ['artIg', 'rednote', 'email'],
+  art:         ['artIg', 'email'],
   photography: ['photoIg', 'photoXhs'],
   network:     ['linkedin', 'github', 'rednote', 'email'],
   market:      ['sweaterIg', 'rednote', 'wechat', 'email'],

@@ -47,7 +47,7 @@
   font-family: var(--display);
   font-style: italic;
   font-weight: 700;
-  font-size: clamp(88px, 16vw, 168px);
+  font-size: clamp(54px, 10vw, 112px);
   line-height: 0.85;
   letter-spacing: -0.03em;
   color: var(--ink);
