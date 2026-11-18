@@ -1,13 +1,5 @@
-import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
 import Friends from '../components/Friends'
-
-const socialLinks = [
-  { icon: 'fab fa-linkedin-in', text: 'LinkedIn · yanying-zhang', href: 'https://www.linkedin.com/in/yanying-zhang-a61943232' },
-  { icon: 'fab fa-github', text: 'GitHub · yyzhangggg', href: 'https://github.com/yyzhangggg/my_website' },
-  { icon: 'fas fa-envelope', text: 'Email · product_sup_wYY', href: 'mailto:product_sup_wYY@hotmail.com' },
-  { icon: 'fas fa-pen-nib', text: 'RedNote · xiaohongshu', href: 'https://xhslink.com/m/88ViesB2Tzd' },
-]
 
 function SakuraFall() {
   const canvasRef = useRef(null)
@@ -127,32 +119,7 @@ function SakuraFall() {
   )
 }
 
-function ScrollingTicker() {
-  const all = [...socialLinks, ...socialLinks, ...socialLinks]
-
-  return (
-    <div className="ticker-wrap">
-      <div className="ticker-track">
-        {all.map((link, i) => (
-          <a
-            key={i}
-            href={link.href}
-            target="_blank"
-            rel="noreferrer"
-            className="ticker-item"
-          >
-            <i className={link.icon} />
-            <span>{link.text}</span>
-          </a>
-        ))}
-      </div>
-    </div>
-  )
-}
-
 export default function MyPeople() {
-  const navigate = useNavigate()
-
   return (
     <div id="wrapper" className="divided" style={{ position: 'relative', minHeight: '100vh' }}>
       <style>{`
@@ -180,61 +147,6 @@ export default function MyPeople() {
           font-size: 0.95em;
         }
 
-        /* ── Scrolling Ticker ── */
-        .ticker-wrap {
-          position: relative;
-          z-index: 1;
-          overflow: hidden;
-          width: 100%;
-          padding: 0.65rem 0;
-          margin: 1rem 0 2rem;
-          background: rgba(255, 255, 255, 0.6);
-          border-top: 1px solid rgba(110,231,183,0.3);
-          border-bottom: 1px solid rgba(110,231,183,0.3);
-          backdrop-filter: blur(8px);
-        }
-        .ticker-track {
-          display: flex;
-          white-space: nowrap;
-          animation: tickerScroll 28s linear infinite;
-          will-change: transform;
-        }
-        .ticker-track:hover {
-          animation-play-state: paused;
-        }
-        .ticker-item {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.45em;
-          padding: 0.25em 1.8em;
-          color: #000000;
-          font-size: 0.72rem;
-          text-decoration: none;
-          letter-spacing: 0.03em;
-          transition: color 0.2s;
-          flex-shrink: 0;
-        }
-        .ticker-item:hover {
-          color: #333333;
-        }
-        .ticker-item i {
-          color: #000000;
-          font-size: 0.9em;
-          transition: color 0.2s;
-        }
-        .ticker-item:hover i {
-          color: #333333;
-        }
-        .ticker-sep {
-          color: rgba(110,231,183,0.3);
-          padding: 0 0.5em;
-          font-size: 0.6em;
-        }
-        @keyframes tickerScroll {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-33.333%); }
-        }
-
         /* ── Friends section ── */
         #friends {
           position: relative;
@@ -252,7 +164,6 @@ export default function MyPeople() {
         </p>
       </div>
 
-      <ScrollingTicker />
       <Friends />
     </div>
   )
