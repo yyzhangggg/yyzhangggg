@@ -132,14 +132,7 @@ export default function Friends() {
         .friend-card.add-slot .friend-photo { background: transparent; border-style: dashed; }
       `}</style>
 
-      <div className="z-row">
-        <div className="z-label">
-          <h2>{t("My People")}</h2>
-          <p>
-            {t("The beautiful souls who colour my world — friends who’ve walked alongside me through every season of life.")}
-          </p>
-        </div>
-        <div className="z-body">
+      <div className="inner">
           <div className="friends-row">
             {friends.map((f, i) => (
               <FriendCard key={i} {...f} />
@@ -152,7 +145,6 @@ export default function Friends() {
               placeholder
             />
           </div>
-        </div>
       </div>
     </section>
   )

@@ -141,13 +141,6 @@ export default function MyPeople() {
           color: #000000;
           line-height: 1.15;
         }
-        .np-hero p {
-          color: #374151;
-          max-width: 500px;
-          margin: 0 auto 1.5rem;
-          line-height: 1.7;
-          font-size: 0.95em;
-        }
 
         /* ── Friends section ── */
         #friends {
@@ -160,9 +153,6 @@ export default function MyPeople() {
 
       <div className="np-hero">
         <h1>{t("Network")}</h1>
-        <p>
-          {t("The beautiful souls who colour my world — friends who’ve walked alongside me through every season of life.")}
-        </p>
       </div>
 
       <Friends />
