@@ -59,8 +59,8 @@ export default function PhotoGallery() {
     setTimeout(() => { slidingRef.current = false }, 440)
   }, [N])
 
-  const startLeft  = useCallback(() => { slide(-1); hoverRef.current = setInterval(() => slide(-1), 1300) }, [slide])
-  const startRight = useCallback(() => { slide(1);  hoverRef.current = setInterval(() => slide(1),  1300) }, [slide])
+  const startLeft  = useCallback(() => { slide(-1); hoverRef.current = setInterval(() => slide(-1), 3900) }, [slide])
+  const startRight = useCallback(() => { slide(1);  hoverRef.current = setInterval(() => slide(1),  3900) }, [slide])
   const stopSlide  = useCallback(() => { clearInterval(hoverRef.current); hoverRef.current = null }, [])
 
   useEffect(() => () => clearInterval(hoverRef.current), [])
@@ -112,16 +112,6 @@ export default function PhotoGallery() {
         .gl-zone-right { right: 0; cursor: e-resize; }
         .gl-zone-left:hover  { background: linear-gradient(to right, rgba(0,0,0,0.35) 0%, transparent 100%); }
         .gl-zone-right:hover { background: linear-gradient(to left,  rgba(0,0,0,0.35) 0%, transparent 100%); }
-        .gl-arrow {
-          font-size: 2.2rem;
-          font-weight: 300;
-          color: rgba(255,255,255,0.85);
-          opacity: 0;
-          transition: opacity 0.18s;
-          pointer-events: none;
-          line-height: 1;
-        }
-        .gl-zone:hover .gl-arrow { opacity: 1; }
         .gl-dots {
           position: absolute;
           bottom: 0.9rem;
@@ -178,12 +168,8 @@ export default function PhotoGallery() {
                   )
                 })}
 
-                <div className="gl-zone gl-zone-left"  onMouseEnter={startLeft}  onMouseLeave={stopSlide}>
-                  <span className="gl-arrow">‹</span>
-                </div>
-                <div className="gl-zone gl-zone-right" onMouseEnter={startRight} onMouseLeave={stopSlide}>
-                  <span className="gl-arrow">›</span>
-                </div>
+                <div className="gl-zone gl-zone-left"  onMouseEnter={startLeft}  onMouseLeave={stopSlide} />
+                <div className="gl-zone gl-zone-right" onMouseEnter={startRight} onMouseLeave={stopSlide} />
 
                 <div className="gl-dots">
                   {imgs.map((_, i) => (
