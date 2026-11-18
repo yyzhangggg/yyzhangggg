@@ -20,7 +20,7 @@ export const social = {
 
   // photography
   photoIg:    { icon: 'fab fa-instagram',   label: 'Instagram', handle: '@dumpmylibrary',  href: 'https://www.instagram.com/dumpmylibrary/' },
-  photoXhs:   { icon: 'fas fa-camera-retro', label: 'RedNote · Portrait & Photoshoot Inquiries', handle: 'yanying', href: REDNOTE_PROFILE },
+  photoXhs:   { icon: 'fas fa-camera-retro', label: 'RedNote', href: REDNOTE_PROFILE },
 
   // art
   rednote:    { icon: 'fas fa-pen-nib',     label: '小红书 RedNote', handle: 'yanying',     href: REDNOTE_PROFILE },

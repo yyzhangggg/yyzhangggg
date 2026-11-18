@@ -17,7 +17,7 @@ export default function SocialLinks({ page, className = '', showHandle = true })
           <>
             <i className={s.icon} aria-hidden="true" />
             <span className="social-label">{t(s.label)}</span>
-            {showHandle && <span className="social-handle">{t(s.handle)}</span>}
+            {showHandle && s.handle && <span className="social-handle">{t(s.handle)}</span>}
             {(s.todo || !s.href) && <span className="tbd">{t("TBD")}</span>}
           </>
         )

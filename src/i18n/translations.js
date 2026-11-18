@@ -38,7 +38,6 @@ const messages = [
   ['Email', '邮箱', 'Courriel'],
   ['Instagram · Art', 'Instagram · 艺术', 'Instagram · Art'],
   ['art account', '艺术账号', 'compte artistique'],
-  ['RedNote · Portrait & Photoshoot Inquiries', '小红书 · 人像约拍咨询', 'RedNote · Renseignements et réservations de portraits'],
   ['Link coming soon', '链接即将发布', 'Lien à venir'],
   ['Portfolio · Painting & Writing', '作品集 · 绘画与写作', 'Portfolio · Peinture et écriture'],
   ['Oil, acrylic, pastel and watercolour. I admire Impressionism and add my own touches to it — rather than replicating real scenes, I prefer to paint dreamlike landscapes.', '油画、丙烯、粉彩与水彩。我喜欢印象派，也会融入自己的笔触，画出梦境般的风景。', 'Huile, acrylique, pastel et aquarelle. J’admire l’impressionnisme et y ajoute ma touche personnelle. Je préfère peindre des paysages oniriques à reproduire des scènes réelles.'],
