@@ -49,7 +49,7 @@ export default function ArtPortfolio() {
       <header className="art-hero">
         <div className="art-hero-card">
           <p className="art-eyebrow">Portfolio · Painting &amp; Writing</p>
-          <h1>Art Gallery</h1>
+          <h1><span className="art-title-initial">A</span>rt{' '}<span className="art-title-initial">G</span>allery</h1>
           <p className="art-lede">
             Oil, acrylic, pastel and watercolour. I admire Impressionism and add my own
             touches to it — rather than replicating real scenes, I prefer to paint

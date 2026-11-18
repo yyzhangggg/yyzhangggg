@@ -53,6 +53,12 @@
   color: var(--ink);
 }
 
+.art-title-initial {
+  font: inherit;
+  font-size: 1.08em;
+  line-height: 1;
+}
+
 .pg .art-lede {
   margin-top: 20px;
   font-size: 17px;
@@ -191,6 +197,7 @@
 }
 
 .pg .art-btn:hover { background: var(--pink); border-color: var(--pink); }
+.pg button.art-btn { color: #fff !important; }
 
 /* modal */
 .art-modal-backdrop {
