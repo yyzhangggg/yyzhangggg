@@ -59,6 +59,15 @@
   line-height: 1;
 }
 
+@supports (background-clip: text) and (-webkit-text-stroke: 1px black) {
+  .art-title-initial-outline {
+    background: linear-gradient(to bottom, transparent 50%, var(--ink) 50%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0.015em var(--ink);
+  }
+}
+
 .pg .art-lede {
   margin-top: 20px;
   font-size: 17px;
