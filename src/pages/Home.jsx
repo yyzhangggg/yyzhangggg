@@ -11,9 +11,8 @@ const pad = (n) => String(n).padStart(2, '0')
 
 const explore = [
   { to: '/art', numeral: 'A', title: 'Art', note: 'painting · mixed media · writing', img: 'images/painting/0.jpg', accent: 'cherry' },
-  { to: '/photography', numeral: 'P', title: 'Photography', note: 'film · light · nature', img: 'images/backlight/0.jpg', accent: 'sage' },
+  { to: '/photography', numeral: 'P', title: 'Photography', note: 'portrait · couple sessions', img: 'images/backlight/0.jpg', accent: 'sage' },
   { to: '/network', numeral: 'N', title: 'Network', note: 'friends & their pages', img: 'images/friendships/LUXI.JPG', accent: 'blue' },
-  { to: '/marketplace', numeral: 'M', title: 'Market', note: 'knitwear · sessions · prices', img: 'images/city/0.jpg', accent: 'gray' },
 ]
 
 function scrollTo(id) {

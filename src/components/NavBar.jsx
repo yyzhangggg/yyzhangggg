@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 const navItems = [
   { path: '/', label: 'Index' },
   { path: '/art', label: 'Art' },
-  { path: '/marketplace', label: 'Market' },
+  { path: '/photography', label: 'Photography' },
   { path: '/people', label: 'Network' },
 ]
 

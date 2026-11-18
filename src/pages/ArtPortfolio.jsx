@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { social } from '../content/site'
 import { asset } from '../utils/assetPath'
 import { leopardTile } from '../utils/leopard'
 import useImageFolder from '../hooks/useImageFolder'
@@ -76,7 +76,7 @@ export default function ArtPortfolio() {
           ))}
         </div>
         <p className="art-buy">
-          Originals available — <Link to="/marketplace">see prices &amp; contact →</Link>
+          Originals available — <a href={social.email.href}>inquire by email →</a>
         </p>
       </section>
 

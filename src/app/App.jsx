@@ -1,7 +1,7 @@
-import { HashRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Navigate, Routes, Route } from 'react-router-dom'
 import Home from '../pages/Home'
 import ArtPortfolio from '../pages/ArtPortfolio'
-import Marketplace from '../pages/Marketplace'
+import Photography from '../pages/Photography'
 import MyPeople from '../pages/MyPeople'
 import LoadMore from '../pages/LoadMore'
 import Navbar from '../components/NavBar'
@@ -21,7 +21,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/art" element={<ArtPortfolio />} />
-        <Route path="/marketplace" element={<Marketplace />} />
+        <Route path="/photography" element={<Photography />} />
+        <Route path="/marketplace" element={<Navigate to="/photography" replace />} />
         <Route path="/people" element={<MyPeople />} />
         <Route path="/gallery/:folder" element={<LoadMore />} />
       </Routes>
