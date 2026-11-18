@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { asset } from '../utils/assetPath'
 import { built, code, academic } from '../content/site'
 import WorldBackground from '../components/WorldBackground'
 import SocialLinks from '../components/SocialLinks'
@@ -10,9 +9,45 @@ import '../styles/index-home.css'
 const pad = (n) => String(n).padStart(2, '0')
 
 const explore = [
-  { to: '/art', numeral: 'A', title: 'Art', note: 'painting · mixed media · writing', img: 'images/painting/0.jpg', accent: 'cherry' },
-  { to: '/photography', numeral: 'P', title: 'Photography', note: 'portrait · couple sessions', img: 'images/backlight/0.jpg', accent: 'sage' },
-  { to: '/network', numeral: 'N', title: 'Network', note: 'friends & their pages', img: 'images/friendships/LUXI.JPG', accent: 'blue' },
+  {
+    to: '/art', title: 'Art', note: 'painting · mixed media · writing', accent: 'cherry',
+    pixels: [
+      '..######..',
+      '.########.',
+      '##.##.####',
+      '##########',
+      '##.####.##',
+      '.#####....',
+      '..####....',
+      '...##.....',
+    ],
+  },
+  {
+    to: '/photography', title: 'Photography', note: 'portrait · couple sessions', accent: 'sage',
+    pixels: [
+      '...####...',
+      '..######..',
+      '##########',
+      '###....###',
+      '##..##..##',
+      '##..##..##',
+      '###....###',
+      '##########',
+    ],
+  },
+  {
+    to: '/people', title: 'Network', note: 'friends & their pages', accent: 'blue',
+    pixels: [
+      '.##....##.',
+      '.##....##.',
+      '..........',
+      '####..####',
+      '####..####',
+      '..........',
+      '....##....',
+      '...####...',
+    ],
+  },
 ]
 
 function scrollTo(id) {
@@ -117,7 +152,7 @@ export default function Home() {
           <h1>Yanying Zhang</h1>
           <p className="idx-sub">
             Full-stack developer · ML / AI · data science —
-            and a photographer, painter &amp; knitter on the side.
+            and a photographer, painter &amp; story teller on the side.
           </p>
           <nav className="idx-jump" aria-label="Sections">
             <a href="#built" onClick={scrollTo('built')}>I. Built</a>
@@ -167,11 +202,14 @@ export default function Home() {
           <div className="idx-explore">
             {explore.map((e) => (
               <Link key={e.to} to={e.to} className="idx-card" style={{ '--accent': `var(--${e.accent})` }}>
-                <div className="idx-card-img">
-                  <img src={asset(e.img)} alt="" loading="lazy" />
+                <div className="idx-card-preview" aria-hidden="true">
+                  <div className="idx-card-icon">
+                    {Array.from(e.pixels.join(''), (pixel, i) => (
+                      <span key={i} className={pixel === '#' ? 'idx-pixel-filled' : undefined} />
+                    ))}
+                  </div>
                 </div>
                 <div className="idx-card-body">
-                  <span className="idx-card-num">{e.numeral}</span>
                   <h3>{e.title}</h3>
                   <span className="idx-card-note">{e.note}</span>
                   <span className="idx-card-arrow" aria-hidden="true">→</span>
