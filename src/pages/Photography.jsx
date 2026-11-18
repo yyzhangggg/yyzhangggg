@@ -91,12 +91,6 @@ export default function Photography() {
         .photo-social { justify-content: center; margin-bottom: 1.5rem; }
         .mp-section { margin-bottom: 3rem; scroll-margin-top: 5rem; }
         .mp-section h3 { margin-bottom: 1em; }
-        .photo-jump {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 0.75rem 1.5rem;
-        }
         .photo-series {
           display: grid;
           gap: clamp(18px, 4vw, 42px);
@@ -168,13 +162,7 @@ export default function Photography() {
 
           <div className="mp-header">
             <h1>{t("Photography")}</h1>
-            <p>{t("Portrait and couple sessions")}</p>
             <SocialLinks page="photography" className="photo-social" />
-            <nav className="photo-jump" aria-label={t("Photography sections")}>
-              <Link to="#galleries">{t("Galleries")}</Link>
-              <Link to="#pricing">{t("Pricing")}</Link>
-              <Link to="#booking">{t("Book a Session")}</Link>
-            </nav>
           </div>
 
           <section className="mp-section photo-panel" id="galleries">

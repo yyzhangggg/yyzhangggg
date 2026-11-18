@@ -11,7 +11,7 @@ import '../styles/pages.css'
 import '../styles/art.css'
 
 function WritingModal({ piece, onClose }) {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
   if (!piece) return null
   return (
     <div className="art-modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
@@ -19,11 +19,12 @@ function WritingModal({ piece, onClose }) {
         <button className="art-modal-close" onClick={onClose} aria-label={t("Close")}>×</button>
         <p className="art-eyebrow">{t(piece.genre)}</p>
         <h2>{t(piece.title)}</h2>
-        <p className="art-modal-setting">{piece.setting}</p>
+        <p className="art-modal-setting">{t(piece.setting)}</p>
+        {language !== 'en' && <p>{t("Original text in English")}</p>}
         {piece.parts.map((part, i) => (
           <section key={i} className="art-modal-part">
-            <h3>{part.heading}</h3>
-            {part.body.split('\n\n').map((para, j) => <p key={j}>{para.trim()}</p>)}
+            <h3>{t(part.heading)}</h3>
+            {part.body.split('\n\n').map((para, j) => <p key={j} lang="en">{para.trim()}</p>)}
           </section>
         ))}
         {piece.docxPath && (
@@ -94,8 +95,8 @@ export default function ArtPortfolio() {
             <article key={w.title} className="art-card">
               <p className="art-eyebrow">{t(w.genre)}</p>
               <h3>{t(w.title)}</h3>
-              <p className="art-card-setting">{w.setting}</p>
-              <p className="art-card-excerpt">“{w.excerpt}”</p>
+              <p className="art-card-setting">{t(w.setting)}</p>
+              <p className="art-card-excerpt">“{t(w.excerpt)}”</p>
               <button className="art-btn" onClick={() => setReading(w)}>{t("Read")}</button>
             </article>
           ))}
