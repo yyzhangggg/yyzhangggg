@@ -141,6 +141,16 @@ export const friends = [
   { name: 'Eno', tag: 'Friend', img: 'images/friendships/eno.jpeg', note: 'A line about Eno.', href: '', todo: true },
 ]
 
+export const photographyPackages = [
+  { id: 'solo', item: 'Solo / Portraits', detail: '1–2 hour session with 9 edited photos. Choose an indoor or outdoor location.', price: '$79.99' },
+  { id: 'duo', item: 'Duo / Couple', detail: '2–3 hour session with 9 edited photos for couples, friends, or siblings.', price: '$99.99' },
+  { id: 'documentary', item: 'Documentary Coverage', detail: 'Candid photography as you go about your activity or event.', price: '$25/hour' },
+]
+
+export const photographyAddOns = [
+  { item: 'Additional Retouching', detail: 'Extra photo editing, including detailed retouching.', price: '$5/photo' },
+]
+
 /* ── Market — price chart ─────────────────────────────────────────────────── */
 export const priceChart = [
   {
@@ -153,10 +163,7 @@ export const priceChart = [
   },
   {
     category: 'Photography Sessions',
-    rows: [
-      { item: 'Solo / Portraits', detail: '1 h · 15+ edited photos · indoor or outdoor', price: '$59.99' },
-      { item: 'Duo / Couple', detail: '1.5 h · 25+ edited photos', price: '$99.99' },
-    ],
+    rows: [...photographyPackages, ...photographyAddOns],
   },
   {
     category: 'Original Paintings',

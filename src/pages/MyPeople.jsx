@@ -1,3 +1,4 @@
+import { useLanguage } from '../i18n/Language'
 import { useEffect, useRef } from 'react'
 import Friends from '../components/Friends'
 
@@ -120,6 +121,7 @@ function SakuraFall() {
 }
 
 export default function MyPeople() {
+  const { t } = useLanguage()
   return (
     <div id="wrapper" className="divided" style={{ position: 'relative', minHeight: '100vh' }}>
       <style>{`
@@ -157,10 +159,9 @@ export default function MyPeople() {
       <SakuraFall />
 
       <div className="np-hero">
-        <h1>Network</h1>
+        <h1>{t("Network")}</h1>
         <p>
-          The beautiful souls who colour my world &mdash; friends who&apos;ve walked
-          alongside me through every season of life.
+          {t("The beautiful souls who colour my world — friends who’ve walked alongside me through every season of life.")}
         </p>
       </div>
 

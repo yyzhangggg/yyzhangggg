@@ -1,3 +1,4 @@
+import { LanguageProvider } from '../i18n/Language'
 import { HashRouter, Navigate, Routes, Route } from 'react-router-dom'
 import Home from '../pages/Home'
 import ArtPortfolio from '../pages/ArtPortfolio'
@@ -15,17 +16,19 @@ function ScrollRevealManager() {
 
 export default function App() {
   return (
-    <HashRouter>
-      <ScrollRevealManager />
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/art" element={<ArtPortfolio />} />
-        <Route path="/photography" element={<Photography />} />
-        <Route path="/marketplace" element={<Navigate to="/photography" replace />} />
-        <Route path="/people" element={<MyPeople />} />
-        <Route path="/gallery/:folder" element={<LoadMore />} />
-      </Routes>
-    </HashRouter>
+    <LanguageProvider>
+      <HashRouter>
+        <ScrollRevealManager />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/art" element={<ArtPortfolio />} />
+          <Route path="/photography" element={<Photography />} />
+          <Route path="/marketplace" element={<Navigate to="/photography" replace />} />
+          <Route path="/people" element={<MyPeople />} />
+          <Route path="/gallery/:folder" element={<LoadMore />} />
+        </Routes>
+      </HashRouter>
+    </LanguageProvider>
   )
 }

@@ -1,6 +1,7 @@
+import { useLanguage } from '../i18n/Language'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { photoSeries } from '../content/site'
+import { photographyAddOns, photographyPackages, photoSeries } from '../content/site'
 import { asset } from '../utils/assetPath'
 import SocialLinks from '../components/SocialLinks'
 import '../styles/pages.css'
@@ -15,6 +16,7 @@ const seriesStories = {
 }
 
 function SeriesPreview({ folder, title, cover }) {
+  const { t } = useLanguage()
   const [index, setIndex] = useState(0)
   const extraPhotos = folder === 'forest' ? [7, 8] : [1, 2]
   const photos = [cover, ...extraPhotos.map((number) => `images/${folder}/${number}.jpg`)]
@@ -30,19 +32,20 @@ function SeriesPreview({ folder, title, cover }) {
       <div className="photo-preview-window" onPointerMove={scrub}>
         <div className="photo-preview-track" style={{ transform: `translateX(-${index * 100}%)` }}>
           {photos.map((src, i) => (
-            <img key={src} src={asset(src)} alt={`${title} preview ${i + 1}`} aria-hidden={i !== index} loading="lazy" />
+            <img key={src} src={asset(src)} alt={t("{title} preview {number}", { title, number: i + 1 })} aria-hidden={i !== index} loading="lazy" />
           ))}
         </div>
       </div>
-      <button type="button" className="photo-preview-prev" aria-label={`Previous ${title} photo`}
+      <button type="button" className="photo-preview-prev" aria-label={t("Previous {title} photo", { title })}
         onClick={() => setIndex((index + photos.length - 1) % photos.length)}>‹</button>
-      <button type="button" className="photo-preview-next" aria-label={`Next ${title} photo`}
+      <button type="button" className="photo-preview-next" aria-label={t("Next {title} photo", { title })}
         onClick={() => setIndex((index + 1) % photos.length)}>›</button>
     </div>
   )
 }
 
 export default function Photography() {
+  const { t } = useLanguage()
   const { hash } = useLocation()
 
   useEffect(() => {
@@ -164,26 +167,26 @@ export default function Photography() {
         <div className="mp-container">
 
           <div className="mp-header">
-            <h1>Photography</h1>
-            <p>Portrait and couple sessions</p>
+            <h1>{t("Photography")}</h1>
+            <p>{t("Portrait and couple sessions")}</p>
             <SocialLinks page="photography" className="photo-social" />
-            <nav className="photo-jump" aria-label="Photography sections">
-              <Link to="#galleries">Galleries</Link>
-              <Link to="#pricing">Pricing</Link>
-              <Link to="#booking">Book a Session</Link>
+            <nav className="photo-jump" aria-label={t("Photography sections")}>
+              <Link to="#galleries">{t("Galleries")}</Link>
+              <Link to="#pricing">{t("Pricing")}</Link>
+              <Link to="#booking">{t("Book a Session")}</Link>
             </nav>
           </div>
 
           <section className="mp-section photo-panel" id="galleries">
-            <h2>Galleries</h2>
+            <h2>{t("Galleries")}</h2>
             <div className="photo-series">
               {photoSeries.map(({ folder, title, cover }) => (
                 <article key={folder} className="photo-series-card photo-panel">
-                  <SeriesPreview folder={folder} title={title} cover={cover} />
+                  <SeriesPreview folder={folder} title={t(title)} cover={cover} />
                   <div className="photo-series-copy">
-                    <h3>{title}</h3>
-                    <p>{seriesStories[folder]}</p>
-                    <Link className="photo-series-action" to={`/gallery/${folder}`} aria-label={`View ${title} gallery`}>View gallery →</Link>
+                    <h3>{t(title)}</h3>
+                    <p>{t(seriesStories[folder])}</p>
+                    <Link className="photo-series-action" to={`/gallery/${folder}`} aria-label={t("View {title} gallery", { title: t(title) })}>{t("View gallery →")}</Link>
                   </div>
                 </article>
               ))}
@@ -196,25 +199,22 @@ export default function Photography() {
               <div className="index align-left">
                 <section>
                   <header>
-                    <h3>Photography Pricing</h3>
+                    <h3>{t("Photography Pricing")}</h3>
                   </header>
                   <div className="content">
                     <div className="table-wrapper">
                       <table>
                         <thead>
-                          <tr><th>Package</th><th>Description</th><th>Price</th></tr>
+                          <tr><th>{t("Package")}</th><th>{t("Description")}</th><th>{t("Price")}</th></tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>Solo / Portraits</td>
-                            <td>1-hour session, 15+ edited photos, indoor or outdoor location of your choice.</td>
-                            <td>$59.99</td>
-                          </tr>
-                          <tr>
-                            <td>Duo / Couple</td>
-                            <td>1.5-hour session, 25+ edited photos, perfect for couples, friends, or siblings.</td>
-                            <td>$99.99</td>
-                          </tr>
+                          {[...photographyPackages, ...photographyAddOns].map(({ item, detail, price }) => (
+                            <tr key={item}>
+                              <td>{t(item)}</td>
+                              <td>{t(detail)}</td>
+                              <td>{t(price)}</td>
+                            </tr>
+                          ))}
                         </tbody>
                       </table>
                     </div>
@@ -230,36 +230,37 @@ export default function Photography() {
               <div className="index align-left">
                 <section>
                   <header>
-                    <h3>Book a Session</h3>
+                    <h3>{t("Book a Session")}</h3>
                   </header>
                   <div className="content">
                     <form method="post" action="#">
                       <div className="fields">
                         <div className="field half">
-                          <label htmlFor="name">Name</label>
+                          <label htmlFor="name">{t("Name")}</label>
                           <input type="text" name="name" id="name" defaultValue="" />
                         </div>
                         <div className="field half">
-                          <label htmlFor="email">Email</label>
+                          <label htmlFor="email">{t("Email")}</label>
                           <input type="email" name="email" id="email" defaultValue="" />
                         </div>
                         <div className="field">
-                          <label htmlFor="package">Package</label>
+                          <label htmlFor="package">{t("Package")}</label>
                           <select name="package" id="package">
-                            <option value="">- Select a package -</option>
-                            <option value="solo">Solo / Portraits</option>
-                            <option value="duo">Duo / Couple</option>
-                            <option value="custom">Custom Request</option>
+                            <option value="">{t("- Select a package -")}</option>
+                            {photographyPackages.map(({ id, item }) => (
+                              <option key={id} value={id}>{t(item)}</option>
+                            ))}
+                            <option value="custom">{t("Custom Request")}</option>
                           </select>
                         </div>
                         <div className="field">
-                          <label htmlFor="message">Message</label>
+                          <label htmlFor="message">{t("Message")}</label>
                           <textarea name="message" id="message" rows="5" />
                         </div>
                       </div>
                       <ul className="actions">
                         <li>
-                          <input type="submit" name="submit" value="Send Request" />
+                          <input type="submit" name="submit" value={t("Send Request")} />
                         </li>
                       </ul>
                     </form>

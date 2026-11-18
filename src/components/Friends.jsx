@@ -1,13 +1,15 @@
+import { useLanguage } from '../i18n/Language'
 import { asset } from '../utils/assetPath'
 
 function FriendCard({ imgPath, name, tag, note, placeholder = false }) {
+  const { t } = useLanguage()
   return (
     <div className={`friend-card${placeholder ? ' add-slot' : ''}`}>
       <div className="friend-photo">
         {imgPath ? (
           <img
             src={asset(imgPath)}
-            alt={name}
+            alt={t(name)}
             onError={(e) => {
               e.currentTarget.style.display = 'none'
               e.currentTarget.nextElementSibling.style.display = 'flex'
@@ -21,9 +23,9 @@ function FriendCard({ imgPath, name, tag, note, placeholder = false }) {
           {placeholder ? '＋' : null}
         </div>
       </div>
-      <h3>{name}</h3>
-      <span className="friend-tag">{tag}</span>
-      <p className="friend-note">{note}</p>
+      <h3>{t(name)}</h3>
+      <span className="friend-tag">{t(tag)}</span>
+      <p className="friend-note">{t(note)}</p>
     </div>
   )
 }
@@ -68,6 +70,7 @@ const friends = [
 ]
 
 export default function Friends() {
+  const { t } = useLanguage()
   return (
     <section className="wrapper style1" id="friends">
       <style>{`
@@ -131,16 +134,9 @@ export default function Friends() {
 
       <div className="z-row">
         <div className="z-label">
-          <h2>My People</h2>
+          <h2>{t("My People")}</h2>
           <p>
-            The beautiful souls who colour my world — friends who&apos;ve walked
-            alongside me through every season of life.
-            <br />
-            <em style={{ fontSize: '0.85em', opacity: 0.65 }}>
-              Drop photos into <code>public/images/friends/</code> and update the
-              name / tag / note in{' '}
-              <code>src/components/Friends.jsx</code>.
-            </em>
+            {t("The beautiful souls who colour my world — friends who’ve walked alongside me through every season of life.")}
           </p>
         </div>
         <div className="z-body">
@@ -150,9 +146,9 @@ export default function Friends() {
             ))}
             <FriendCard
               imgPath={null}
-              name="Add Friend"
-              tag="Your pick"
-              note="Duplicate a friends entry in Friends.jsx to add more people."
+              name={t("Add Friend")}
+              tag={t("Your pick")}
+              note={t("Duplicate a friends entry in Friends.jsx to add more people.")}
               placeholder
             />
           </div>

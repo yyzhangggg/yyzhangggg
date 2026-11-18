@@ -1,3 +1,4 @@
+import { useLanguage } from '../i18n/Language'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { asset } from '../utils/assetPath'
@@ -27,6 +28,7 @@ function tryLoadImage(folder, index) {
 }
 
 export default function LoadMore() {
+  const { t } = useLanguage()
   const { folder } = useParams()
   const series = photoSeries.find((entry) => entry.folder === folder)
   const [images, setImages] = useState([])
@@ -63,9 +65,9 @@ export default function LoadMore() {
     return () => { cancelled = true }
   }, [folder])
 
-  const title = series?.title ?? (folder
+  const title = series ? t(series.title) : (folder
     ? folder.charAt(0).toUpperCase() + folder.slice(1)
-    : 'Gallery')
+    : t('Gallery'))
 
   return (
     <>
@@ -117,15 +119,15 @@ export default function LoadMore() {
       <div className={series ? 'lm-gallery-page is-photography' : 'lm-gallery-page'}>
         <div className="lm-header">
           <h1>{title}</h1>
-          {series && <Link className="lm-back" to="/photography#galleries">Back to Photography</Link>}
+          {series && <Link className="lm-back" to="/photography#galleries">{t("Back to Photography")}</Link>}
         </div>
 
         {loading && images.length === 0 && (
-          <div className="lm-loader">Loading images</div>
+          <div className="lm-loader">{t("Loading images")}</div>
         )}
 
         {!loading && images.length === 0 && (
-          <p className="lm-empty">No images found in this category.</p>
+          <p className="lm-empty">{t("No images found in this category.")}</p>
         )}
 
         <div className="masonry">

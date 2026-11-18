@@ -1,3 +1,4 @@
+import { useLanguage } from '../i18n/Language'
 import { useMemo, useState } from 'react'
 import { social } from '../content/site'
 import { asset } from '../utils/assetPath'
@@ -10,13 +11,14 @@ import '../styles/pages.css'
 import '../styles/art.css'
 
 function WritingModal({ piece, onClose }) {
+  const { t } = useLanguage()
   if (!piece) return null
   return (
     <div className="art-modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
       <article className="art-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="art-modal-close" onClick={onClose} aria-label="Close">×</button>
-        <p className="art-eyebrow">{piece.genre}</p>
-        <h2>{piece.title}</h2>
+        <button className="art-modal-close" onClick={onClose} aria-label={t("Close")}>×</button>
+        <p className="art-eyebrow">{t(piece.genre)}</p>
+        <h2>{t(piece.title)}</h2>
         <p className="art-modal-setting">{piece.setting}</p>
         {piece.parts.map((part, i) => (
           <section key={i} className="art-modal-part">
@@ -25,7 +27,7 @@ function WritingModal({ piece, onClose }) {
           </section>
         ))}
         {piece.docxPath && (
-          <a className="art-btn" href={asset(piece.docxPath)} download>Download .docx</a>
+          <a className="art-btn" href={asset(piece.docxPath)} download>{t("Download .docx")}</a>
         )}
       </article>
     </div>
@@ -33,6 +35,7 @@ function WritingModal({ piece, onClose }) {
 }
 
 export default function ArtPortfolio() {
+  const { language, t } = useLanguage()
   const { images, loading } = useImageFolder('painting')
   const [open, setOpen] = useState(null)
   const [reading, setReading] = useState(null)
@@ -48,12 +51,10 @@ export default function ArtPortfolio() {
       {/* Hero */}
       <header className="art-hero">
         <div className="art-hero-card">
-          <p className="art-eyebrow">Portfolio · Painting &amp; Writing</p>
-          <h1><span className="art-title-initial">A</span>rt{' '}<span className="art-title-initial">G</span>allery</h1>
+          <p className="art-eyebrow">{t("Portfolio · Painting & Writing")}</p>
+          <h1>{language === 'en' ? <><span className="art-title-initial">A</span>rt{' '}<span className="art-title-initial">G</span>allery</> : t('Art Gallery')}</h1>
           <p className="art-lede">
-            Oil, acrylic, pastel and watercolour. I admire Impressionism and add my own
-            touches to it — rather than replicating real scenes, I prefer to paint
-            dreamlike landscapes.
+            {t("Oil, acrylic, pastel and watercolour. I admire Impressionism and add my own touches to it — rather than replicating real scenes, I prefer to paint dreamlike landscapes.")}
           </p>
           <SocialLinks page="art" className="art-social" />
         </div>
@@ -63,20 +64,20 @@ export default function ArtPortfolio() {
       <section className="art-section">
         <div className="art-section-head">
           <span className="art-num">01</span>
-          <h2>The Wall</h2>
-          <span className="art-count">{images.length ? `${images.length} works` : ''}</span>
+          <h2>{t("The Wall")}</h2>
+          <span className="art-count">{images.length ? t("{count} works", { count: images.length }) : ''}</span>
         </div>
-        {loading && !images.length && <p className="art-loading">Hanging the paintings…</p>}
+        {loading && !images.length && <p className="art-loading">{t("Hanging the paintings…")}</p>}
         <div className="art-wall">
           {images.map((src, i) => (
-            <button key={src} className="art-frame" onClick={() => setOpen(i)} aria-label={`Open painting ${i + 1}`}>
-              <img src={src} alt={`Painting ${i + 1}`} loading="lazy" />
-              <span className="art-frame-tag">No. {String(i + 1).padStart(2, '0')}</span>
+            <button key={src} className="art-frame" onClick={() => setOpen(i)} aria-label={t("Open painting {number}", { number: i + 1 })}>
+              <img src={src} alt={t("Painting {number}", { number: i + 1 })} loading="lazy" />
+              <span className="art-frame-tag">{t("No. {number}", { number: String(i + 1).padStart(2, "0") })}</span>
             </button>
           ))}
         </div>
         <p className="art-buy">
-          Originals available — <a href={social.email.href}>inquire by email →</a>
+          {t("Originals available")} — <a href={social.email.href}>{t("inquire by email →")}</a>
         </p>
       </section>
 
@@ -86,23 +87,23 @@ export default function ArtPortfolio() {
       <section className="art-section">
         <div className="art-section-head">
           <span className="art-num">02</span>
-          <h2>Creative Writing</h2>
+          <h2>{t("Creative Writing")}</h2>
         </div>
         <div className="art-writing">
           {writings.map((w) => (
             <article key={w.title} className="art-card">
-              <p className="art-eyebrow">{w.genre}</p>
-              <h3>{w.title}</h3>
+              <p className="art-eyebrow">{t(w.genre)}</p>
+              <h3>{t(w.title)}</h3>
               <p className="art-card-setting">{w.setting}</p>
               <p className="art-card-excerpt">“{w.excerpt}”</p>
-              <button className="art-btn" onClick={() => setReading(w)}>Read</button>
+              <button className="art-btn" onClick={() => setReading(w)}>{t("Read")}</button>
             </article>
           ))}
         </div>
       </section>
 
       <footer className="art-foot">
-        <h2>Follow the studio</h2>
+        <h2>{t("Follow the studio")}</h2>
         <SocialLinks page="art" className="art-social" />
       </footer>
 

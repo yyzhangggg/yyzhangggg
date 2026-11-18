@@ -1,3 +1,4 @@
+import { useLanguage, languages } from '../i18n/Language'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { photoSeries } from '../content/site'
@@ -10,6 +11,7 @@ const navItems = [
 ]
 
 export default function Navbar() {
+  const { t, language, setLanguage } = useLanguage()
   const navigate = useNavigate()
   const location = useLocation()
   const navRef = useRef(null)
@@ -43,7 +45,7 @@ export default function Navbar() {
       }
     }
     requestAnimationFrame(update)
-  }, [location.pathname])
+  }, [location.pathname, language])
 
   return (
     <nav className="capsule-nav" ref={navRef}>
@@ -110,13 +112,26 @@ export default function Navbar() {
           color: #fff !important;
           text-shadow: none;
         }
+        .capsule-nav .capsule-language {
+          position: relative;
+          z-index: 1;
+          width: auto;
+          height: auto;
+          padding: 0.4rem 0.5rem;
+          color: #fff;
+          background: #20242b;
+          border: 1px solid #ffffff35;
+          border-radius: 999px;
+          font: 400 0.75rem Inter, sans-serif;
+          cursor: pointer;
+        }
         @media (max-width: 500px) {
           .capsule-nav {
             padding: 0.28rem;
             gap: 0.12rem;
           }
           .capsule-nav-item {
-            padding: 0.42rem 0.8rem;
+            padding: 0.42rem clamp(0.3rem, 1.5vw, 0.65rem);
             font-size: 0.72rem;
           }
         }
@@ -135,9 +150,15 @@ export default function Navbar() {
           className={`capsule-nav-item${isActive(item.path) ? ' active' : ''}`}
           onClick={() => navigate(item.path)}
         >
-          {item.label}
+          {t(item.label)}
         </button>
       ))}
+      <select className="capsule-language" aria-label={t('Language')} value={language}
+        onChange={(event) => setLanguage(event.target.value)}>
+        {Object.entries(languages).map(([code, label]) => (
+          <option key={code} value={code} lang={code}>{label}</option>
+        ))}
+      </select>
     </nav>
   )
 }
