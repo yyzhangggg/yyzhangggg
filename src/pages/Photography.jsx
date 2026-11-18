@@ -2,6 +2,7 @@ import { useLanguage } from '../i18n/Language'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { photographyAddOns, photographyPackages, photoSeries } from '../content/site'
+import photoManifest from 'virtual:photo-manifest'
 import { asset } from '../utils/assetPath'
 import SocialLinks from '../components/SocialLinks'
 import '../styles/pages.css'
@@ -18,8 +19,7 @@ const seriesStories = {
 function SeriesPreview({ folder, title, cover }) {
   const { t } = useLanguage()
   const [index, setIndex] = useState(0)
-  const extraPhotos = folder === 'forest' ? [7, 8] : [1, 2]
-  const photos = [cover, ...extraPhotos.map((number) => `images/${folder}/${number}.jpg`)]
+  const photos = [cover, ...(photoManifest[folder] ?? []).filter((src) => src !== cover)]
 
   function scrub(event) {
     if (event.pointerType !== 'mouse') return
