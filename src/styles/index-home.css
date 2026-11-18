@@ -252,7 +252,7 @@
   background: rgba(15, 18, 22, 0.5);
 }
 
-.pg .idx-filter.is-on { color: var(--ink) !important; background: var(--blue); border-color: var(--blue); }
+.pg .idx-filter.is-on { background: #315687; border-color: var(--blue); }
 
 /* academic */
 .idx-acad-grid {

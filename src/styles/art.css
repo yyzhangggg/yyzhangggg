@@ -59,10 +59,8 @@
   line-height: 1;
 }
 
-@supports (background-clip: text) and (-webkit-text-stroke: 1px black) {
-  .art-title-initial-outline {
-    background: linear-gradient(to bottom, transparent 50%, var(--ink) 50%);
-    background-clip: text;
+@supports (-webkit-text-stroke: 1px black) {
+  .art-title-initial {
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 0.015em var(--ink);
   }
@@ -198,15 +196,14 @@
   font-size: 12px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #fff;
+  color: #fff !important;
   background: var(--ink);
   border: 2px solid var(--ink);
   border-radius: 999px;
   transition: background 0.2s ease;
 }
 
-.pg .art-btn:hover { background: var(--pink); border-color: var(--pink); }
-.pg button.art-btn { color: #fff !important; }
+.pg .art-btn:hover { background: #90224b; border-color: #90224b; }
 
 /* modal */
 .art-modal-backdrop {
